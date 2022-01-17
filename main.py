@@ -28,13 +28,12 @@ wait(30, MSEC)
 # define variables used for controlling motors based on controller inputs
 controller_1_left_shoulder_control_motors_stopped = True
 controller_1_right_shoulder_control_motors_stopped = True
-controller_1_x_b_buttons_control_motors_stopped = True
 drivetrain_l_needs_to_be_stopped_controller_1 = False
 drivetrain_r_needs_to_be_stopped_controller_1 = False
 
 # define a task that will handle monitoring inputs from controller_1
 def rc_auto_loop_function_controller_1():
-    global drivetrain_l_needs_to_be_stopped_controller_1, drivetrain_r_needs_to_be_stopped_controller_1, controller_1_left_shoulder_control_motors_stopped, controller_1_right_shoulder_control_motors_stopped, controller_1_x_b_buttons_control_motors_stopped, remote_control_code_enabled
+    global drivetrain_l_needs_to_be_stopped_controller_1, drivetrain_r_needs_to_be_stopped_controller_1, controller_1_left_shoulder_control_motors_stopped, controller_1_right_shoulder_control_motors_stopped, remote_control_code_enabled
     # process the controller input every 20 milliseconds
     # update the motors based on the input values
     while True:
@@ -104,19 +103,6 @@ def rc_auto_loop_function_controller_1():
                 # set the toggle so that we don't constantly tell the motor to stop when
                 # the buttons are released
                 controller_1_right_shoulder_control_motors_stopped = True
-            # check the buttonX/buttonB status
-            # to control claw
-            if controller_1.buttonX.pressing():
-                claw.spin(FORWARD)
-                controller_1_x_b_buttons_control_motors_stopped = False
-            elif controller_1.buttonB.pressing():
-                claw.spin(REVERSE)
-                controller_1_x_b_buttons_control_motors_stopped = False
-            elif not controller_1_x_b_buttons_control_motors_stopped:
-                claw.stop()
-                # set the toggle so that we don't constantly tell the motor to stop when
-                # the buttons are released
-                controller_1_x_b_buttons_control_motors_stopped = True
         # wait before repeating the process
         wait(20, MSEC)
 
@@ -159,15 +145,28 @@ def user_control():
     while True:
         wait(20, MSEC)
 
+        #Temp Print Settings
+        controller_1.screen.print("Claw: ", claw.temperature(PERCENT))
+        controller_1.screen.print("Lift: ", four_bar.temperature(PERCENT))
+
+        #Power Print Settings
+        brain.screen.print("Claw Power:", claw.power(PowerUnits.WATT))
+        brain.screen.print("4 Bar Power:", four_bar.power(PowerUnits.WATT))
+        brain.screen.print("Rear Lift Power:", rear_lift.power(PowerUnits.WATT))
+        brain.screen.print("Conveyer Belt Power:", conveyer_belt.power(PowerUnits.WATT))
+        brain.screen.print("Drivetrain Power:", drivetrain.power(PowerUnits.WATT))
+
         #Drivetrain Settings
         drivetrain.set_drive_velocity(100,PERCENT)
         
         #Claw Settings
+        claw.set_stopping(HOLD)
         claw.velocity(PERCENT, 100)
         def claw_down():
-            claw.set_stopping(HOLD)
+            claw.spin(REVERSE)
         def claw_up():
-            claw.set_stopping(COAST)
+            claw.stop()
+            claw.spin(FORWARD)
         
         #Conveyer Belt Settings
         conveyer_belt.set_velocity(50, PERCENT)
@@ -176,12 +175,15 @@ def user_control():
         def conveyer_belt_stop():
             conveyer_belt.stop()
 
+        #Lift Settings
+        four_bar.set_velocity(100, PERCENT)
+
         #Controller Settings
         controller_1.buttonB.pressed(claw_down)
-        controller_1.buttonX.pressed(claw_up)
+        if controller_1.buttonX.pressing():
+            claw_up()
         controller_1.buttonY.pressed(conveyer_belt_start)
         controller_1.buttonA.pressed(conveyer_belt_stop)
-
 
 # create competition instance
 comp = Competition(user_control, autonomous)
