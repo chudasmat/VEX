@@ -5,6 +5,8 @@ import urandom
 # Brain should be defined by default
 brain=Brain()
 
+clawvelocity = 100
+
 # Robot configuration code
 left_motor_a = Motor(Ports.PORT1, GearSetting.RATIO_18_1, False)
 left_motor_b = Motor(Ports.PORT2, GearSetting.RATIO_18_1, False)
@@ -161,7 +163,7 @@ def user_control():
         
         #Claw Settings
         claw.set_stopping(HOLD)
-        claw.velocity(PERCENT, 100)
+        claw.velocity(PERCENT, clawvelocity)
         def claw_down():
             claw.spin(REVERSE)
         def claw_up():
