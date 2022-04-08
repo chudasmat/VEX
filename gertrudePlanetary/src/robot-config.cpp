@@ -46,8 +46,12 @@ int rc_auto_loop_function_Controller1() {
         Controller1LeftShoulderControlMotorsStopped = true;
       }
     }
-      if (Controller1.ButtonA.pressing()) {
+      if (Controller1.ButtonUp.pressing()) {
         gears.setStopping(hold);
+        gears.setVelocity(0, pct);
+      } else if (Controller1.ButtonLeft.pressing()) {
+        gears.setStopping(coast);
+        gears.setVelocity(0, pct);
       }
 
     // wait before repeating the process
