@@ -19,7 +19,7 @@ motor_group chain = motor_group(chainA1, chainA2, chainB1, chainB2);
 motor fourBar = motor(PORT7, ratio36_1, false);
 motor ringIntake = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
-digital_out fourBarClamp = digital_out(Brain.ThreeWirePort.A);
+pneumatics fourBarClamp = pneumatics();
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable

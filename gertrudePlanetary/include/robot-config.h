@@ -14,7 +14,8 @@ extern motor_group chain;
 extern motor fourBar;
 extern motor ringIntake;
 extern controller Controller1;
-extern digital_out fourBarClamp;
+extern pneumatics fourBarClamp;
+
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
