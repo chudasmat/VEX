@@ -15,7 +15,7 @@
 // fourBar              motor         7               
 // ringIntake           motor         8               
 // Controller1          controller                    
-// fourBarClamp         digital_out   A               
+// fourBarClamp         pneumatics    A               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -78,9 +78,9 @@ void usercontrol(void) {
     chainA1.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Tank Control
     chainA2.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Left Stick
     
-    gearB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2           Right Side
-    chainB1.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2          Tank Control
-    chainB2.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2          Right Stick
+    gearB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2                 Right Side
+    chainB1.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Tank Control
+    chainB2.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Right Stick
 
 
     wait(20, msec); // Sleep the task for a short amount of time to

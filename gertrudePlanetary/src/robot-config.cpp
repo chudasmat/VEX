@@ -19,7 +19,7 @@ motor_group chain = motor_group(chainA1, chainA2, chainB1, chainB2);
 motor fourBar = motor(PORT7, ratio36_1, false);
 motor ringIntake = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
-pneumatics fourBarClamp = pneumatics();
+pneumatics fourBarClamp = pneumatics(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -46,6 +46,10 @@ int rc_auto_loop_function_Controller1() {
         Controller1LeftShoulderControlMotorsStopped = true;
       }
     }
+      if (Controller1.ButtonA.pressing()) {
+        gears.setStopping(hold);
+      }
+
     // wait before repeating the process
     wait(20, msec);
   }
