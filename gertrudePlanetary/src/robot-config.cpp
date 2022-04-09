@@ -47,11 +47,10 @@ int rc_auto_loop_function_Controller1() {
       }
     }
       if (Controller1.ButtonUp.pressing()) {
-        gears.setStopping(hold);
-        gears.setVelocity(0, pct);
-      } else if (Controller1.ButtonLeft.pressing()) {
         gears.setStopping(coast);
-        gears.setVelocity(0, pct);
+        gears.setVelocity(100, percent);
+      } else if (Controller1.ButtonLeft.pressing()) {
+        gears.stop(hold);
       }
 
     // wait before repeating the process
