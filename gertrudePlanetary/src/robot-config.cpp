@@ -48,7 +48,7 @@ int rc_auto_loop_function_Controller1() {
     }
       if (Controller1.ButtonUp.pressing()) {
         gears.setStopping(coast);
-        gears.setVelocity(100, percent);
+        gears.setVelocity(100, pct);
       } else if (Controller1.ButtonLeft.pressing()) {
         gears.stop(hold);
       }
