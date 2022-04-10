@@ -45,6 +45,92 @@ void pre_auton(void) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
+// Autonomous Settings //
+int desiredValue = 200;
+int desiredTurnValue = 0;
+
+// PID Values //
+double kP = 0.0;         /////////////////////
+double kI = 0.0;         
+double kD = 0.0;     //        Requires
+double turnkP = 0.0; //         Tuning 
+double turnkI = 0.0;
+double turnkD = 0.0;     /////////////////////
+
+int error;           // sensorValue - desiredValue (Position)
+int prevError = 0;   // Position 20ms ago
+int derivative;      // error - prevError (Speed)
+int totalError = 0;  // totalError = totalError + error
+
+int turnError;           // sensorValue - desiredValue (Position)
+int turnPrevError = 0;   // Position 20ms ago
+int turnDerivative;      // error - prevError (Speed)
+int turnTotalError = 0;  // totalError = totalError + error
+
+bool resetEncoders = false;
+
+bool enableDrivePID = true;
+
+int drivePID() {
+  
+  while(enableDrivePID) {
+    
+    if (resetEncoders) {
+      resetEncoders = false;
+      gearA.resetPosition();
+      gearB.resetPosition();
+      chainA1.resetPosition();
+      chainA2.resetPosition();
+      chainB1.resetPosition();
+      chainB2.resetPosition();
+    }
+    
+    int gearAPos = gearA.position(degrees);          /////////////////////////
+    int gearBPos = gearB.position(degrees);
+    int chainA1Pos = chainA1.position(degrees); //     Fetches position   
+    int chainA2Pos = chainA2.position(degrees); //     of drivetrain motors
+    int chainB1Pos = chainB1.position(degrees);
+    int chainB2Pos = chainB2.position(degrees);      /////////////////////////
+
+    /////////////////////////////////////////////////////// Lateral Movement PID /////////////////////////////////////////////////////////////
+    int avgPos = (gearAPos + gearBPos + chainA1Pos + chainA2Pos + chainB1Pos + chainB2Pos) / 6;  // Calculates average position of motors
+
+    error = avgPos - desiredValue;     // Potential
+    derivative = error - prevError;    // Derivative
+    totalError += error;               // Integral
+
+    double lateralMotorPower = error * kP + derivative * kD + totalError * kI;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////////////// Turning Movement PID /////////////////////////////////////////////////////////////
+    int turnAvgPos = (gearAPos - gearBPos - chainA1Pos - chainA2Pos - chainB1Pos - chainB2Pos) / 6;  // Calculates average position of motors
+
+    turnError = turnAvgPos - desiredTurnValue;    // Potential
+    turnDerivative = turnError - turnPrevError;   // Derivative
+    turnTotalError += turnError;                  // Integral  (Include to drivetrain PID with testing, otherwise use PD controller instead)
+
+    double turnMotorPower = turnError * turnkP + turnDerivative * turnkD + turnTotalError * turnkI;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    gearA.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt); 
+    chainA1.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
+    chainA2.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    gearB.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    chainB1.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    chainB2.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
+
+    /* "prevError" is set to "error" and the program waits 20ms before running loop, when error is fetched again, 
+        meaning that "prevError" is set to the value "error" was 20ms ago. Same logic applies to "turnPrevError" and "turnError"  */
+    prevError = error;
+    turnPrevError = turnError;
+    vex::task::sleep(20);
+
+  }
+  
+  return 1;
+}
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              Autonomous Task                              */
@@ -56,9 +142,16 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  vex::task PIDDY(drivePID);
+
+  resetEncoders = true;
+  desiredValue = 2000;
+  desiredTurnValue = 10;
+  vex::task::sleep(1000);
+
+  /* Reset encoders after every action, by setting "resetEncoders" to true.
+     Sleep after every action */
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -72,7 +165,9 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) {
-  // User control code here, inside the loop
+  
+  enableDrivePID = false;
+
   while (1) {
     gearA.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2                Left Side
     chainA1.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Tank Control
