@@ -170,7 +170,14 @@ void usercontrol(void) {
 	fclose(rerun);
 
   while (1) {
-    wait(20, msec);
+    
+    leftFront.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2                Left Side
+    leftMid.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Tank Control
+    leftRear.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Left Stick
+    
+    rightFront.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2                 Right Side
+    rightMid.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Tank Control
+    rightRear.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Right Stick
     
     int LFspeed = leftFront.velocity(percent);
     int LMspeed = leftMid.velocity(percent);
@@ -196,6 +203,8 @@ void usercontrol(void) {
     fprintf(rerun, "delay(%i); \n", deltaTime);
 
     fclose(rerun);
+
+    wait(20, msec);
   }
 }
 
