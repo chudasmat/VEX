@@ -10,9 +10,8 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// gearDrive            motor_group   1, 2            
-// bottomChainDrive     motor_group   3, 4            
-// topChainDrive        motor_group   5, 6            
+// LeftDriveSmart       motor_group   1, 2, 3            
+// RightDriveSmart      motor_group   4, 5, 6                        
 // fourBar              motor         7               
 // ringIntake           motor         8               
 // Controller1          controller                    
