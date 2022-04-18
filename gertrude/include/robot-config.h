@@ -12,8 +12,12 @@ extern motor rightRear;
 extern drivetrain Drivetrain;
 extern motor fourBar;
 extern motor ringIntake;
+extern pneumatics lockingClamp;
+extern pneumatics rearMechA;
+extern pneumatics rearMechB;
+extern pneumatics goalCover;
 extern controller Controller1;
-extern pneumatics fourBarClamp;
+
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

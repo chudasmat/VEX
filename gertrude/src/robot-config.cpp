@@ -19,7 +19,10 @@ motor_group RightDriveSmart = motor_group(rightFront, rightMid, rightRear);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1.4);
 motor fourBar = motor(PORT7, ratio36_1, false);
 motor ringIntake = motor(PORT8, ratio18_1, false);
-pneumatics fourBarClamp = pneumatics(Brain.ThreeWirePort.A);
+pneumatics lockingClamp = pneumatics(Brain.ThreeWirePort.A);
+pneumatics rearMechA = pneumatics(Brain.ThreeWirePort.B);
+pneumatics rearMechB = pneumatics(Brain.ThreeWirePort.C);
+pneumatics goalCover = pneumatics(Brain.ThreeWirePort.D);
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions
@@ -49,17 +52,25 @@ int rc_auto_loop_function_Controller1() {
         Controller1LeftShoulderControlMotorsStopped = true;
       }
 
-      if (Controller1.ButtonB.pressing()) {
+      if (Controller1.ButtonR2.pressing()) {
         ringIntake.setVelocity(100, percent);
         ringIntake.spin(forward);
       }
-      else if (Controller1.ButtonY.pressing()) {
+      else if (Controller1.ButtonA.pressing()) {
         ringIntake.setVelocity(100, percent);
         ringIntake.spin(reverse);
       }
-      else if (Controller1.ButtonA.pressing()) {
+      else if (Controller1.ButtonR1.pressing()) {
         ringIntake.setVelocity(0, percent);
         ringIntake.stop(coast);
+      }
+
+      if (Controller1.ButtonDown.pressing()) {
+        lockingClamp.open();
+      }
+
+      else if (Controller1.ButtonRight.pressing()) {
+        lockingClamp.close();
       }
     }
     // wait before repeating the process
