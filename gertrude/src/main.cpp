@@ -12,7 +12,7 @@
 // [Name]               [Type]        [Port(s)]
 // LeftDriveSmart       motor_group   1, 2, 3            
 // RightDriveSmart      motor_group   4, 5, 6                        
-// fourBar              motor         7               
+// fourBar              motor         21               
 // ringIntake           motor         8               
 // Controller1          controller                    
 // lockingClamp         pneumatics    A     
