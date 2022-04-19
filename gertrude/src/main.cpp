@@ -21,7 +21,6 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
-#include "robot-config.cpp"
 #include <iostream>
 #include <fstream>
 

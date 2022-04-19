@@ -31,6 +31,8 @@ bool RemoteControlCodeEnabled = true;
 controller inputs;
 bool Controller1LeftShoulderControlMotorsStopped = true;
 
+bool drivetrainHold = false;
+
 // define a task that will handle monitoring inputs from Controller1
 int rc_auto_loop_function_Controller1() {
   // process the controller input every 20 milliseconds
@@ -87,6 +89,23 @@ int rc_auto_loop_function_Controller1() {
 
       else if (Controller1.ButtonUp.pressing()) {
         goalCover.close();
+      }
+
+      if (drivetrainHold) {
+        leftFront.setStopping(hold);
+        leftMid.setStopping(hold);
+        leftRear.setStopping(hold);
+        rightFront.setStopping(hold);
+        rightMid.setStopping(hold);
+        rightRear.setStopping(hold);
+      }
+
+      if ((Controller1.ButtonX.pressing()) && (drivetrainHold == false)) {
+        drivetrainHold = true;
+      }
+      
+      else if ((Controller1.ButtonX.pressing()) && (drivetrainHold == true)) {
+        drivetrainHold = false;
       }
     }
     // wait before repeating the process
