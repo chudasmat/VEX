@@ -15,7 +15,9 @@
 // fourBar              motor         7               
 // ringIntake           motor         8               
 // Controller1          controller                    
-// fourBarClamp         pneumatics    A               
+// lockingClamp         pneumatics    A     
+// rearMech             pneumatics    B
+// goalCover            pneumatics    C          
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -58,21 +60,18 @@ int desiredTurnValue = 0;
 
 // PID Values //
 double kP = 0.0;         /////////////////////
-double kI = 0.0;         
-double kD = 0.0;     //        Requires
+double kI = 0.0;     //        Requires
+double kD = 0.0;     //         Proper        
 double turnkP = 0.0; //         Tuning 
-double turnkI = 0.0;
 double turnkD = 0.0;     /////////////////////
 
 int error;           // sensorValue - desiredValue (Position)
 int prevError = 0;   // Position 20ms ago
 int derivative;      // error - prevError (Speed)
-int totalError = 0;  // totalError = totalError + error
 
 int turnError;           // sensorValue - desiredValue (Position)
 int turnPrevError = 0;   // Position 20ms ago
 int turnDerivative;      // error - prevError (Speed)
-int turnTotalError = 0;  // totalError = totalError + error
 
 bool resetEncoders = false;
 
@@ -104,9 +103,8 @@ int drivePID() {
 
     error = avgPos - desiredValue;     // Potential
     derivative = error - prevError;    // Derivative
-    totalError += error;               // Integral
 
-    double lateralMotorPower = error * kP + derivative * kD + totalError * kI;
+    double lateralMotorPower = error * kP + derivative * kD;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -115,17 +113,16 @@ int drivePID() {
 
     turnError = turnAvgPos - desiredTurnValue;    // Potential
     turnDerivative = turnError - turnPrevError;   // Derivative
-    turnTotalError += turnError;                  // Integral  (Include to drivetrain PID with testing, otherwise use PD controller instead)
 
-    double turnMotorPower = turnError * turnkP + turnDerivative * turnkD + turnTotalError * turnkI;
+    double turnMotorPower = turnError * turnkP + turnDerivative * turnkD;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     leftFront.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt); 
-    leftMid.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
-    leftRear.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    leftMid.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    leftRear.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
     rightFront.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
-    rightMid.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
-    rightRear.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
+    rightMid.spin(vex::directionType::fwd, lateralMotorPower + turnMotorPower, voltageUnits::volt);
+    rightRear.spin(vex::directionType::fwd, lateralMotorPower - turnMotorPower, voltageUnits::volt);
 
     /* "prevError" is set to "error" and the program waits 20ms before running loop, when error is fetched again, 
         meaning that "prevError" is set to the value "error" was 20ms ago. Same logic applies to "turnPrevError" and "turnError"  */
@@ -149,9 +146,9 @@ int drivePID() {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  vex::task piddy(drivePID);
+  
+
 }
 
 /*---------------------------------------------------------------------------*/

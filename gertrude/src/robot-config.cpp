@@ -20,15 +20,15 @@ drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295,
 motor fourBar = motor(PORT7, ratio36_1, false);
 motor ringIntake = motor(PORT8, ratio18_1, false);
 pneumatics lockingClamp = pneumatics(Brain.ThreeWirePort.A);
-pneumatics rearMechA = pneumatics(Brain.ThreeWirePort.B);
-pneumatics rearMechB = pneumatics(Brain.ThreeWirePort.C);
-pneumatics goalCover = pneumatics(Brain.ThreeWirePort.D);
+pneumatics rearMech = pneumatics(Brain.ThreeWirePort.B);
+pneumatics goalCover = pneumatics(Brain.ThreeWirePort.C);
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
-// define variables used for controlling motors based on controller inputs
+// define variables used for controlling motors based on 
+controller inputs;
 bool Controller1LeftShoulderControlMotorsStopped = true;
 
 // define a task that will handle monitoring inputs from Controller1
@@ -71,6 +71,22 @@ int rc_auto_loop_function_Controller1() {
 
       else if (Controller1.ButtonRight.pressing()) {
         lockingClamp.close();
+      }
+
+      if (Controller1.ButtonY.pressing()) {
+        rearMech.open();
+      }
+
+      else if (Controller1.ButtonB.pressing()) {
+        rearMech.close();
+      }
+
+      if (Controller1.ButtonLeft.pressing()) {
+        goalCover.open();
+      }
+
+      else if (Controller1.ButtonUp.pressing()) {
+        goalCover.close();
       }
     }
     // wait before repeating the process
