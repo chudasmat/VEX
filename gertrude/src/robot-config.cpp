@@ -32,6 +32,8 @@ controller inputs;
 bool Controller1LeftShoulderControlMotorsStopped = true;
 
 bool drivetrainHold = false;
+bool goalCoverUp = false;
+bool whyyoucominfas = true;
 
 // define a task that will handle monitoring inputs from Controller1
 int rc_auto_loop_function_Controller1() {
@@ -58,7 +60,7 @@ int rc_auto_loop_function_Controller1() {
         ringIntake.setVelocity(100, percent);
         ringIntake.spin(forward);
       }
-      else if (Controller1.ButtonA.pressing()) {
+      else if (Controller1.ButtonUp.pressing()) {
         ringIntake.setVelocity(100, percent);
         ringIntake.spin(reverse);
       }
@@ -83,14 +85,6 @@ int rc_auto_loop_function_Controller1() {
         rearMech.close();
       }
 
-      if (Controller1.ButtonLeft.pressing()) {
-        goalCover.open();
-      }
-
-      else if (Controller1.ButtonUp.pressing()) {
-        goalCover.close();
-      }
-
       if (drivetrainHold) {
         leftFront.setStopping(hold);
         leftMid.setStopping(hold);
@@ -98,6 +92,41 @@ int rc_auto_loop_function_Controller1() {
         rightFront.setStopping(hold);
         rightMid.setStopping(hold);
         rightRear.setStopping(hold);
+      }
+      
+      else if (!drivetrainHold) {
+        leftFront.setStopping(coast);
+        leftMid.setStopping(coast);
+        leftRear.setStopping(coast);
+        rightFront.setStopping(coast);
+        rightMid.setStopping(coast);
+        rightRear.setStopping(coast);
+      }
+
+      if (goalCoverUp) {
+        goalCover.close();
+      }
+
+      else if (!goalCoverUp) {
+        goalCover.open();
+      }
+
+      if (whyyoucominfas) {
+        leftFront.setVelocity(100, percent);
+        leftMid.setVelocity(100, percent);
+        leftRear.setVelocity(100, percent);
+        rightFront.setVelocity(100, percent);
+        rightMid.setVelocity(100, percent);
+        rightRear.setVelocity(100, percent);
+      }
+
+      else if (!whyyoucominfas) {
+        leftFront.setVelocity(80, percent);
+        leftMid.setVelocity(80, percent);
+        leftRear.setVelocity(80, percent);
+        rightFront.setVelocity(80, percent);
+        rightMid.setVelocity(80, percent);
+        rightRear.setVelocity(80, percent);
       }
 
       if ((Controller1.ButtonX.pressing()) && (drivetrainHold == false)) {
@@ -107,6 +136,23 @@ int rc_auto_loop_function_Controller1() {
       else if ((Controller1.ButtonX.pressing()) && (drivetrainHold == true)) {
         drivetrainHold = false;
       }
+
+      if ((Controller1.ButtonA.pressing()) && (goalCoverUp == false)) {
+        goalCoverUp = true;
+      }
+      
+      else if ((Controller1.ButtonA.pressing()) && (goalCoverUp == true)) {
+        goalCoverUp = false;
+      }
+      
+      if ((Controller1.ButtonLeft.pressing()) && (whyyoucominfas == false)) {
+        whyyoucominfas = true;
+      }
+      
+      else if ((Controller1.ButtonLeft.pressing()) && (whyyoucominfas == true)) {
+        whyyoucominfas = false;
+      } 
+
     }
     // wait before repeating the process
     wait(20, msec);
