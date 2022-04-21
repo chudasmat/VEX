@@ -15,9 +15,9 @@
 // fourBar              motor         7               
 // ringIntake           motor         8               
 // Controller1          controller                    
-// fourBarClamp         pneumatics    A
-// rearMech             pneumatics  ` B
-// goalCover            pneumatics    C              
+// lockingClamp         pneumatics   A
+// rearMech             pneumatics  `B
+// goalCover            pneumatics   C              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -189,7 +189,7 @@ void usercontrol(void) {
     ////////////////////////////// Ring Intake (Start) ////////////////////////////
     if (Controller1.ButtonR2.pressing() && ringactivate == false) {
       ringactivate = true;
-} 
+    }  
     else if (Controller1.ButtonR2.pressing() && ringactivate == true) {
       ringactivate = false;}
     if (ringactivate == true) {
