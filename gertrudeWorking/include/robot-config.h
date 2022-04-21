@@ -14,7 +14,7 @@ extern motor_group chain;
 extern motor fourBar;
 extern motor ringIntake;
 extern controller Controller1;
-extern pneumatics fourBarClamp;
+extern pneumatics lockingClamp;
 extern pneumatics rearMech;
 extern pneumatics goalCover;
 

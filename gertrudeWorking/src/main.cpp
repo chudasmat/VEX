@@ -15,7 +15,9 @@
 // fourBar              motor         7               
 // ringIntake           motor         8               
 // Controller1          controller                    
-// fourBarClamp         pneumatics    A               
+// fourBarClamp         pneumatics    A
+// rearMech             pneumatics  ` B
+// goalCover            pneumatics    C              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -25,7 +27,6 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-// define your global instances of motors and other devices here
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -45,6 +46,9 @@ void pre_auton(void) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
+bool lockingActivate = false;
+bool rearActivate = false;
+bool coverActivate = false;
 bool ringactivate = false;
 bool Controller1LeftShoulderControlMotorsStopped = true;
 
@@ -172,29 +176,54 @@ void usercontrol(void) {
   enableDrivePID = false;
 
   while (1) {
-    gearA.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2                Left Side
-    chainA1.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Tank Control
-    chainA2.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct); //(Axis3+Axis4)/2              Left Stick
+    /////////////////////////////// Tank Controls (Start) /////////////////////////////////////
+    gearA.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);                 
+    chainA1.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);               
+    chainA2.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);               
     
-    gearB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2                 Right Side
-    chainB1.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Tank Control
-    chainB2.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);//(Axis3-Axis4)/2               Right Stick
+    gearB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);                 
+    chainB1.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);               
+    chainB2.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);               
+    ////////////////////////////// Tank Controls (End) ////////////////////////////////////////
 
-    if (Controller1.ButtonLeft.pressing() && ringactivate == false) {
+    ////////////////////////////// Ring Intake (Start) ////////////////////////////
+    if (Controller1.ButtonR2.pressing() && ringactivate == false) {
       ringactivate = true;
-    } 
-    else if (Controller1.ButtonLeft.pressing() && ringactivate == true) {
-      ringactivate = false;
-    }
-
+} 
+    else if (Controller1.ButtonR2.pressing() && ringactivate == true) {
+      ringactivate = false;}
     if (ringactivate == true) {
       ringIntake.setVelocity(100, pct);
       ringIntake.spin(forward);
     } else if (ringactivate == false) {
-      ringIntake.setVelocity(0, percent);
-    }
+      ringIntake.setVelocity(0, percent);}
+    ////////////////////////////// Ring Intake (End) ////////////////////////////
 
+    ///////////////////////////// Locking Clamp (Start) ///////////////////////////
+    if (Controller1.ButtonRight.pressing() && lockingActivate == false) {
+      lockingActivate = true;} 
+    else if (Controller1.ButtonRight.pressing() && lockingActivate == true) {
+      lockingActivate = false;}
+    if (lockingActivate == true) {
+      lockingClamp.open();
+    } else if (lockingActivate == false) {
+      lockingClamp.close();}
+    ///////////////////////////// Locking Clamp (End) ///////////////////////////
+
+    ////////////////////////// Rear Clamp / Tilter (Start) //////////////////////
+    if (Controller1.ButtonY.pressing() && rearActivate == false) {
+      rearActivate = true;} 
+    else if (Controller1.ButtonY.pressing() && rearActivate == true) {
+      rearActivate = false;}
+    if (rearActivate == true) {
+      rearMech.close();
+    } else if (rearActivate == false) {
+      rearMech.open();}
+    ////////////////////////// Rear Clamp / Tilter (End) ////////////////////////
+    
+    ////////////////////////// Four Bar Lift (Start) ///////////////////////////
     if (Controller1.ButtonL1.pressing()) {
+      fourBar.setVelocity(100, percent);
       fourBar.spin(forward);
       Controller1LeftShoulderControlMotorsStopped = false;
     } else if (Controller1.ButtonL2.pressing()) {
@@ -202,9 +231,19 @@ void usercontrol(void) {
       Controller1LeftShoulderControlMotorsStopped = false;
     } else if (!Controller1LeftShoulderControlMotorsStopped) {
       fourBar.stop();
-      // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
-      Controller1LeftShoulderControlMotorsStopped = true;
-    }
+      // set toggle so motor isn't always told to stop when buttons released                              
+      Controller1LeftShoulderControlMotorsStopped = true;}
+    ////////////////////////// Four Bar Lift (End) ////////////////////////////
+
+    /////////////////////////// Goal Cover (Start) ////////////////////////////
+    if (Controller1.ButtonA.pressing() && coverActivate == false) {
+      coverActivate = true;} 
+    else if (Controller1.ButtonA.pressing() && coverActivate == true) {
+      coverActivate = false;}
+    if (coverActivate == true) {
+      goalCover.open();
+    } else if (coverActivate == false) {
+      goalCover.close();}
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.

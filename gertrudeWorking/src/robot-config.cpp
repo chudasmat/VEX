@@ -19,17 +19,13 @@ motor_group chain = motor_group(chainA1, chainA2, chainB1, chainB2);
 motor fourBar = motor(PORT18, ratio36_1, false);
 motor ringIntake = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
-pneumatics fourBarClamp = pneumatics(Brain.ThreeWirePort.A);
+pneumatics lockingClamp = pneumatics(Brain.ThreeWirePort.A);
 pneumatics rearMech = pneumatics(Brain.ThreeWirePort.B);
 pneumatics goalCover = pneumatics(Brain.ThreeWirePort.C);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
-// define variables used for controlling motors based on controller inputs
-
-
-bool ringmech = false;
 
 // define a task that will handle monitoring inputs from Controller1
 int rc_auto_loop_function_Controller1() {
