@@ -46,8 +46,6 @@ void pre_auton(void) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
-bool lockingActivate = false;
-bool rearActivate = false;
 bool coverActivate = false;
 bool ringactivate = false;
 bool Controller1LeftShoulderControlMotorsStopped = true;
@@ -194,31 +192,27 @@ void usercontrol(void) {
       ringactivate = false;}
     if (ringactivate == true) {
       ringIntake.setVelocity(100, pct);
-      ringIntake.spin(forward);
+      ringIntake.spin(reverse);
     } else if (ringactivate == false) {
       ringIntake.setVelocity(0, percent);}
     ////////////////////////////// Ring Intake (End) ////////////////////////////
 
     ///////////////////////////// Locking Clamp (Start) ///////////////////////////
-    if (Controller1.ButtonRight.pressing() && lockingActivate == false) {
-      lockingActivate = true;} 
-    else if (Controller1.ButtonRight.pressing() && lockingActivate == true) {
-      lockingActivate = false;}
-    if (lockingActivate == true) {
+    if (Controller1.ButtonDown.pressing()) {
       lockingClamp.open();
-    } else if (lockingActivate == false) {
-      lockingClamp.close();}
+    }
+    else if (Controller1.ButtonRight.pressing()) {
+      lockingClamp.close();
+    }
     ///////////////////////////// Locking Clamp (End) ///////////////////////////
 
     ////////////////////////// Rear Clamp / Tilter (Start) //////////////////////
-    if (Controller1.ButtonY.pressing() && rearActivate == false) {
-      rearActivate = true;} 
-    else if (Controller1.ButtonY.pressing() && rearActivate == true) {
-      rearActivate = false;}
-    if (rearActivate == true) {
+    if (Controller1.ButtonB.pressing()) {
       rearMech.close();
-    } else if (rearActivate == false) {
-      rearMech.open();}
+    }
+    else if (Controller1.ButtonY.pressing()) {
+      rearMech.open();
+    }
     ////////////////////////// Rear Clamp / Tilter (End) ////////////////////////
     
     ////////////////////////// Four Bar Lift (Start) ///////////////////////////
@@ -239,15 +233,13 @@ void usercontrol(void) {
     ////////////////////////// Four Bar Lift (End) ////////////////////////////
 
     /////////////////////////// Goal Cover (Start) ////////////////////////////
-    if (Controller1.ButtonA.pressing() && coverActivate == false) {
-      coverActivate = true;} 
-    else if (Controller1.ButtonA.pressing() && coverActivate == true) {
-      coverActivate = false;}
-    if (coverActivate == true) {
+    if (Controller1.ButtonUp.pressing()) {
+      goalCover.close();
+    }
+    else if (Controller1.ButtonLeft.pressing()) {
       goalCover.open();
-    } else if (coverActivate == false) {
-      goalCover.close();}
-
+    }
+    /////////////////////////// Goal Cover (End) ////////////////////////////
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
