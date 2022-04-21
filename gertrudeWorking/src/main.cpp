@@ -224,13 +224,16 @@ void usercontrol(void) {
     ////////////////////////// Four Bar Lift (Start) ///////////////////////////
     if (Controller1.ButtonL1.pressing()) {
       fourBar.setVelocity(100, percent);
+      fourBar.setStopping(hold);
       fourBar.spin(forward);
       Controller1LeftShoulderControlMotorsStopped = false;
     } else if (Controller1.ButtonL2.pressing()) {
+      fourBar.setVelocity(100, percent);
+      fourBar.setStopping(hold);
       fourBar.spin(reverse);
       Controller1LeftShoulderControlMotorsStopped = false;
     } else if (!Controller1LeftShoulderControlMotorsStopped) {
-      fourBar.stop();
+      fourBar.stop(hold);
       // set toggle so motor isn't always told to stop when buttons released                              
       Controller1LeftShoulderControlMotorsStopped = true;}
     ////////////////////////// Four Bar Lift (End) ////////////////////////////
