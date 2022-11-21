@@ -90,6 +90,8 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
+Drivetrain.drive(reverse);
+roller.spinFor(reverse, 0.75, sec);
 flywheel.spin(forward, 12, volt);
 vexDelay(1000);
 indexer.set(true);
