@@ -7,53 +7,84 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// ---- END VEXCODE CONFIGURED DEVICES ----
+/* 
+
+Controls 
+Left Stick + Right Stick -> Drive
+L1 -> Toggles Drivetrain Direction
+L2 -> Flywheel On/Off
+R2 -> Indexer (Shoot Disks)
+ButtonRight -> Intake On/Off
+ButtonDown -> Intake Reverse
+ButtonY -> Roller On/Off
+ButtonB -> Roller Reverse
+ButtonA -> Activates String Launchers
+
+*/
 
 #include "vex.h"
-
 using namespace vex;
-
-// A global instance of competition
 competition Competition;
 
-// define your global instances of motors and other devices here
+////// Toggle Variables //////
 bool intakeSpinning = false;
 bool rollerSpinning = false;
 bool flySpinning = false;
 bool driveInvert = false;
+//////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////// Take Back Half (Start) ///////////////////////////////////////////////////////////////////////
 int error;
-int goal = 400;
+int goal = 500;
 int prevError;
-int output = 300;
+int output;
 int tbh;
 double gain = 0.003;
 
 bool resetEncoders = false;
-bool enableTBH = true;
+bool enableTBH = false;
 
 int TBH() {
   while (enableTBH) {
     if (resetEncoders) {
       resetEncoders = false;
-      flywheel.resetPosition();
-    }
-
-    double currentSpeed = flywheel.velocity(rpm);
-
-    error = goal - currentSpeed;                // calculate the error;
-    output += gain * error;                     // integrate the output;
-    if (signbit(error)!= signbit(prevError)) {  // if zero crossing,
-      output = 0.5 * (output + tbh);            // then Take Back Half
-      tbh = output;                             // update Take Back Half variable
-      prevError = error;                       // and save the previous error
-      vex::task::sleep(10);                     // then wait for 10ms
-    }
+      flywheel.resetPosition();}
+    
+    double currentSpeed = (flywheelMotorA.velocity(rpm) + flywheelMotorB.velocity(rpm)) / 2;      // Fetch motor speeds
+    error = goal - currentSpeed;                                                                  // Calculate the error
+    if (output + (gain * error) < (goal + 20)) {                                                  // Checks if integration is less than goal + margin 
+      output = output + (gain * error);}                                                          // Integrates into output if condition is met
+    if (signbit(error) != signbit(prevError)) {                                                   // Checks if errors are zero-crossing
+      output = 0.5 * (output + tbh);                                                              // If they add then "Take Back Half"
+      tbh = output;}                                                                              // Update Take Back Half variable
+    prevError = error;                                                                            // Save the previous error
+    vex::task::sleep(10);                                                                         // Wait for 10ms to save CPU resources
   }
   return 1;
 }
+/////////////////////////////////////////////////////////////////////////////// Take Back Half (End) ///////////////////////////////////////////////////////////////////////
 
+//////////////////////// Brain Slideshow (Start) ////////////////////
+int slideshow() {
+  while (true) {
+    Brain.Screen.drawImageFromFile("alexx.png", 0, 0);
+    vex::task::sleep(10000);
+    Brain.Screen.clearScreen();
+    Brain.Screen.drawImageFromFile("dairytrishy.png", 0, 0);
+    vex::task::sleep(10000);
+    Brain.Screen.clearScreen();
+    Brain.Screen.drawImageFromFile("emiliano.png", 0, 0);
+    vex::task::sleep(10000);
+    Brain.Screen.clearScreen();
+    Brain.Screen.drawImageFromFile("scaryalex.png", 0, 0);
+    vex::task::sleep(10000);
+    Brain.Screen.clearScreen();
+    Brain.Screen.drawImageFromFile("daroos.png", 0, 0);
+    vex::task::sleep(10000);
+    Brain.Screen.clearScreen();
+    vex::task::sleep(10);}
+  return 1;}
+//////////////////////// Brain Slideshow (End) //////////////////////
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -68,13 +99,46 @@ int TBH() {
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  Brain.Screen.drawImageFromFile("alexx.png", 0, 0);
+  // Brain.Screen.drawImageFromFile("alexx.png", 0, 0);    
   vex::task TBH_(TBH);
+  vex::task pics(slideshow);}
 
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
-}
+//////////  Toggle Functions (Start) ///////////
+void intakeToggle(void) {
+  if (intakeSpinning) {
+    intake.stop();}
+  else {
+    intake.spin(forward, 12, volt);}
+  intakeSpinning = !intakeSpinning;}
 
+void rollerToggle(void) {
+  if (rollerSpinning) {
+    roller.stop();}
+  else {
+    roller.spin(forward, 10, volt);}
+  rollerSpinning = !rollerSpinning;}
+
+void flyToggle(void) {
+  if (flySpinning) {
+    flywheel.stop();}
+  else {
+    flywheel.spin(forward, output / 50, volt);}
+  flySpinning = !flySpinning;}
+
+void driveToggle(void) {
+  if (!driveInvert) {
+    driveInvert = true;
+    Controller1.Screen.setCursor(0, 0);
+    Controller1.Screen.clearLine();
+    Controller1.Screen.print("Orientation: Intake");}
+  else if (driveInvert) {
+    driveInvert = false;
+    Controller1.Screen.setCursor(0, 0);
+    Controller1.Screen.clearLine();
+    Controller1.Screen.print("Orientation: Flywheel");}}
+  
+  // driveInvert = !driveInvert;}
+/////////////// Toggle Functions (End) //////////////
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -85,38 +149,6 @@ void pre_auton(void) {
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
-
-void intakeToggle(void) {
-  if (intakeSpinning) {
-    intake.stop();
-  }
-  else {
-    intake.spin(forward, 12, volt);
-  }
-  intakeSpinning = !intakeSpinning;
-}
-void rollerToggle(void) {
-  if (rollerSpinning) {
-    roller.stop();
-  }
-  else {
-    roller.spin(forward, 10, volt);
-  }
-  rollerSpinning = !rollerSpinning;
-}
-void flyToggle(void) {
-  if (flySpinning) {
-    flywheel.stop();
-  }
-  else {
-    flywheel.spin(forward, output, volt);
-  }
-  flySpinning = !flySpinning;
-}
-
-void driveToggle(void) {
-  driveInvert = !driveInvert;
-}
 
 void autonomous(void) {
   Drivetrain.drive(reverse);
@@ -147,6 +179,13 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
+  
+  Controller1.Screen.setCursor(0, 0);
+  Controller1.Screen.print("Orientation: Flywheel");
+  
+  resetEncoders = true;
+  enableTBH = true;
+  
   Controller1.ButtonRight.pressed(intakeToggle);
   Controller1.ButtonY.pressed(rollerToggle);
   Controller1.ButtonL2.pressed(flyToggle);
@@ -155,25 +194,17 @@ void usercontrol(void) {
 
   while (1) {
     ///////////////////////////////////////// Driver Controls (Start) ////////////////////////////////////
-
-
-    if (driveInvert) {
-    leftMotorA.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);                 
-    leftMotorB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);                     
-    rightMotorA.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);                 
-    rightMotorB.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);
-    }
-    else {
-      leftMotorA.spin(vex::directionType::fwd, -(Controller1.Axis3.value()), vex::velocityUnits::pct);                 
-      leftMotorB.spin(vex::directionType::fwd, -(Controller1.Axis3.value()), vex::velocityUnits::pct);                       
-      rightMotorA.spin(vex::directionType::fwd, -(Controller1.Axis2.value()), vex::velocityUnits::pct);                 
-      rightMotorB.spin(vex::directionType::fwd, -(Controller1.Axis2.value()), vex::velocityUnits::pct);
-    }
+    if (!driveInvert) {
+      leftMotorA.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::voltageUnits::volt);                 
+      leftMotorB.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::voltageUnits::volt);                     
+      rightMotorA.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::voltageUnits::volt);                 
+      rightMotorB.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::voltageUnits::volt);
+    } else {
+      leftMotorA.spin(vex::directionType::fwd, -(Controller1.Axis3.value()), vex::voltageUnits::volt);                 
+      leftMotorB.spin(vex::directionType::fwd, -(Controller1.Axis3.value()), vex::voltageUnits::volt);                       
+      rightMotorA.spin(vex::directionType::fwd, -(Controller1.Axis2.value()), vex::voltageUnits::volt);                 
+      rightMotorB.spin(vex::directionType::fwd, -(Controller1.Axis2.value()), vex::voltageUnits::volt);}
     ///////////////////////////////////////// Driver Controls (End) //////////////////////////////////////
-    
-    ///////////////////////////////////////// Flywheel Controls (Start) ////////////////////////////////////
-
-    ///////////////////////////////////////// Flywheel Controls (End) //////////////////////////////////////
 
     ///////////////////////////////////////// Intake Controls (Start) ////////////////////////////////////
     if (Controller1.ButtonDown.pressing()){

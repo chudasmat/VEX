@@ -5,6 +5,8 @@ extern motor leftMotorA;
 extern motor leftMotorB;
 extern motor rightMotorA;
 extern motor rightMotorB;
+extern motor flywheelMotorA;
+extern motor flywheelMotorB;
 extern drivetrain Drivetrain;
 extern motor_group flywheel;
 extern motor intake;
