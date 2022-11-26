@@ -1,3 +1,3 @@
-<div align="center># 282S VEXCode
+<p align="justify"># 282S VEXCode
 282S VEXCode V5 Code for Gertrude
-![.](images/slideshow.gif)</div>
+![.](images/slideshow.gif)</p>
