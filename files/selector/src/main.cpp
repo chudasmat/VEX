@@ -418,9 +418,6 @@ void usercontrol(void) {
       if (Controller1.ButtonA.pressing()) {
         endgame.set(true);
       }
-      else {
-        endgame.set(false);
-      }
       //////////////////////////////////////////////// Expansion Controls (End) /////////////////////////////////////////////////
 
     }      
