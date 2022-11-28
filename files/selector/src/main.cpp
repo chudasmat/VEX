@@ -233,12 +233,12 @@ void flyToggle(void) {
 void driveToggle(void) {
   if (!driveInvert) {
     driveInvert = true;
-    Controller1.Screen.setCursor(0, 0);
+    Controller1.Screen.setCursor(3, 0);
     Controller1.Screen.clearLine();
     Controller1.Screen.print("Orientation: Intake");}
   else if (driveInvert) {
     driveInvert = false;
-    Controller1.Screen.setCursor(0, 0);
+    Controller1.Screen.setCursor(3, 0);
     Controller1.Screen.clearLine();
     Controller1.Screen.print("Orientation: Flywheel");}}
   
@@ -287,7 +287,7 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   
-  Controller1.Screen.setCursor(0, 0);
+  Controller1.Screen.setCursor(3, 0);
   Controller1.Screen.print("Orientation: Flywheel");
   
   resetEncoders = true;
