@@ -19,11 +19,11 @@ bool driveInvert = false;
 
 /////////////////////////////////////////////////////////////////////////////// Take Back Half (Start) ///////////////////////////////////////////////////////////////////////
 double tbhError = 0;
-double tbhGoal = 500;
+double tbhGoal = 575;
 double tbhPrevError = 0;
 double tbhOutput = 0;
 double tbh = 0;
-double tbhGain = 0.05;
+double tbhGain = 0.5;
 
 bool resetFlyEncoders = false;
 bool enableTBH = true;
@@ -37,11 +37,15 @@ int TBH() {
     
     double currentSpeed = (flywheelMotorA.velocity(rpm) + flywheelMotorB.velocity(rpm)) / 2;      // Fetch motor speeds
     tbhError = tbhGoal - currentSpeed;                                                            // Calculate the difference between desired and current speeds
-    if (tbhOutput + (tbhGain * tbhError) < (tbhGoal + 20)) {                                      // Checks if integration is less than desired speed + margin 
+    if (tbhOutput + (tbhGain * tbhError) < (tbhGoal + 35)) {                                  // Checks if integration is less than desired speed + margin 
       tbhOutput = tbhOutput + (tbhGain * tbhError);}                                              // Integrates into output if condition is met
     if (signbit(tbhError) != signbit(tbhPrevError)) {                                             // Checks if errors are zero-crossing
       tbhOutput = 0.5 * (tbhOutput + tbh);                                                        // If they add then "Take Back Half"
       tbh = tbhOutput;}                                                                           // Update Take Back Half variable
+    Controller1.Screen.setCursor(0, 5);
+    Controller1.Screen.print(currentSpeed);
+    Controller1.Screen.print(" ");
+    Controller1.Screen.print(tbhOutput);
     tbhPrevError = tbhError;                                                                      // Saves the previous error
     vex::task::sleep(10);                                                                         // Wait for 10ms to save CPU resources
   }
@@ -153,7 +157,7 @@ void intakeToggle(void) {
   if (intakeSpinning) {
     intake.stop();}
   else {
-    intake.spin(forward, 11, volt);}
+    intake.spin(forward, 12, volt);}
   intakeSpinning = !intakeSpinning;}
 
 void rollerToggle(void) {
@@ -175,12 +179,12 @@ void driveToggle(void) {
     driveInvert = true;
     Controller1.Screen.setCursor(0, 0);
     Controller1.Screen.clearLine();
-    Controller1.Screen.print("Orientation: Intake");}
+    Controller1.Screen.print("IT");}
   else if (driveInvert) {
     driveInvert = false;
     Controller1.Screen.setCursor(0, 0);
     Controller1.Screen.clearLine();
-    Controller1.Screen.print("Orientation: Flywheel");}}
+    Controller1.Screen.print("FW");}}
   
   // driveInvert = !driveInvert;}
 /////////////// Toggle Functions (End) //////////////
@@ -243,7 +247,7 @@ void usercontrol(void) {
   // User control code here, inside the loop
   
   Controller1.Screen.setCursor(0, 0);
-  Controller1.Screen.print("Orientation: Flywheel");
+  Controller1.Screen.print("FW");
   
   resetEncoders = true;
   enableTBH = true;
