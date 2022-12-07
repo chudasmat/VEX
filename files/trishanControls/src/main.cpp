@@ -8,6 +8,8 @@
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
 #include "gifclass.h"
+#include "sylib/sylib.hpp"
+#include <string>
 competition Competition;
 using namespace vex;
 
@@ -16,31 +18,44 @@ bool intakeSpinning = false;
 bool rollerSpinning = false;
 bool flySpinning = false;
 bool driveInvert = false;
+bool brakeHold = false;
+std::string driveCurrent = "FW";
+std::string brakeCurrent = "BR"; 
 
 /////////////////////////////////////////////////////////////////////////////// Take Back Half (Start) ///////////////////////////////////////////////////////////////////////
-int tbhError;
-int tbhGoal = 500;
-int tbhPrevError;
-int tbhOutput;
-int tbh;
-double tbhGain = 0.003;
+double tbhError = 0;
+double tbhGoal = 560;
+double tbhPrevError = 0;
+double tbhOutput = 0;
+double tbh = 0;
+double tbhGain = 0.5;
+
 
 bool resetFlyEncoders = false;
-bool enableTBH = false;
+bool enableTBH = true;
 
 int TBH() {
   while (enableTBH) {
     if (resetFlyEncoders) {
       resetFlyEncoders = false;
-      flywheel.resetPosition();}
+      flywheelMotorA.resetPosition();
+      flywheelMotorB.resetPosition();}
     
     double currentSpeed = (flywheelMotorA.velocity(rpm) + flywheelMotorB.velocity(rpm)) / 2;      // Fetch motor speeds
     tbhError = tbhGoal - currentSpeed;                                                            // Calculate the difference between desired and current speeds
-    if (tbhOutput + (tbhGain * tbhError) < (tbhGoal + 20)) {                                      // Checks if integration is less than desired speed + margin 
+    if (tbhOutput + (tbhGain * tbhError) < (tbhGoal + 35)) {                                  // Checks if integration is less than desired speed + margin 
       tbhOutput = tbhOutput + (tbhGain * tbhError);}                                              // Integrates into output if condition is met
-    if (signbit(tbhError) != signbit(tbhPrevError)) {                                             // Checks if errors are zero-crossing
+    if (std::signbit(tbhError) != std::signbit(tbhPrevError)) {                                             // Checks if errors are zero-crossing
       tbhOutput = 0.5 * (tbhOutput + tbh);                                                        // If they add then "Take Back Half"
       tbh = tbhOutput;}                                                                           // Update Take Back Half variable
+    Controller1.Screen.setCursor(0, 0);
+    Controller1.Screen.print(driveCurrent.c_str());
+    Controller1.Screen.print(" ");
+    Controller1.Screen.print(brakeCurrent.c_str());
+    Controller1.Screen.print(" ");
+    Controller1.Screen.print(currentSpeed);
+    Controller1.Screen.print(" ");
+    Controller1.Screen.print(tbhOutput);
     tbhPrevError = tbhError;                                                                      // Saves the previous error
     vex::task::sleep(10);                                                                         // Wait for 10ms to save CPU resources
   }
@@ -159,7 +174,7 @@ void rollerToggle(void) {
   if (rollerSpinning) {
     roller.stop();}
   else {
-    roller.spin(forward, 10, volt);}
+    roller.spin(forward, 12, volt);}
   rollerSpinning = !rollerSpinning;}
 
 void flyToggle(void) {
@@ -172,16 +187,23 @@ void flyToggle(void) {
 void driveToggle(void) {
   if (!driveInvert) {
     driveInvert = true;
-    Controller1.Screen.setCursor(0, 0);
-    Controller1.Screen.clearLine();
-    Controller1.Screen.print("Orientation: Intake");}
+    driveCurrent = "IT";
+    }
   else if (driveInvert) {
     driveInvert = false;
-    Controller1.Screen.setCursor(0, 0);
-    Controller1.Screen.clearLine();
-    Controller1.Screen.print("Orientation: Flywheel");}}
-  
-  // driveInvert = !driveInvert;}
+    driveCurrent = "FW";
+    }}
+
+void brakeToggle(void) {
+  if (!brakeHold) {
+    brakeHold = true;
+    brakeCurrent = "BR";
+    Drivetrain.setStopping(hold);
+    }
+  else if (brakeHold) {
+    brakeHold = false;
+    brakeCurrent = "NB";
+    Drivetrain.setStopping(coast);}}
 /////////////// Toggle Functions (End) //////////////
 
 /*---------------------------------------------------------------------------*/
@@ -197,9 +219,13 @@ void driveToggle(void) {
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+
+  sylib::initialize();
+  auto lightstrip = sylib::Addrled(22, 8, 64);
+  lightstrip.set_all(0xE62169);
+
   // Brain.Screen.drawImageFromFile("alexx.png", 0, 0);    
   vex::task TBH_(TBH);
-  // vex::task pics(slideshow);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -243,7 +269,7 @@ void usercontrol(void) {
   // User control code here, inside the loop
   
   Controller1.Screen.setCursor(0, 0);
-  Controller1.Screen.print("Orientation: Flywheel");
+  Controller1.Screen.print("FW");
   
   resetEncoders = true;
   enableTBH = true;
@@ -252,7 +278,7 @@ void usercontrol(void) {
   Controller1.ButtonY.pressed(rollerToggle);
   Controller1.ButtonL2.pressed(flyToggle);
   Controller1.ButtonL1.pressed(driveToggle);
-
+  Controller1.ButtonR1.pressed(brakeToggle);
 
   while (1) {
     ///////////////////////////////////////// Driver Controls (Start) ////////////////////////////////////
@@ -290,7 +316,9 @@ void usercontrol(void) {
 
     ////////////////////////////////////////  Endgame Controls (Start) /////////////////////////////////
     if (Controller1.ButtonA.pressing()) {
-      endgame.set(true);}
+      endgame.set(true);
+      vexDelay(500);
+      endgame.set(false);}
     ////////////////////////////////////////  Indexer Controls (End) ///////////////////////////////////
 
     wait(10, msec); // Sleep the task for a short amount of time to
