@@ -1,14 +1,18 @@
+#include "controller.h"
 #include "main.h"
 #include "roller.h"
 
-// 0 = RED 
+// 0 = RED
 // 1 = BLUE
 
+bool taskTog = true;
+bool colourToggle = false;
 bool rollerSpinning = false;
 bool colour;
 bool teamCol = 0;
 double prox = 0;
 double hoo = 0;
+std::string textColour = "RED";
 Motor roller(12, MOTOR_GEAR_100);
 Optical optical(11);
 
@@ -35,8 +39,23 @@ void rollerControl (void) {
 			if (rollerSpinning) {roller.move_velocity(0);}
 			else {roller.move_voltage(12);}
 			rollerSpinning = !rollerSpinning;}
-		if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12);}  
+		
+		if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12);}
+		
+		if (master.get_digital_new_press(DIGITAL_A)){
+			if (colourToggle) {teamCol = 0;}
+			else {teamCol = 1;}
+			colourToggle = !colourToggle;}
     delay(10);     
     }
+}
+
+void initColTog(void) {
+	while (taskTog) {
+		if (master.get_digital_new_press(DIGITAL_L2)) {teamCol = 0; textColour = "RED";}
+		else if (master.get_digital_new_press(DIGITAL_R2)) {teamCol = 1; textColour = "BLUE";}
+		okapiController.setText(0, 0, textColour);
+	delay(30);
+	}
 }
 

@@ -1,25 +1,26 @@
 #include "main.h"
+#include "controller.h"
+#include "pros/rtos.hpp"
+#include "roller.h"
 
-bool complete = false;
+// L2 = RED
+// R2 = BLUE
 
 void initialize() {
-	okapiController.setText(0,0, "RED");
 	sylib::initialize();
+	okapiController.setText(0, 0, "SELECT COLOUR");
+	Task initColTogg(initColTog);
+	Task autoRoll_(autoRoll);
+	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	rgb();
 	arms::init();
-	static Gif gif("/usd/slideshow.gif", lv_scr_act());
-	Task autoRoll_(autoRoll);
-	while (complete == false) {if (master.get_digital_new_press(DIGITAL_A)) {if (teamCol == 0) {teamCol = 1;} else {teamCol = 0;} complete = true;}}
-	okapiController.clearLine(0);
-	if (teamCol == 0) {okapiController.setText(0,0, "RED");} else {okapiController.setText(0,0,"BLUE");}
-//	Task TBH_(tbhCntrl);
-//	Task PID_(drivePID);
 }
 
 void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
+	taskTog = false;
 	chassisDrive->setState({0_in, 0_in, 0_deg});
 	//  chassis->moveDistance(-12_in);
 	//  chassis->moveDistance(12_in);
