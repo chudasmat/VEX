@@ -15,8 +15,11 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
+#include "pros/rtos.hpp"
 #define RED 0;
 #define BLUE 1;
+
+extern pros::Task initColTog_;
 
 /**
  * If defined, some commonly used enums will have preprocessor macros which give

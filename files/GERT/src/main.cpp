@@ -9,7 +9,7 @@
 void initialize() {
 	sylib::initialize();
 	okapiController.setText(0, 0, "SELECT COLOUR");
-	Task initColTogg(initColTog);
+	Task initColTog_(initColTog);
 	Task autoRoll_(autoRoll);
 	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	rgb();
@@ -20,7 +20,7 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	taskTog = false;
+	initColTog_.remove();
 	chassisDrive->setState({0_in, 0_in, 0_deg});
 	//  chassis->moveDistance(-12_in);
 	//  chassis->moveDistance(12_in);

@@ -14,4 +14,4 @@ extern pros::Optical optical;
 extern int getColour();
 extern void autoRoll(void);
 extern void rollerControl(void);
-extern void initColTog(void);
+extern int initColTog();
