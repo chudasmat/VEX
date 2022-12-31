@@ -41,10 +41,10 @@ void chassisControl (void) {
 			driveInvert = !driveInvert;
 			lightDirec = !lightDirec;}
 
-		if (master.get_digital_new_press(DIGITAL_LEFT)){
-			if (brakeHold) {drive.set_brake_modes(MOTOR_BRAKE_COAST);}
-			else {drive.set_brake_modes(MOTOR_BRAKE_HOLD);}
-			brakeHold = !brakeHold;
-			if (brakeHold) {brakeCurrent = "BR";} else {brakeCurrent = "NB";}}
+//		if (master.get_digital_new_press(DIGITAL_LEFT)){
+//			if (brakeHold) {drive.set_brake_modes(MOTOR_BRAKE_COAST);}
+//			else {drive.set_brake_modes(MOTOR_BRAKE_HOLD);}
+//			brakeHold = !brakeHold;
+//			if (brakeHold) {brakeCurrent = "BR";} else {brakeCurrent = "NB";}}
 
 		delay(10);}}

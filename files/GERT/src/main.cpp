@@ -38,4 +38,5 @@ void opcontrol() {
 	Task flywheel_(flywheel);
 	Task intakeControl_(intakeControl);
 	Task rollerControl_(rollerControl);
-	Task pneumatics_(pneumatics);}
+	Task pneumatics_(pneumatics);
+	Task printer_(printer);}

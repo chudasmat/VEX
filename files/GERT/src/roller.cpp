@@ -28,19 +28,19 @@ void autoRoll() {
 		colour = getColour();
 		prox = optical.get_proximity();
 		if (teamCol == 0) {
-			if (colour != 0 && prox < 100) {roller.move_velocity(100);}}
+			if (colour != 0 && prox < 100) {roller.move_voltage(12000);}}
 		if (teamCol == 1) {
-			if (colour != 1 && prox < 100) {roller.move_velocity(100);}}
+			if (colour != 1 && prox < 100) {roller.move_voltage(12000);}}
 		delay(10);}}
 
 void rollerControl (void) {
     while (true) {
 		if (master.get_digital_new_press(DIGITAL_Y)){
-			if (rollerSpinning) {roller.move_velocity(0);}
-			else {roller.move_voltage(12);}
+			if (rollerSpinning) {roller.move_voltage(0);}
+			else {roller.move_voltage(12000);}
 			rollerSpinning = !rollerSpinning;}
 		
-		if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12);}
+		if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12000);}
 		
 		if (master.get_digital_new_press(DIGITAL_A)){
 			if (colourToggle) {teamCol = 0;}

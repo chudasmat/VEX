@@ -55,6 +55,8 @@ extern pros::Task initColTog_;
 #include "ARMS/api.h"
 #include "ARMS/config.h"
 using namespace okapi::literals;
+#include <iostream>
+#include <string.h>
 
 #include "drivetrain.h"
 #include "flywheel.h"
