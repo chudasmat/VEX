@@ -3,7 +3,7 @@
 #include <string>
 
 bool flySpinning = false;
-std::vector <int> fwSpeeds = {2500, 3000, 3600};
+std::vector <int> fwSpeeds = {0, 2000, 3000, 3600};
 int fwIndex = 0;
 
 sylib::SpeedControllerInfo flyController (
@@ -23,12 +23,10 @@ void flywheel (void) {
     while (true) {
         if (master.get_digital_new_press(DIGITAL_L2)){
 			if (flySpinning) {fly.stop();}
-			else {fly.set_velocity_custom_controller(3000);}
+			else {fly.set_velocity_custom_controller(fwSpeeds[fwIndex]);}
 			flySpinning = !flySpinning;}
         if (master.get_digital_new_press(DIGITAL_LEFT)) {
             fwIndex++;
             if (fwIndex >= fwSpeeds.size()) {
-                fwIndex = 0;}
-            setFW(fwSpeeds[fwIndex]);}
-            flySpinning = true;
+                fwIndex = 0;};}
         delay(10);}}
