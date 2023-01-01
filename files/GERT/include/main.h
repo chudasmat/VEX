@@ -19,7 +19,7 @@
 #define RED 0;
 #define BLUE 1;
 
-extern pros::Task initColTog_;
+extern pros::Task booba;
 
 /**
  * If defined, some commonly used enums will have preprocessor macros which give

@@ -30,4 +30,5 @@ void flywheel (void) {
             if (fwIndex >= fwSpeeds.size()) {
                 fwIndex = 0;}
             setFW(fwSpeeds[fwIndex]);}
+            flySpinning = true;
         delay(10);}}
