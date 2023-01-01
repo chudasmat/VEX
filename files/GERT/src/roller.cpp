@@ -52,8 +52,8 @@ void rollerControl (void) {
 
 int initColTog() {
 	while (taskTog) {
-		if (master.get_digital_new_press(DIGITAL_L2)) {teamCol = 0; textColour = "RED";}
-		else if (master.get_digital_new_press(DIGITAL_R2)) {teamCol = 1; textColour = "BLUE";}
+		if (master.get_digital_new_press(DIGITAL_L2)) {teamCol = 0; textColour = "RED"; okapiController.clearLine(0);}
+		else if (master.get_digital_new_press(DIGITAL_R2)) {teamCol = 1; textColour = "BLUE"; okapiController.clearLine(0);}
 		okapiController.setText(0, 0, textColour);
 	delay(30);
 	}
