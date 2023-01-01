@@ -2,7 +2,7 @@
 #include "main.h"
 #include "roller.h"
 
-// 0 = RED
+// 0 = RED.
 // 1 = BLUE
 
 bool taskTog = true;
