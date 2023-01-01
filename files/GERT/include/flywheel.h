@@ -2,7 +2,7 @@
 #include "main.h"
 
 extern bool flySpinning;
-extern std::vector <int> fwSpeeds;
+extern int fwSpeeds[4];
 extern int fwIndex;
 extern sylib::SpeedControllerInfo flyController;
 extern sylib::Motor fly;
