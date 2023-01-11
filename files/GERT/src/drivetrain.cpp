@@ -31,19 +31,19 @@ void chassisControl (void) {
 //		chassisDrive->getModel()->tank(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 		
 		if (!driveInvert) {
-			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			leftC.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftA.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			leftB.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			leftC.move(-(master.get_analog(ANALOG_LEFT_Y)));
 			rightA.move(master.get_analog(ANALOG_RIGHT_Y));
 			rightB.move(master.get_analog(ANALOG_RIGHT_Y));
 	   		rightC.move(master.get_analog(ANALOG_RIGHT_Y));}
 		else {
-			leftA.move(master.get_analog(ANALOG_RIGHT_Y));
-			leftB.move(master.get_analog(ANALOG_RIGHT_Y));
-			leftC.move(master.get_analog(ANALOG_RIGHT_Y));
-			rightA.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightC.move(-(master.get_analog(ANALOG_LEFT_Y)));}
+			leftA.move(master.get_analog(ANALOG_LEFT_Y));
+			leftB.move(master.get_analog(ANALOG_LEFT_Y));
+			leftC.move(master.get_analog(ANALOG_LEFT_Y));
+			rightA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			rightB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			rightC.move(-(master.get_analog(ANALOG_RIGHT_Y)));}
 
 
 		if (master.get_digital_new_press(DIGITAL_L1)) {
