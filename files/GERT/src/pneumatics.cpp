@@ -1,8 +1,8 @@
 #include "main.h"
 #include "pneumatics.h"
 
-ADIDigitalOut indexer({13, 1});
-ADIDigitalOut lip({13, 2});
+ADIDigitalOut indexer({{13, 1}});
+ADIDigitalOut lip({{13, 2}});
 ADIDigitalOut stringS({{13, 3}});
 
 void pneumatics (void) {
