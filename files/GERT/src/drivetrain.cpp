@@ -5,10 +5,12 @@ bool brakeHold = false;
 std::string driveCurrent = "FW";
 std::string brakeCurrent = "NB";
 
-Motor rightA(3, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor rightB(4, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor leftA(1, MOTOR_GEAR_200, true, MOTOR_ENCODER_DEGREES);
-Motor leftB(2, MOTOR_GEAR_200, true, MOTOR_ENCODER_DEGREES);
+Motor rightA(4, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
+Motor rightB(5, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
+Motor rightC(6, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
+Motor leftA(1, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
+Motor leftB(2, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
+Motor leftC(3, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
 MotorGroup drive({leftA, leftB, rightA, rightB});
 
 std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisControllerBuilder()
@@ -26,15 +28,20 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
 void chassisControl (void) {
     while (true) {
 		if (!driveInvert) {
-			leftA.move(master.get_analog(ANALOG_LEFT_Y));
-			leftB.move(master.get_analog(ANALOG_LEFT_Y));
-			rightA.move(master.get_analog(ANALOG_RIGHT_Y));
-			rightB.move(master.get_analog(ANALOG_RIGHT_Y));}
+			leftA.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			leftB.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			leftC.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			rightA.move(master.get_analog(ANALOG_RIGHT_Y)));
+			rightB.move(master.get_analog(ANALOG_RIGHT_Y)));
+	   		rightC.move(master.get_analog(ANALOG_RIGHT_Y)));}
 		else {
-			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftA.move(master.get_analog(ANALOG_RIGHT_Y));
+			leftB.move(master.get_analog(ANALOG_RIGHT_Y));
+			leftC.move(master.get_analog(ANALOG_RIGHT_Y));
 			rightA.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));}
+			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			rightC.move(-(master.get_analog(ANALOG_LEFT_Y)));}
+
 
 		if (master.get_digital_new_press(DIGITAL_L1)) {
 			if (driveInvert) {driveCurrent = "FW";} else {driveCurrent = "IT";}
