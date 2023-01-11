@@ -9,5 +9,7 @@ void intakeControl (void) {
 			if (intakeSpinning) {intake.move_voltage(0);}
 			else {intake.move_voltage(12000);}
 			intakeSpinning = !intakeSpinning;}
-		if (master.get_digital_new_press(DIGITAL_DOWN)) {intakeSpinning = true; intake.move_voltage(-12000);;}
+		
+//		Flex wheel indexer		
+		if (master.get_digital_new_press(DIGITAL_R2)) {intakeSpinning = true; intake.move_voltage(-12000);;}
     delay(10);}}

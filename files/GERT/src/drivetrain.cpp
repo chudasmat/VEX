@@ -5,16 +5,16 @@ bool brakeHold = false;
 std::string driveCurrent = "FW";
 std::string brakeCurrent = "NB";
 
-Motor rightA(4, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor rightB(5, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor rightC(6, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor leftA(1, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor leftB(2, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-Motor leftC(3, MOTOR_GEAR_200, false, MOTOR_ENCODER_DEGREES);
-MotorGroup drive({leftA, leftB, rightA, rightB});
+Motor leftA(1, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
+Motor leftB(2, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
+Motor leftC(3, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
+Motor rightA(4, MOTOR_GEAR_600, true, MOTOR_ENCODER_DEGREES);
+Motor rightB(5, MOTOR_GEAR_600, true, MOTOR_ENCODER_DEGREES);
+Motor rightC(6, MOTOR_GEAR_600, true, MOTOR_ENCODER_DEGREES);
+MotorGroup drive({leftA, leftB, leftC, rightA, rightB, rightC});
 
 std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisControllerBuilder()
-.withMotors({1, 2}, {3, 4})
+.withMotors({1, 2, 3}, {-4, -5, -6})
 // .withGains({0.001, 0, 0.0001},
 //          {0.001, 0, 0.0001},
 //          {0.001, 0, 0.0001})
@@ -27,17 +27,20 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
 
 void chassisControl (void) {
     while (true) {
+		
+//		chassisDrive->getModel()->tank(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
+		
 		if (!driveInvert) {
-			leftA.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			leftB.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			leftC.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			leftA.move(master.get_analog(ANALOG_LEFT_Y));
+			leftB.move(master.get_analog(ANALOG_LEFT_Y));
+			leftC.move(master.get_analog(ANALOG_LEFT_Y));
 			rightA.move(master.get_analog(ANALOG_RIGHT_Y));
 			rightB.move(master.get_analog(ANALOG_RIGHT_Y));
 	   		rightC.move(master.get_analog(ANALOG_RIGHT_Y));}
 		else {
-			leftA.move(master.get_analog(ANALOG_RIGHT_Y));
-			leftB.move(master.get_analog(ANALOG_RIGHT_Y));
-			leftC.move(master.get_analog(ANALOG_RIGHT_Y));
+			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftC.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			rightA.move(-(master.get_analog(ANALOG_LEFT_Y)));
 			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));
 			rightC.move(-(master.get_analog(ANALOG_LEFT_Y)));}

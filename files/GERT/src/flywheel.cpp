@@ -23,7 +23,7 @@ void flywheel (void) {
                 fly.stop();
             }
             else {
-                 fly.set_velocity_custom_controller(fwSpeeds[fwIndex]);
+                 fly.set_velocity_custom_controller(3000);
             }
             flySpinning = !flySpinning;
         }
