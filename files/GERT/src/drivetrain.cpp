@@ -31,9 +31,9 @@ void chassisControl (void) {
 			leftA.move(-(master.get_analog(ANALOG_LEFT_Y)));
 			leftB.move(-(master.get_analog(ANALOG_LEFT_Y)));
 			leftC.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightA.move(master.get_analog(ANALOG_RIGHT_Y)));
-			rightB.move(master.get_analog(ANALOG_RIGHT_Y)));
-	   		rightC.move(master.get_analog(ANALOG_RIGHT_Y)));}
+			rightA.move(master.get_analog(ANALOG_RIGHT_Y));
+			rightB.move(master.get_analog(ANALOG_RIGHT_Y));
+	   		rightC.move(master.get_analog(ANALOG_RIGHT_Y));}
 		else {
 			leftA.move(master.get_analog(ANALOG_RIGHT_Y));
 			leftB.move(master.get_analog(ANALOG_RIGHT_Y));
