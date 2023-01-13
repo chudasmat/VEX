@@ -35,12 +35,12 @@ void autoRoll() {
 
 void rollerControl (void) {
     while (true) {
-		if (master.get_digital_new_press(DIGITAL_Y)){
-			if (rollerSpinning) {roller.move_voltage(0);}
-			else {roller.move_voltage(12000);}
-			rollerSpinning = !rollerSpinning;}
+		// if (master.get_digital_new_press(DIGITAL_Y)){
+			// if (rollerSpinning) {roller.move_voltage(0);}
+			// else {roller.move_voltage(12000);}
+			// rollerSpinning = !rollerSpinning;}
 		
-		if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12000);}
+		// if (master.get_digital_new_press(DIGITAL_B)) {rollerSpinning = true; roller.move_voltage(-12000);}
 		
 		if (master.get_digital_new_press(DIGITAL_A)){
 			if (colourToggle) {teamCol = 0;}

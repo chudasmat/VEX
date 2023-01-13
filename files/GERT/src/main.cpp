@@ -24,22 +24,20 @@ void autonomous() {
 	bobby.remove();
 	okapiController.clearLine(0);
 	chassisDrive->setState({0_in, 0_in, 0_deg});
-	//  chassis->moveDistance(-12_in);
-	//  chassis->moveDistance(12_in);
-	//  chassis->turnAngle(45_deg);
-	//  chassis->moveDistance(8_ft);
-	//  chassis->waitUntilSettled();
-	chassisDrive->driveToPoint({12_in, 12_in});
-	chassisDrive->moveDistance(-16.97_in);
-	chassisDrive->driveToPoint({0_in, 0_in}  );
-	chassisDrive->turnToAngle(0_deg);
+	
+    leftDrive.move_voltage(12000); // Moves robot back
+    rightDrive.move_voltage(-12000); // Moves robot back
+    intake.move_voltage(12000); // Starts roller
+    delay(750); // Time for roller to spin
+    intake.move_voltage(0); // Roller stop
+    leftDrive.move_voltage(0); // Stop robot moving
+    rightDrive.move_voltage(0); // Stop robot moving
 }
 
 void opcontrol() {
 	Task chassisControl_(chassisControl);
 	Task flywheel_(flywheel);
 	Task intakeControl_(intakeControl);
-	Task rollerControl_(rollerControl);
 	Task pneumatics_(pneumatics);
 //	Task printer_(printer);
 	

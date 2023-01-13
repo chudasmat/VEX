@@ -11,6 +11,9 @@ Motor leftC(3, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
 Motor rightA(4, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
 Motor rightB(5, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
 Motor rightC(6, MOTOR_GEAR_600, false, MOTOR_ENCODER_DEGREES);
+
+MotorGroup leftDrive({leftA, leftB, leftC});
+MotorGroup rightDrive({rightA, rightB, rightC});
 MotorGroup drive({leftA, leftB, leftC, rightA, rightB, rightC});
 
 std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisControllerBuilder()
