@@ -16,6 +16,10 @@ sylib::SpeedControllerInfo flyController (
 
 sylib::Motor fly(15, 3600, true, flyController);
 
+void setFW (int power) {
+    fly.set_velocity_custom_controller(power);
+}
+
 void flywheel (void) {
     while (true) {
         if (master.get_digital_new_press(DIGITAL_L2)) {
