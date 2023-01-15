@@ -18,39 +18,32 @@ bool flySpinning = false;
 bool intakeSpinning = false;
 bool lipUp = false;
 
-int flyPower = 10;
-
-int flyLevels[3] = {8, 9, 10};
-int flyIndex = 2;
+double flyPower = 8;
 
 // A global instance of competition
 competition Competition;
 
 // Control Toggles
 
-void flyLevelController(void) {
-  if ((flyIndex + 1) != (3)) {
-    flyIndex = flyIndex + 1;}
-  else {
-    flyIndex = 0;}
-  
-  if (flySpinning) {
-    flywheel.spin(forward, flyLevels[flyIndex], volt);}
-}
+
 
 void lipToggle(void) {
   if (lipUp) {
-    lip.set(false);}
+    lip.set(false);
+    flyPower = 10.5;}
   if (!lipUp) {
-    lip.set(true);}
+    lip.set(true);
+    flyPower = 8;}
   lipUp = !lipUp;
+  if (flySpinning) {
+    flywheel.spin(forward, flyPower, volt);}
 }
 
 void flyToggle(void) {
   if (flySpinning) {
     flywheel.stop();}
   else {
-    flywheel.spin(forward, flyLevels[flyIndex], volt);}
+    flywheel.spin(forward, flyPower, volt);}
   flySpinning = !flySpinning;}
 
 void intakeToggle(void) {
@@ -87,6 +80,36 @@ void skills_auton(void) {
   Drivetrain.driveFor(forward, 4, inches);
   vexDelay(2500);
   indexer.set(true);
+  vexDelay(2500);
+  indexer.set(false);
+  vexDelay(2500);
+  indexer.set(true);
+  vexDelay(2500);
+  indexer.set(false);
+
+  Drivetrain.driveFor(forward, 6, inches);
+  Drivetrain.turnFor(right, 45, degrees);
+  Drivetrain.driveFor(reverse, 6, inches);
+  rollerIntake.spinFor(reverse, 2.25, sec);
+  vexDelay(2250);
+  Drivetrain.stop();
+  
+  Drivetrain.driveFor(forward, 6, inches);
+  Drivetrain.turnFor(left, 45, degrees);
+  Drivetrain.driveFor(reverse, 6, inches);
+  expansion.set(true);
+  vexDelay(500);
+  expansion.set(false);
+}
+
+void awpAuton(void) {
+  flywheel.spin(forward, 10.5, volt);
+  Drivetrain.driveFor(reverse, 3, inches);
+  rollerIntake.spinFor(reverse, 0.75, sec);
+  vexDelay(750);
+  Drivetrain.stop();
+  vexDelay(2500);
+  indexer.set(true);
   vexDelay(1500);
   indexer.set(false);
   vexDelay(1500);
@@ -98,15 +121,8 @@ void skills_auton(void) {
   Drivetrain.turnFor(right, 45, degrees);
   Drivetrain.driveFor(reverse, 6, inches);
   rollerIntake.spinFor(reverse, 0.75, sec);
-  vexDelay(750);
+  vexDelay(2250);
   Drivetrain.stop();
-  
-  Drivetrain.driveFor(forward, 6, inches);
-  Drivetrain.turnFor(left, 45, degrees);
-  Drivetrain.driveFor(reverse, 6, inches);
-  expansion.set(true);
-  vexDelay(500);
-  expansion.set(false);
 }
 
 void autonomous(void) {
@@ -115,13 +131,13 @@ void autonomous(void) {
   rollerIntake.spinFor(reverse, 0.75, sec);
   vexDelay(750);
   Drivetrain.stop();
-  vexDelay(1500);
+  vexDelay(3000);
   indexer.set(true);
-  vexDelay(1500);
+  vexDelay(2500);
   indexer.set(false);
-  vexDelay(1500);
+  vexDelay(2500);
   indexer.set(true);
-  vexDelay(1500);
+  vexDelay(2500);
   indexer.set(false);
 }
 
@@ -136,6 +152,9 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) {
+  lip.set(true);
+  lipUp = true;
+
   Controller1.ButtonL2.pressed(flyToggle);
   Controller1.ButtonRight.pressed(intakeToggle);
   Controller1.ButtonY.pressed(lipToggle);
