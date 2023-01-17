@@ -3,8 +3,10 @@
 #include <string>
 
 bool flySpinning = false;
-int fwSpeeds[3] = {2000, 3000, 3600};
-int fwIndex = 0;
+// int fwSpeeds[3] = {2000, 3000, 3600};
+// int fwIndex = 0;
+
+int fwPower = 3000; 
 
 sylib::SpeedControllerInfo flyController (
         [](double rpm){return 5;}, // kV function
@@ -15,6 +17,9 @@ sylib::SpeedControllerInfo flyController (
 );
 
 sylib::Motor fly(15, 3600, true, flyController);
+void setFW (int power) {
+    fly.set_velocity_custom_controller(power);
+}
 
 void flywheel (void) {
     while (true) {
@@ -23,12 +28,13 @@ void flywheel (void) {
                 fly.stop();
             }
             else {
-                 fly.set_velocity_custom_controller(3000);
+                // fly.set_velocity_custom_controller(3000);
+                fly.set_velocity_custom_controller(fwPower);
             }
             flySpinning = !flySpinning;
         }
 
-        if (master.get_digital_new_press(DIGITAL_LEFT)) {
+        /* if (master.get_digital_new_press(DIGITAL_LEFT)) {
             if (flySpinning == true) {
                 if ((fwIndex + 1) != (3)) {
                     fwIndex = fwIndex + 1;
@@ -47,7 +53,7 @@ void flywheel (void) {
                     fwIndex = 0;
                 }
             }
-        }
+        } */
         delay(10);
     }
 }

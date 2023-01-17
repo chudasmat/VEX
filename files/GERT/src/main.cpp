@@ -19,44 +19,11 @@ void initialize() {
 	rgb();
 }
 
-void experimentalAuton() {
-	drive.move_voltage(12000); // Drive back towards roller
-	intake.move_voltage(12000); // Start roller
-	delay(750); // Time to wait for roller to finish
-	intake.move_voltage(0); // Stop roller
-	drive.move_voltage(0); // Stop driving back
-
-	chassisDrive->moveDistance(1_in); // Drive forward before turning
-	chassisDrive->turnAngle(45_deg); // Turning around to pick up discs
-	intake.move_voltage(12000); // Start intake
-	chassisDrive->moveDistance(15_in); // Move forward to pick up discs
-	chassisDrive->turnAngle(-90_deg); // Turn towards goal
-	fly.set_velocity_custom_controller(1600); // Start flywheel
-
-	chassisDrive->turnAngle(90_deg);
-	
-}
-
-void workingAuton() {
-
-
-	//  chassis->moveDistance(-12_in);
-	//  chassis->moveDistance(12_in);
-	//  chassis->turnAngle(45_deg);
-	//  chassis->moveDistance(8_ft);
-	//  chassis->waitUntilSettled();
-	// chassisDrive->driveToPoint({12_in, 12_in});
-	// chassisDrive->moveDistance(-16.97_in);
-	// chassisDrive->driveToPoint({0_in, 0_in}  );
-	// chassisDrive->turnToAngle(0_deg);
-}
-
 void autonomous() {
 	bobby.remove();
 	//okapiController.clearLine(0);
 	chassisDrive->setState({0_in, 0_in, 0_deg});
-
-	workingAuton();
+	rollerAuton();
 }
 
 void opcontrol() {
