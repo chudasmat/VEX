@@ -19,8 +19,6 @@
 #define RED 0;
 #define BLUE 1;
 
-extern pros::Task booba;
-
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
  * a shorter, more convenient naming pattern. If this isn't desired, simply
@@ -60,7 +58,6 @@ using namespace okapi::literals;
 
 #include "drivetrain.h"
 #include "flywheel.h"
-#include "roller.h"
 #include "intake.h"
 #include "rgb.h"
 #include "pneumatics.h"
