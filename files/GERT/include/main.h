@@ -65,6 +65,7 @@ using namespace okapi::literals;
 #include "rgb.h"
 #include "pneumatics.h"
 #include "controller.h"
+#include "autons.h"
 
 /**
  * You should add more #includes here

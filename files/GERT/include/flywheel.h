@@ -5,7 +5,8 @@ extern bool flySpinning;
 
 extern sylib::SpeedControllerInfo flyController;
 extern sylib::Motor fly;
+extern void setFW (int power);
 extern void flywheel (void);
-extern int fwSpeed[3];
-extern int fwIndex;
-
+// extern int fwSpeeds[3];
+// extern int fwIndex;
+extern int fwPower;
