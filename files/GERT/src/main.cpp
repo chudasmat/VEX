@@ -23,7 +23,7 @@ void autonomous() {
 
 void opcontrol() {
 	lip.set_value(true);
-	lipToggle = true;
+	lipBool = true;
 	fwPower = 2400;
 
 	Task chassisControl_(chassisControl);

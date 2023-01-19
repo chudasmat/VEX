@@ -22,7 +22,7 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
  		okapi::ADIEncoder{'E', 'F', true}, 
  		okapi::ADIEncoder{'G', 'H'})
 .withDimensions({okapi::AbstractMotor::gearset::green, (60.0/84.0)}, {{4.125_in, 15_in}, okapi::imev5GreenTPR})
-.withOdometry({{2.75_in, 9.8_in, 6.5_in, 2.75_in}, okapi::quadEncoderTPR}, okapi::StateMode::FRAME_TRANSFORMATION)  // Add ADI Encoders after Gains and add tracking wheel size with track width
+.withOdometry({{2.75_in, 10.45_in, 6.5_in, 2.75_in}, okapi::quadEncoderTPR}, okapi::StateMode::FRAME_TRANSFORMATION)  // Add ADI Encoders after Gains and add tracking wheel size with track width
 .buildOdometry();
 
 void chassisControl (void) {
@@ -38,9 +38,9 @@ void chassisControl (void) {
 			rightB.move(master.get_analog(ANALOG_RIGHT_Y));
 			rightC.move(master.get_analog(ANALOG_RIGHT_Y));}
 		else {
-			leftA.move(master.get_analog(ANALOG_LEFT_Y));
-			leftB.move(master.get_analog(ANALOG_LEFT_Y));
-			leftC.move(master.get_analog(ANALOG_LEFT_Y));
+			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
+			leftC.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			rightA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			rightB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			rightC.move(-(master.get_analog(ANALOG_RIGHT_Y)));}
