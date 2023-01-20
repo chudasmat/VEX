@@ -30,7 +30,7 @@ void pneumatics (void) {
         if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
         if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); indexToggle(); indexToggle();}
         if (master.get_digital_new_press(DIGITAL_Y)) {
-            lipToggle(lipBool);
+            lipToggleCntrl();
         }
         
         if (master.get_digital(DIGITAL_X)) {stringS.set_value(true); delay(200); stringS.set_value(false);}
