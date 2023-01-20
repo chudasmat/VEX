@@ -13,14 +13,14 @@ void indexToggle (void) {
 }
 
 void lipToggle (bool state) {
-    if (state == true) {lip.set_value(true); fwPower = 2400; lipBool = true;}
-    else if (state == false) {lip.set_value(false); fwPower = 3000; lipBool = false;}
+    if (state == true) {lip.set_value(true); fwPower = 2700; lipBool = true;}
+    else if (state == false) {lip.set_value(false); fwPower = 2200; lipBool = false;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
 }
 
 void lipToggleCntrl (void) {
-    if (lipBool == true) {lip.set_value(false); fwPower = 3000;}
-    else if (lipBool == false) {lip.set_value(true); fwPower = 2400;}
+    if (lipBool == true) {lip.set_value(false); fwPower = 2700;}
+    else if (lipBool == false) {lip.set_value(true); fwPower = 2200;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
     lipBool = !lipBool;
 }
@@ -28,6 +28,7 @@ void lipToggleCntrl (void) {
 void pneumatics (void) {
     while (true) {
         if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
+        if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); indexToggle(); indexToggle();}
         if (master.get_digital_new_press(DIGITAL_Y)) {
             lipToggle(lipBool);
         }

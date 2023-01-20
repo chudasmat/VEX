@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "ezGERT",
+    "project_name": "GERT",
     "target": "v5",
     "templates": {
       "ARMS": {
@@ -512,7 +512,8 @@
       }
     },
     "upload_options": {
-      "icon": "pizza"
+      "icon": "pizza",
+      "description": "GERT"
     }
   }
 }
