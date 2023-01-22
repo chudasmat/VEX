@@ -1,6 +1,14 @@
 #include "main.h"
 #include "pneumatics.h"
 
+double robotAngleRatio = 1;
+
+void turnRobot(double angle) {
+    double robotAngle = angle * robotAngleRatio;
+    leftDrive.move_relative(robotAngle, 600);
+    rightDrive.move_relative(-(robotAngle), 600);  
+}
+
 void expirementalAuton(void) {
     chassisDrive->moveDistance(-3_in);
     intake.move_voltage(12000);
