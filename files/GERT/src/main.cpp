@@ -24,7 +24,7 @@ void autonomous() {
 void opcontrol() {
 	lip.set_value(true);
 	lipBool = true;
-	fwPower = 2400;
+	fwPower = 8000;
 
 	Task chassisControl_(chassisControl);
 	Task flywheel_(flywheel);

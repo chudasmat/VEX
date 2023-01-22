@@ -17,7 +17,7 @@ void intakeControl (void) {
 			intakeSpinning = !intakeSpinning;}
 
 //		Flex wheel indexer		
-		if (master.get_digital_new_press(DIGITAL_B)) {
+		if (master.get_digital_new_press(DIGITAL_DOWN)) {
 			if (intakeSpinning) {intake.move_voltage(0);}
 			else {intake.move_voltage(-12000);}
 			intakeSpinning = !intakeSpinning;}

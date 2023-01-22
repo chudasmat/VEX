@@ -8,19 +8,19 @@ ADIDigitalOut stringS({{13, 6}});
 
 void indexToggle (void) {
     indexer.set_value(true);
-    delay(70);
+    delay(200);
     indexer.set_value(false);
 }
 
 void lipToggle (bool state) {
-    if (state == true) {lip.set_value(true); fwPower = 2400; lipBool = true;}
-    else if (state == false) {lip.set_value(false); fwPower = 3100; lipBool = false;}
+    if (state == true) {lip.set_value(true); fwPower = 8000; lipBool = true;}
+    else if (state == false) {lip.set_value(false); fwPower = 10000; lipBool = false;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
 }
 
 void lipToggleCntrl (void) {
-    if (lipBool == true) {lip.set_value(false); fwPower = 3100;}
-    else if (lipBool == false) {lip.set_value(true); fwPower = 2400;}
+    if (lipBool == true) {lip.set_value(false); fwPower = 10000;}
+    else if (lipBool == false) {lip.set_value(true); fwPower = 8000;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
     lipBool = !lipBool;
 }

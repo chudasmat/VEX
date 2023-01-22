@@ -6,7 +6,7 @@ bool flySpinning = false;
 // int fwSpeeds[3] = {2000, 3000, 3600};
 // int fwIndex = 0;
 
-int fwPower = 3000; 
+int fwPower = 10.5; 
 
 sylib::SpeedControllerInfo flyController (
         [](double rpm){return 5;}, // kV function
@@ -17,11 +17,12 @@ sylib::SpeedControllerInfo flyController (
 );
 
 sylib::Motor fly(15, 3600, true, flyController);
-void setFW (int power) {
-    fly.set_velocity_custom_controller(power);
+void setFW (double power) {
+    fly.set_voltage((power * -1));
 }
 
 void flywheel (void) {
+    fly.set_braking_mode(kV5MotorBrakeModeBrake);
     while (true) {
         if (master.get_digital_new_press(DIGITAL_L2)) {
             if (flySpinning == true) {
