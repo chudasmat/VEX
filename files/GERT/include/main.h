@@ -64,9 +64,6 @@ using namespace okapi::literals;
 #include "controller.h"
 #include "autons.h"
 
-#include "odom.hpp"
-#include "pid.hpp"
-
 /**
  * You should add more #includes here
  */

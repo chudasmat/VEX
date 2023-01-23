@@ -23,7 +23,7 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
 .withSensors(okapi::ADIEncoder{'C', 'D'}, 
  		okapi::ADIEncoder{'E', 'F', true}, 
  		okapi::ADIEncoder{'G', 'H'})
-.withDimensions({okapi::AbstractMotor::gearset::green, (60.0/84.0)}, {{4.125_in, 15_in}, okapi::imev5GreenTPR})
+.withDimensions({okapi::AbstractMotor::gearset::blue, (36.0/60.0)}, {{4.125_in, 15_in}, okapi::imev5BlueTPR})
 .withOdometry({{2.75_in, 10.45_in, 6.5_in, 2.75_in}, okapi::quadEncoderTPR}, okapi::StateMode::FRAME_TRANSFORMATION)  // Add ADI Encoders after Gains and add tracking wheel size with track width
 .buildOdometry();
 

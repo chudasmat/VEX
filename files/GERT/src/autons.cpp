@@ -9,7 +9,7 @@ void turnRobot(double angle) {
     rightDrive.move_relative(-(robotAngle), 600);  
 }
 
-void expirementalAuton(void) {
+void experimentalAuton(void) {
     chassisDrive->moveDistance(-3_in);
     intake.move_voltage(12000);
     delay(769);
