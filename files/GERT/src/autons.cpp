@@ -9,13 +9,21 @@ void turnRobot(double angle) {
     rightDrive.move_relative(-(robotAngle), 600);  
 }
 
+void turnTest(void) {
+    while (true) {
+        if (master.get_digital_new_press(DIGITAL_LEFT)) {
+
+        }
+    }
+}
+
 void experimentalAuton(void) {
     chassisDrive->moveDistance(-3_in);
     intake.move_voltage(12000);
     delay(769);
     intake.move_voltage(0);
     chassisDrive->moveDistance(6_in);
-    setFW(2700);
+    setFW(10000);
     delay(5000);
     indexToggle();
     delay(2500);

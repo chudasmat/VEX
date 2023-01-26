@@ -5,10 +5,9 @@ okapi::Controller okapiController;
 std::string printSpeed;
 
 void printer(void) {
-    okapiController.clearLine(0);
     while (true) {
-        // printSpeed = to_string(fwSpeeds[fwIndex]);
-        // okapiController.setText(0, 0, printSpeed + " " + driveCurrent);
-        delay(20);
+        master.print(0, 0, "%d", fly.get_velocity());
+        master.clear_line(0); 
+        delay(60);
     }
 }

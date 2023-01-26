@@ -16,7 +16,7 @@ MotorGroup rightDrive({rightA, rightB, rightC});
 MotorGroup drive({leftA, leftB, leftC, rightA, rightB, rightC});
 
 std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisControllerBuilder()
-.withMotors({1, 2, 3}, {-4, -5, -6})
+.withMotors({1, 2, 3}, {4, 5, 6})
 // .withGains({0.001, 0, 0.0001},
 //          {0.001, 0, 0.0001},
 //          {0.001, 0, 0.0001})
@@ -43,9 +43,9 @@ void chassisControl (void) {
 			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
 			leftC.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			rightA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			rightB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			rightC.move(-(master.get_analog(ANALOG_RIGHT_Y)));}
+			rightA.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));
+			rightC.move(-(master.get_analog(ANALOG_LEFT_Y)));}
 
 
 		if (master.get_digital_new_press(DIGITAL_L1)) {

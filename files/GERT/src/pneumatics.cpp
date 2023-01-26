@@ -8,7 +8,7 @@ ADIDigitalOut stringS({{13, 6}});
 
 void indexToggle (void) {
     indexer.set_value(true);
-    delay(200);
+    delay(120);
     indexer.set_value(false);
 }
 
@@ -28,7 +28,7 @@ void lipToggleCntrl (void) {
 void pneumatics (void) {
     while (true) {
         if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
-        if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); indexToggle(); indexToggle();}
+        if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); delay(150); indexToggle(); delay(150); indexToggle();}
         if (master.get_digital_new_press(DIGITAL_Y)) {
             lipToggleCntrl();
         }

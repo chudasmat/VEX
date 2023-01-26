@@ -9,4 +9,4 @@ extern void setFW (double power);
 extern void flywheel (void);
 // extern int fwSpeeds[3];
 // extern int fwIndex;
-extern int fwPower;
+extern double fwPower;

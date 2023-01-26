@@ -6,7 +6,7 @@ bool flySpinning = false;
 // int fwSpeeds[3] = {2000, 3000, 3600};
 // int fwIndex = 0;
 
-int fwPower = 10.5; 
+double fwPower = 10.5; 
 
 sylib::SpeedControllerInfo flyController (
         [](double rpm){return 5;}, // kV function
