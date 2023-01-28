@@ -513,7 +513,8 @@
     },
     "upload_options": {
       "icon": "pizza",
-      "description": "GERT"
+      "description": "GERT",
+      "slot": 1
     }
   }
 }

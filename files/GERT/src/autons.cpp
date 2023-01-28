@@ -1,20 +1,14 @@
 #include "main.h"
 #include "pneumatics.h"
 
-double robotAngleRatio = 1;
+double robotAngleRatio = 5.277777778;
 
+// Right = positive
+// Left = negative
 void turnRobot(double angle) {
     double robotAngle = angle * robotAngleRatio;
     leftDrive.move_relative(robotAngle, 600);
     rightDrive.move_relative(-(robotAngle), 600);  
-}
-
-void turnTest(void) {
-    while (true) {
-        if (master.get_digital_new_press(DIGITAL_LEFT)) {
-
-        }
-    }
 }
 
 void experimentalAuton(void) {
@@ -31,7 +25,7 @@ void experimentalAuton(void) {
 }
 
 void rollerAuton(void) {
-    setFW(10000);
+    setFW(9500);
     drive.move_relative(-70, 600);
     intake.move_voltage(-12000);
     delay(350);
@@ -50,6 +44,9 @@ void awpAuton(void) {
 
 }
 
+void adjAuton(void) {
+}
+
 void skillsAuton(void) {
     setFW(10000);
     drive.move_relative(-70, 600);
@@ -63,9 +60,9 @@ void skillsAuton(void) {
     delay(2500);
     indexToggle();
     delay(1000);
-    leftDrive.move_relative(45, 600);
-    rightDrive.move_relative(-45, 600);
-    /*stringS.set_value(true); 
+    turnRobot(250);
+    // around 450 = 90 deg
+    stringS.set_value(true); 
     delay(200); 
-    stringS.set_value(false);*/
+    stringS.set_value(false);
 }
