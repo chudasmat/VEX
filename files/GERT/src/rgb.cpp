@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool lightDirec = true;
+bool lightDirec = false;
 sylib::Addrled ledStrip1(22, 1, 25);
 sylib::Addrled ledStrip2(22, 2, 25);
 

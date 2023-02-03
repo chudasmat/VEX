@@ -11,7 +11,7 @@ void turnRobot(double angle) {
     rightDrive.move_relative(-(robotAngle), 600);  
 }
 
-void experimentalAuton(void) {
+/* void experimentalAuton(void) {
     chassisDrive->moveDistance(-3_in);
     intake.move_voltage(12000);
     delay(769);
@@ -22,16 +22,16 @@ void experimentalAuton(void) {
     indexToggle();
     delay(2500);
     indexToggle();
-}
+} */
 
-void rollerAuton(void) {
-    setFW(9500);
-    drive.move_relative(-70, 600);
+void rollerAuton (void) {
+    setFW(9.5);
+    drivetrain.move_relative(-70, 600);
     intake.move_voltage(-12000);
     delay(350);
     intake.move_voltage(0);
-    drive.move_velocity(0);
-    drive.move_relative(140, 600);
+    drivetrain.move_velocity(0);
+    drivetrain.move_relative(140, 600);
     delay(5400);
     indexToggle();
     delay(2500);
@@ -48,13 +48,13 @@ void adjAuton(void) {
 }
 
 void skillsAuton(void) {
-    setFW(10000);
-    drive.move_relative(-70, 600);
+    setFW(10);
+    drivetrain.move_relative(-70, 600);
     intake.move_voltage(-12000);
     delay(350);
     intake.move_voltage(0);
-    drive.move_velocity(0);
-    drive.move_relative(140, 600);
+    drivetrain.move_velocity(0);
+    drivetrain.move_relative(140, 600);
     delay(5400);
     indexToggle();
     delay(2500);

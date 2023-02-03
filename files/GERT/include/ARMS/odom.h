@@ -1,6 +1,7 @@
 #ifndef _ARMS_ODOM_H_
 #define _ARMS_ODOM_H_
 
+#include "pros/adi.h"
 #include "ARMS/point.h"
 #include <memory>
 
@@ -11,9 +12,9 @@ typedef enum EncoderType { ENCODER_ADI, ENCODER_ROTATION } EncoderType_e_t;
 // Odom Configuration
 typedef struct config_data_s {
 	int expanderPort = 0;
-    int rightEncoderPort = 0;
-    int leftEncoderPort = 0;
-	int middleEncoderPort = 0;
+    int rightEncoderPort = 3;
+    int leftEncoderPort = 5;
+	int middleEncoderPort = 7;
     int imuPort = 0;
     EncoderType_e_t encoderType;
 } config_data_s_t;

@@ -15,10 +15,6 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
-#include "pros/rtos.hpp"
-#define RED 0;
-#define BLUE 1;
-
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
  * a shorter, more convenient naming pattern. If this isn't desired, simply
@@ -39,35 +35,22 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
-#include "okapi/api/util/mathUtil.hpp"
-#include "okapi/impl/device/controller.hpp"
-#include "okapi/impl/device/rotarysensor/adiEncoder.hpp"
-#include "pros/adi.hpp"
 #include "sylib/sylib.hpp"
 #include "gif-pros/gifclass.hpp"
-#include "okapi/api.hpp"
-#include <cmath>
-#include <memory>
-#include <string>
-#include "EZ-Template/api.hpp"
 #include "ARMS/api.h"
-#include "ARMS/config.h"
-using namespace okapi::literals;
-#include <iostream>
-#include <string.h>
 
-#include "drivetrain.h"
 #include "flywheel.h"
+#include "controller.h"
+#include "drive.h"
 #include "intake.h"
 #include "rgb.h"
 #include "pneumatics.h"
-#include "controller.h"
 #include "autons.h"
 
 /**
  * You should add more #includes here
  */
-#include "okapi/api.hpp"
+//#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
 
 /**
