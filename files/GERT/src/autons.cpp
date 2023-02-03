@@ -1,3 +1,4 @@
+#include "ARMS/chassis.h"
 #include "main.h"
 #include "pneumatics.h"
 
@@ -11,18 +12,18 @@ void turnRobot(double angle) {
     rightDrive.move_relative(-(robotAngle), 600);  
 }
 
-/* void experimentalAuton(void) {
-    chassisDrive->moveDistance(-3_in);
+void experimentalAuton(void) {
+    arms::chassis::move(-3,100, arms::REVERSE);
     intake.move_voltage(12000);
     delay(769);
     intake.move_voltage(0);
-    chassisDrive->moveDistance(6_in);
+    arms::chassis::move(6,100);
     setFW(10000);
     delay(5000);
     indexToggle();
     delay(2500);
     indexToggle();
-} */
+}
 
 void rollerAuton (void) {
     setFW(9.5);
