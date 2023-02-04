@@ -30,6 +30,7 @@ void opcontrol() {
 	Task fly_(flywheel);
 	Task intake_(intakeControl);
 	Task pneumatics_(pneumatics);
+	Task printer_(printer);
 
 	while (true) {
 		printf("%d,%d,%f,%f,%f,%d\n", sylib::millis(), desiredVal, fly.get_velocity(), fly.get_velocity_error(), fly.get_acceleration(), fly.get_efficiency());
