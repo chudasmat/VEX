@@ -13,16 +13,18 @@ void turnRobot(double angle) {
 }
 
 void experimentalAuton(void) {
+    setFW(9.5);
     arms::chassis::move(-3,100, arms::REVERSE);
-    intake.move_voltage(12000);
-    delay(769);
+    intake.move_voltage(-12000);
+    delay(350);
     intake.move_voltage(0);
     arms::chassis::move(6,100);
-    setFW(10000);
-    delay(5000);
+    delay(5400);
     indexToggle();
     delay(2500);
     indexToggle();
+    delay(1000);
+    setFW(0);
 }
 
 void rollerAuton (void) {
