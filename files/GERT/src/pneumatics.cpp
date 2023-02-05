@@ -13,14 +13,14 @@ void indexToggle (void) {
 }
 
 void lipToggle (bool state) {
-    if (state == true) {lip.set_value(true); fwPower = 8000; lipBool = true;}
+    if (state == true) {lip.set_value(true); fwPower = 9000; lipBool = true;}
     else if (state == false) {lip.set_value(false); fwPower = 10000; lipBool = false;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
 }
 
 void lipToggleCntrl (void) {
     if (lipBool == true) {lip.set_value(false); fwPower = 10000;}
-    else if (lipBool == false) {lip.set_value(true); fwPower = 8000;}
+    else if (lipBool == false) {lip.set_value(true); fwPower = 9000;}
     if (flySpinning) {fly.stop(); setFW(fwPower);}
     lipBool = !lipBool;
 }

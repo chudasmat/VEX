@@ -18,14 +18,13 @@ void initialize() {
 void autonomous() {
 	//okapiController.clearLine(0);
 	chassisDrive->setState({0_in, 0_in, 0_deg});
-	//rollerAuton();
-	experimentalAuton();
+	rollerAuton();
 }
 
 void opcontrol() {
 	lip.set_value(true);
 	lipBool = true;
-	fwPower = 8000;
+	fwPower = 9000;
 
 	Task chassisControl_(chassisControl);
 	Task flywheel_(flywheel);
