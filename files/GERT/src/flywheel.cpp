@@ -6,14 +6,14 @@ bool flySpinning = false;
 // int fwSpeeds[3] = {2000, 3000, 3600};
 // int fwIndex = 0;
 
-double fwPower = 10.5; 
+double fwPower = 10500; 
 
 sylib::SpeedControllerInfo flyController (
         [](double rpm){return 5;}, // kV function
         0,
         0,
         0,
-        0.245
+        0.001
 );
 
 sylib::Motor fly(15, 3600, true, flyController);
