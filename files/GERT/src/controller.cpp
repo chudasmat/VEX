@@ -1,7 +1,8 @@
 #include "main.h"
-#include "pros/misc.h"
 
-pros::Controller master (CONTROLLER_MASTER);
+Controller master(CONTROLLER_MASTER);
+okapi::Controller okapiController;
+std::string printSpeed;
 
 void printer(void) {
     while (true) {

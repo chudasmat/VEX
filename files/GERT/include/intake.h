@@ -1,6 +1,6 @@
 #pragma once
 #include "main.h"
 
-extern pros::Motor intake;
 extern bool intakeSpinning;
+extern pros::Motor intake;
 extern void intakeControl (void);

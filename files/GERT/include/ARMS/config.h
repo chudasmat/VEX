@@ -10,21 +10,21 @@ namespace arms {
 #define ODOM_DEBUG 0
 
 // Negative numbers mean reversed motor
-#define LEFT_MOTORS 1, 2, 3
-#define RIGHT_MOTORS -4, -5, -6
-#define GEARSET pros::E_MOTOR_GEAR_600 // RPM of chassis motors
+#define LEFT_MOTORS 1, 2
+#define RIGHT_MOTORS -3, -4
+#define GEARSET pros::E_MOTOR_GEAR_200 // RPM of chassis motors
 
 // Ticks per inch
-#define TPI 41.6696578277      			  // Encoder ticks per inch of forward robot movement
-#define MIDDLE_TPI 41.6696578277          // Ticks per inch for the middle wheel
+#define TPI 1      			  // Encoder ticks per inch of forward robot movement
+#define MIDDLE_TPI 1          // Ticks per inch for the middle wheel
 
 // Tracking wheel distances
-#define TRACK_WIDTH 10.5 		  // The distance between left and right wheels (or tracker wheels)
-#define MIDDLE_DISTANCE 6.7     // Distance from middle wheel to the robot turning center
+#define TRACK_WIDTH 0 		  // The distance between left and right wheels (or tracker wheels)
+#define MIDDLE_DISTANCE 0     // Distance from middle wheel to the robot turning center
 
 // Sensors
 #define IMU_PORT 0                           // Port 0 for disabled
-#define ENCODER_PORTS 3, 5, 7                // Port 0 for disabled,
+#define ENCODER_PORTS 0, 0, 0                // Port 0 for disabled,
 #define EXPANDER_PORT 0                      // Port 0 for disabled
 #define ENCODER_TYPE arms::odom::ENCODER_ADI // The type of encoders
 
@@ -63,7 +63,7 @@ inline void init() {
 	pid::init(LINEAR_KP, LINEAR_KI, LINEAR_KD, ANGULAR_KP, ANGULAR_KI, ANGULAR_KD, TRACKING_KP, MIN_ERROR, LEAD_PCT);
 
 	const char* b[] = {AUTONS, ""};
-//	selector::init(HUE, DEFAULT, b);
+	selector::init(HUE, DEFAULT, b);
 
 }
 
