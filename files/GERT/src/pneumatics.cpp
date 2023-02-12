@@ -26,15 +26,10 @@ void lipToggleCntrl (void) {
 }
 
 void pneumatics (void) {
-    while (true) {
         if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
         if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); delay(150); indexToggle(); delay(150); indexToggle();}
-        if (master.get_digital_new_press(DIGITAL_Y)) {
-            lipToggleCntrl();
-        }
+        if (master.get_digital_new_press(DIGITAL_Y)) {lipToggleCntrl();}
         
-        if (master.get_digital(DIGITAL_X)) {stringS.set_value(true); delay(200); stringS.set_value(false);}
-        delay(10);
-    }}
+        if (master.get_digital(DIGITAL_X)) {stringS.set_value(true); delay(200); stringS.set_value(false);}}
 
 

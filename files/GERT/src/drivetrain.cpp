@@ -1,4 +1,9 @@
 #include "main.h"
+#include "pros/misc.h"
+
+int leftTarget; int rightTarget;
+int leftPower; int rightPower;
+int leftPrev; int rightPrev;
 
 bool driveInvert = false;
 bool brakeHold = false;
@@ -28,35 +33,12 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
 .buildOdometry();
 
 void chassisControl (void) {
-    while (true) {
-		
-		// chassisDrive->getModel()->tank(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
-		
-		if (!driveInvert) {
-			leftA.move(master.get_analog(ANALOG_LEFT_Y));
-			leftB.move(master.get_analog(ANALOG_LEFT_Y));
-			leftC.move(master.get_analog(ANALOG_LEFT_Y));
-			rightA.move(master.get_analog(ANALOG_RIGHT_Y));
-			rightB.move(master.get_analog(ANALOG_RIGHT_Y));
-			rightC.move(master.get_analog(ANALOG_RIGHT_Y));}
-		else {
-			leftA.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			leftB.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			leftC.move(-(master.get_analog(ANALOG_RIGHT_Y)));
-			rightA.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightB.move(-(master.get_analog(ANALOG_LEFT_Y)));
-			rightC.move(-(master.get_analog(ANALOG_LEFT_Y)));}
-
-
-		if (master.get_digital_new_press(DIGITAL_L1)) {
-			if (driveInvert) {driveCurrent = "FW";} else {driveCurrent = "IT";}
-			driveInvert = !driveInvert;
-			lightDirec = !lightDirec;}
-
-//		if (master.get_digital_new_press(DIGITAL_LEFT)){
-//			if (brakeHold) {drive.set_brake_modes(MOTOR_BRAKE_COAST);}
-//			else {drive.set_brake_modes(MOTOR_BRAKE_HOLD);}
-//			brakeHold = !brakeHold;
-//			if (brakeHold) {brakeCurrent = "BR";} else {brakeCurrent = "NB";}}
-
-		delay(10);}}
+	leftTarget = master.get_analog(ANALOG_LEFT_Y);
+	rightTarget = master.get_analog(ANALOG_RIGHT_Y);
+	
+	leftA.move((leftTarget + leftPrev) / 2);
+	leftB.move((leftTarget + leftPrev) / 2);
+	leftC.move((leftTarget + leftPrev) / 2);
+	rightA.move((rightTarget + rightPrev) / 2);
+	rightB.move((rightTarget + rightPrev) / 2);
+	rightC.move((rightTarget + rightPrev) / 2);}
