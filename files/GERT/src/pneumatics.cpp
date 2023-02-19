@@ -2,6 +2,7 @@
 #include "pneumatics.h"
 
 bool lipBool = false;
+bool endgame = false;
 ADIDigitalOut indexer({{13, 8}});
 ADIDigitalOut lip({{13, 7}});
 ADIDigitalOut stringS({{13, 6}});
@@ -26,10 +27,12 @@ void lipToggleCntrl (void) {
 }
 
 void pneumatics (void) {
-        if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
-        if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); delay(150); indexToggle(); delay(150); indexToggle();}
+//      if (master.get_digital_new_press(DIGITAL_R2)) {indexToggle();}
+//      if (master.get_digital_new_press(DIGITAL_R1)) {indexToggle(); delay(150); indexToggle(); delay(150); indexToggle();}
         if (master.get_digital_new_press(DIGITAL_Y)) {lipToggleCntrl();}
-        
-        if (master.get_digital(DIGITAL_X)) {stringS.set_value(true); delay(200); stringS.set_value(false);}}
+        if (endgame && master.get_digital_new_press(DIGITAL_X)) {
+            stringS.set_value(true);
+            delay(150);
+            stringS.set_value(false);}}
 
 

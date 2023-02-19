@@ -9,8 +9,8 @@ bool flySpinning = false;
 double fwPower = 10500; 
 
 sylib::SpeedControllerInfo flyController (
-        [](double rpm){return 5;}, // kV function
-        0,
+        [](double rpm){return 3;}, // kV function
+        0.001,
         0,
         0,
         0.001
@@ -29,7 +29,6 @@ void flywheel (void) {
             fly.stop();
         }
         else {
-            // fly.set_velocity_custom_controller(3000);
             setFW(fwPower);
             }
         flySpinning = !flySpinning;

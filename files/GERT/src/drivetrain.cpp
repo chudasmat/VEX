@@ -35,10 +35,22 @@ std::shared_ptr<okapi::OdomChassisController> chassisDrive = okapi::ChassisContr
 void chassisControl (void) {
 	leftTarget = master.get_analog(ANALOG_LEFT_Y);
 	rightTarget = master.get_analog(ANALOG_RIGHT_Y);
+	leftPower = (15.8 * (tan(M_PI * leftTarget / 260)));
+	rightPower = (15.8 * (tan(M_PI * rightTarget / 260)));
 	
-	leftA.move((leftTarget + leftPrev) / 2);
-	leftB.move((leftTarget + leftPrev) / 2);
-	leftC.move((leftTarget + leftPrev) / 2);
-	rightA.move((rightTarget + rightPrev) / 2);
-	rightB.move((rightTarget + rightPrev) / 2);
-	rightC.move((rightTarget + rightPrev) / 2);}
+	leftA.move(leftPower);
+	leftB.move(leftPower);
+	leftC.move(leftPower);
+	rightA.move(rightPower);
+	rightB.move(rightPower);
+	rightC.move(rightPower);
+	
+//	leftA.move((leftPower + leftPrev) / 2);
+//	leftB.move((leftPower + leftPrev) / 2);
+//	leftC.move((leftPower + leftPrev) / 2);
+//	rightA.move((rightPower + rightPrev) / 2);
+//	rightB.move((rightPower + rightPrev) / 2);
+//	rightC.move((rightPower + rightPrev) / 2);	
+	
+	leftPrev = leftPower;
+	rightPrev = rightPower;}

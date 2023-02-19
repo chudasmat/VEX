@@ -2,6 +2,7 @@
 #include "main.h"
 
 extern bool lipBool;
+extern bool endgame;
 extern pros::ADIDigitalOut indexer;
 extern pros::ADIDigitalOut lip;
 extern pros::ADIDigitalOut stringS;
