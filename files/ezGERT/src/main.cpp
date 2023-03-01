@@ -12,13 +12,14 @@ void disabled() {}
 void competition_initialize() {}
 
 void initialize() {
+	chassis.initialize();
 	sylib::initialize();
 	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	rgb();
 }
 
 void autonomous() {
-	experimentalAuton();
+	combining_movements();
 }
 
 void opcontrol() {

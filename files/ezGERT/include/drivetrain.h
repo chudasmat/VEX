@@ -10,3 +10,5 @@ extern void chassisControl (void);
 extern pros::MotorGroup rightDrive;
 extern pros::MotorGroup leftDrive;
 extern pros::MotorGroup drive;
+
+// ez chassis is defined in main.h
