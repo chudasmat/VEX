@@ -66,9 +66,19 @@ void lipToggle (void) {
   lipActive = !lipActive;
 }
 
+void rgb (void) {
+    auto addrled1 = sylib::Addrled(22,1,25);
+    addrled1.gradient(0xFF0000, 0xFF0005, 0, 0, false, true);
+    addrled1.cycle(*addrled1, 4);
+    auto addrled2 = sylib::Addrled(22,2,25);
+    addrled2.gradient(0xFF0000, 0xFF0005, 0, 0, false, true);
+    addrled2.cycle(*addrled2, 4);
+}
+
 void pre_auton (void) {
   vexcodeInit();
   sylib::initialize();
+  rgb();
 }
 
 void autonomous(void) {
