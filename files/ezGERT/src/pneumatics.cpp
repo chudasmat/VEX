@@ -3,9 +3,10 @@
 
 bool lipBool = false;
 bool endgame = false;
+
+ADIDigitalOut stringS({{13, 6}});
 ADIDigitalOut blocker({{13, 8}});
 ADIDigitalOut lip({{13, 7}});
-ADIDigitalOut stringS({{13, 6}});
 
 void indexToggle (void) {
     indexer.set_value(true);
