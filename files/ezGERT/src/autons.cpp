@@ -250,6 +250,7 @@ void turnTest(void) {
 
 void experimentalAuton(void) {
   chassis.set_drive_pid(144, DRIVE_SPEED, true, false);
+  chassis.wait_drive();
   chassis.set_swing_pid(ez::LEFT_SWING, 180, SWING_SPEED);
 }
 
