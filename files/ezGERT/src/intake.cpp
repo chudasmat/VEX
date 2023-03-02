@@ -2,7 +2,7 @@
 #include "pros/misc.h"
 
 bool intakeSpinning = false;
-Motor intake(20, MOTOR_GEAR_200, true);
+Motor intake(20, MOTOR_GEAR_200, false);
 
 void intakeControl (void) {
 		if (master.get_digital_new_press(DIGITAL_L2)){
