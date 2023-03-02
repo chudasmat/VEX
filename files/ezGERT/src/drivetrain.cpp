@@ -12,12 +12,12 @@ bool brakeHold = false;
 std::string driveCurrent = "FW";
 std::string brakeCurrent = "NB";
 
-Motor leftA(1, E_MOTOR_GEARSET_06, false);
-Motor leftB(2, E_MOTOR_GEARSET_06, false);
-Motor leftC(3, E_MOTOR_GEARSET_06, false);
-Motor rightA(4, E_MOTOR_GEARSET_06, true);
-Motor rightB(5, E_MOTOR_GEARSET_06, true);
-Motor rightC(6, E_MOTOR_GEARSET_06, true);
+Motor leftA(7, E_MOTOR_GEARSET_06, false);
+Motor leftB(8, E_MOTOR_GEARSET_06, false);
+Motor leftC(9, E_MOTOR_GEARSET_06, false);
+Motor rightA(1, E_MOTOR_GEARSET_06, true);
+Motor rightB(2, E_MOTOR_GEARSET_06, true);
+Motor rightC(3, E_MOTOR_GEARSET_06, true);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
 MotorGroup drive({leftA, leftB, leftC, rightA, rightB, rightC});
@@ -26,14 +26,14 @@ MotorGroup drive({leftA, leftB, leftC, rightA, rightB, rightC});
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {1, 2, 3}
+  {7, 8, 9}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-4, -5, -6}
+  ,{-1, -2, -3}
 
   // IMU Port
-  ,16
+  ,10
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   //    (or tracking wheel diameter)
@@ -67,17 +67,22 @@ float scaledInput = 127;
 float scaledOutput = 12000;
 
 void chassisControl (void) {
-	leftTarget = master.get_analog(ANALOG_LEFT_Y);
-	rightTarget = master.get_analog(ANALOG_RIGHT_Y);
-	leftPower = (scaledOutput * tan((leftTarget / scaledInput) * atan(gradient))) / gradient;
-	rightPower = (scaledOutput * tan((rightTarget / scaledInput) * atan(gradient))) / gradient;
-	
-	leftA.move_voltage((leftPower + leftPrev) / 2);
-	leftB.move_voltage((leftPower + leftPrev) / 2);
-	leftC.move_voltage((leftPower + leftPrev) / 2);
-	rightA.move_voltage((rightPower + rightPrev) / 2);
-	rightB.move_voltage((rightPower + rightPrev) / 2);
-	rightC.move_voltage((rightPower + rightPrev) / 2);	
-	
-	leftPrev = leftPower;
-	rightPrev = rightPower;}
+// leftTarget = master.get_analog(ANALOG_LEFT_Y);
+// rightTarget = master.get_analog(ANALOG_RIGHT_Y);
+// leftPower = (scaledOutput * tan((leftTarget / scaledInput) * atan(gradient))) / gradient;
+// rightPower = (scaledOutput * tan((rightTarget / scaledInput) * atan(gradient))) / gradient;
+// 
+// leftA.move_voltage((leftPower + leftPrev) / 2);
+// leftB.move_voltage((leftPower + leftPrev) / 2);
+// leftC.move_voltage((leftPower + leftPrev) / 2);
+// rightA.move_voltage((rightPower + rightPrev) / 2);
+// rightB.move_voltage((rightPower + rightPrev) / 2);
+// rightC.move_voltage((rightPower + rightPrev) / 2);	
+// 
+// leftPrev = leftPower;
+// rightPrev = rightPower;
+  
+  chassis.tank();
+
+  if (master.get_digital_new_press(DIGITAL_A)) {drive_example();}
+  if (master.get_digital_new_press(DIGITAL_B)) {turn_example();}}

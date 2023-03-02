@@ -1,3 +1,4 @@
+#include "EZ-Template/util.hpp"
 #include "main.h"
 
 const int DRIVE_SPEED = 105; // This is 110/127 (around 87% of max speed).  We don't suggest making this 127.
@@ -248,7 +249,8 @@ void turnTest(void) {
 }
 
 void experimentalAuton(void) {
-
+  chassis.set_drive_pid(144, DRIVE_SPEED, true, false);
+  chassis.set_swing_pid(ez::LEFT_SWING, 180, SWING_SPEED);
 }
 
 void rollerAuton(void) {

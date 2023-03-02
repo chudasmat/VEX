@@ -18,7 +18,7 @@ sylib::SpeedControllerInfo flyController (
 
 sylib::Motor fly(15, 3600, true, flyController);
 void setFW (double power) {
-//    fly.set_velocity_custom_controller((power *-1));  
+//  fly.set_velocity_custom_controller(power);  
     fly.set_voltage((power * -1));
 }
 

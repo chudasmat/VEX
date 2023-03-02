@@ -1,4 +1,5 @@
 #include "main.h"
+#include "autons.h"
 #include "controller.h"
 #include "flywheel.h"
 #include "intake.h"
@@ -13,13 +14,14 @@ void competition_initialize() {}
 
 void initialize() {
 	chassis.initialize();
+	default_constants();
 	sylib::initialize();
-	static Gif gif("/usd/slideshow.gif", lv_scr_act());
+//	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	rgb();
 }
 
 void autonomous() {
-	combining_movements();
+	experimentalAuton();
 }
 
 void opcontrol() {
@@ -35,6 +37,6 @@ void opcontrol() {
 		intakeControl();
 		pneumatics();
 		if ((now - startTime) > 95000) {endgame = true;}
-//		printf("%d,%d,%f\n", millis(), desiredVal,fly.get_velocity();
+//		printf("%d,%d,%f\n", millis(), desiredVal, fly.get_velocity();
 		Task::delay_until(&startTime, 10);
 	}}
