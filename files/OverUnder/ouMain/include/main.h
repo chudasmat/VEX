@@ -40,6 +40,7 @@
 #include "drive.h"
 #include "intake.h"
 #include "rgb.h"
+#include "pneumatics.h"
 
 /**
  * You should add more #includes here

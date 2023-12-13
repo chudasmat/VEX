@@ -14,4 +14,4 @@ extern pros::MotorGroup rightDrive;
 extern lemlib::Chassis chassis;
 extern pros::Imu inertial;
 
-extern void drive (void);
+extern void chassisControl (void);
