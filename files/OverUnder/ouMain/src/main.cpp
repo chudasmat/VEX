@@ -1,7 +1,11 @@
 #include "main.h"
 
 
-void initialize() {}
+void initialize() {
+    sylib::initialize();
+	// static Gif gif("/usd/slideshow.gif", lv_scr_act());
+	rgb();
+}
 
 void disabled() {}
 
