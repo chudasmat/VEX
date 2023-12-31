@@ -13,7 +13,7 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
-	while (1) {
+	while (true) {
 		std::uint32_t now = millis();
 		chassisControl();
 		intakeControl();
