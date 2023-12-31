@@ -55,8 +55,8 @@ void chassisControl (void) {
     // thanks for the curve eden
 	leftTarget = master.get_analog(ANALOG_LEFT_Y);
 	rightTarget = master.get_analog(ANALOG_RIGHT_Y);
-	leftPower = (atan((2 * leftTarget - (leftTarget / abs(leftTarget))) * 5.5) / (2 * atan(5.5))) + (leftTarget / (2 * abs(leftTarget))) * 127;
-	rightPower = (atan((2 * rightTarget - (rightTarget / abs(rightTarget))) * 5.5) / (2 * atan(5.5))) + (rightTarget / (2 * abs(rightTarget))) * 127;
+	leftPower = (atan((2 * leftTarget - (leftTarget / abs(leftTarget))) * 5.5) / (2 * atan(5.5))) + (leftTarget / (2 * abs(leftTarget)));
+	rightPower = (atan((2 * rightTarget - (rightTarget / abs(rightTarget))) * 5.5) / (2 * atan(5.5))) + (rightTarget / (2 * abs(rightTarget)));
 	
 	leftDrive.move(leftPower);
 	rightDrive.move(rightPower);}
