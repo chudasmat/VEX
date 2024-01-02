@@ -19,5 +19,9 @@ void chassisControl (void) {
 //	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput)));
 //	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput)));
 	
-	leftDrive.move(leftInput);
-	rightDrive.move(rightInput);}
+	leftA.move(leftInput);
+	leftB.move(leftInput);
+	leftC.move(leftInput);
+	rightA.move(leftInput);
+	rightB.move(leftInput);
+	rightC.move(leftInput);}
