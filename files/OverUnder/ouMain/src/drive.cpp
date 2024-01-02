@@ -22,6 +22,6 @@ void chassisControl (void) {
 	leftA.move(leftInput);
 	leftB.move(leftInput);
 	leftC.move(leftInput);
-	rightA.move(leftInput);
-	rightB.move(leftInput);
-	rightC.move(leftInput);}
+	rightA.move(rightInput);
+	rightB.move(rightInput);
+	rightC.move(rightInput);}
