@@ -2,6 +2,7 @@
 bool kickerOn = false;
 Motor kicker(7, false);
 ADIDigitalIn kickLimit(5);
+Optical optical(18);
 
 void kickerControl(void) {
     if (master.get_digital_new_press(DIGITAL_B)) {

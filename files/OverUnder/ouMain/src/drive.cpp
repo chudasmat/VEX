@@ -11,6 +11,7 @@ Motor leftB(9, E_MOTOR_GEARSET_06, false);
 Motor leftC(10, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
+Imu imu(16);
 
 void chassisControl (void) {
     leftInput = master.get_analog(ANALOG_LEFT_Y);
