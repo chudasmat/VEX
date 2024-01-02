@@ -1,8 +1,9 @@
 #include "main.h"
+Controller master(CONTROLLER_MASTER);
 
 void initialize() {
-    sylib::initialize();
-	// static Gif gif("/usd/slideshow.gif", lv_scr_act());
+	sylib::initialize();
+	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	rgb();
 }
 
@@ -14,9 +15,11 @@ void autonomous() {}
 
 void opcontrol() {
 	while (true) {
-		std::uint32_t now = millis();
 		chassisControl();
+		kickerControl();
 		intakeControl();
-		pneumatics();
-		Task::delay_until(&now, 10);}
+		liftControl();
+		wingsControl();
+		pros::delay(10);
+	}
 }

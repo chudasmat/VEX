@@ -4,42 +4,22 @@
         "project_name": "ouMain",
         "target": "v5",
         "templates": {
-            "LemLib": {
-                "location": "C:\\Users\\trish\\AppData\\Roaming\\PROS\\templates\\LemLib@0.5.0-rc3",
+            "gif-pros": {
+                "location": "C:\\Users\\trish\\AppData\\Roaming\\PROS\\templates\\gif-pros@2.1.1",
                 "metadata": {
                     "origin": "local"
                 },
-                "name": "LemLib",
+                "name": "gif-pros",
                 "py/object": "pros.conductor.templates.local_template.LocalTemplate",
-                "supported_kernels": "^3.8.0",
+                "supported_kernels": "^3.2.0",
                 "system_files": [
-                    "include\\lemlib\\chassis\\odom.hpp",
-                    "static\\example.txt",
-                    "include\\fmt\\args.h",
-                    "include\\fmt\\core.h",
-                    "firmware\\LemLib.a",
-                    "include\\lemlib\\logger\\infoSink.hpp",
-                    "include\\lemlib\\pose.hpp",
-                    "include\\lemlib\\logger\\message.hpp",
-                    "include\\lemlib\\logger\\baseSink.hpp",
-                    "include\\lemlib\\logger\\telemetrySink.hpp",
-                    "include\\fmt\\format.h",
-                    "include\\lemlib\\util.hpp",
-                    "include\\lemlib\\timer.hpp",
-                    "include\\lemlib\\logger\\stdout.hpp",
-                    "include\\lemlib\\api.hpp",
-                    "include\\lemlib\\logger\\buffer.hpp",
-                    "include\\lemlib\\asset.hpp",
-                    "include\\lemlib\\chassis\\chassis.hpp",
-                    "include\\lemlib\\pid.hpp",
-                    "firmware\\asset.mk",
-                    "include\\fmt\\format-inl.h",
-                    "include\\lemlib\\chassis\\trackingWheel.hpp",
-                    "include\\lemlib\\logger\\logger.hpp"
+                    "include\\gif-pros\\gifdec.h",
+                    "firmware\\gif-pros.a",
+                    "include\\gif-pros\\gifclass.hpp"
                 ],
                 "target": "v5",
                 "user_files": [],
-                "version": "0.5.0-rc3"
+                "version": "2.1.1"
             },
             "kernel": {
                 "location": "C:\\Users\\trish\\AppData\\Roaming\\PROS\\templates\\kernel@3.8.0",

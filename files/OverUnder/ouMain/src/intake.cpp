@@ -1,20 +1,17 @@
 #include "main.h"
-#include "pros/misc.h"
+bool intakeOn = false;
+Motor intake(20, false);
 
-bool intakeSpinning = false;
-Motor intake(20, MOTOR_GEAR_200, true);
+void intakeControl(void) {
+    if (master.get_digital_new_press(DIGITAL_R1)) {
+        if (intakeOn) {intake.brake();}
+        else {intake.move(127);}
+        intakeOn = !intakeOn;
+    }
+    if (master.get_digital_new_press(DIGITAL_L1)) {
+        if (intakeOn) {intake.brake();}
+        else {intake.move(-127);}
+        intakeOn = !intakeOn;
+    }
 
-void intakeControl (void) {
-		if (master.get_digital_new_press(DIGITAL_RIGHT)){
-			if (intakeSpinning) {intake.move_voltage(0);}
-			else {intake.move_voltage(12000);}
-			intakeSpinning = !intakeSpinning;}
-		
-		if (master.get_digital_new_press(DIGITAL_R2)) {
-			intake.move_relative(-300, 200);
-			}
-
-		if (master.get_digital_new_press(DIGITAL_R1)) {
-			if (intakeSpinning) {intake.move_voltage(0);}
-			else {intake.move_voltage(-12000);}
-			intakeSpinning = !intakeSpinning;}}
+}

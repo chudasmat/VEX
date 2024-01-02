@@ -36,11 +36,6 @@
 
 #include "api.h"
 #include "sylib/sylib.hpp"
-#include "lemlib/api.hpp"
-#include "drive.h"
-#include "intake.h"
-#include "rgb.h"
-#include "pneumatics.h"
 
 /**
  * You should add more #includes here
@@ -60,6 +55,8 @@ using namespace pros;
 // using namespace pros::literals;
 // using namespace okapi;
 
+#include "globals.h"
+#include "gif-pros/gifclass.hpp"
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
  * that they can be called from user code (i.e. calling autonomous from a
