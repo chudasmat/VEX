@@ -16,8 +16,8 @@ Imu imu(16);
 void chassisControl (void) {
     leftInput = master.get_analog(ANALOG_LEFT_Y);
     rightInput = master.get_analog(ANALOG_RIGHT_Y);
-	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput)));
-	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput)));
+	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
+	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
 	
 	leftA.move(leftPower);
 	leftB.move(leftPower);
