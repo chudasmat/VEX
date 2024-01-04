@@ -14,7 +14,7 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
-	while (true) {
+	while (1) {
 		chassisControl();
 		kickerControl();
 		intakeControl();
