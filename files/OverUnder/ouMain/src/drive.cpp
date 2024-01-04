@@ -3,12 +3,12 @@
 float leftInput; float rightInput;
 float leftPower; float rightPower;
 
-Motor rightA(2, E_MOTOR_GEARSET_06, true);
-Motor rightB(3, E_MOTOR_GEARSET_06, true);
-Motor rightC(4, E_MOTOR_GEARSET_06, true);
-Motor leftA(8, E_MOTOR_GEARSET_06, false);
-Motor leftB(9, E_MOTOR_GEARSET_06, false);
-Motor leftC(10, E_MOTOR_GEARSET_06, false);
+Motor rightA(8, E_MOTOR_GEARSET_06, true);
+Motor rightB(9, E_MOTOR_GEARSET_06, true);
+Motor rightC(10, E_MOTOR_GEARSET_06, true);
+Motor leftA(2, E_MOTOR_GEARSET_06, false);
+Motor leftB(3, E_MOTOR_GEARSET_06, false);
+Motor leftC(4, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
 Imu imu(16);
