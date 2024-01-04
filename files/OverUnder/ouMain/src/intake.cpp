@@ -1,6 +1,8 @@
 #include "main.h"
 bool intakeOn = false;
-Motor intake(20, false);
+Motor intakeA(5, false);
+Motor intakeB(6, true);
+MotorGroup intake({intakeA, intakeB});
 
 void intakeControl(void) {
     if (master.get_digital_new_press(DIGITAL_R1)) {

@@ -1,6 +1,6 @@
 #include "main.h"
 bool kickerOn = false;
-Motor kicker(7, false);
+Motor kicker(7, true);
 ADIDigitalIn kickLimit(5);
 Optical optical(18);
 

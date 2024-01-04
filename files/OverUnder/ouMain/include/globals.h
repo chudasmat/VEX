@@ -14,7 +14,7 @@ extern Motor kicker;
 
 // intake
 extern void intakeControl(void);
-extern Motor intake;
+extern MotorGroup intake;
 
 // lift
 extern void liftControl(void);
