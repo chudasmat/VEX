@@ -14,14 +14,15 @@ MotorGroup rightDrive({rightA, rightB, rightC});
 Imu imu(11);
 
 void chassisControl (void) {
-    leftInput = master.get_analog(ANALOG_LEFT_Y) / 127.0;
-    rightInput = master.get_analog(ANALOG_RIGHT_Y) / 127.0;
-	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
-	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
+    leftInput = master.get_analog(ANALOG_LEFT_Y);
+    rightInput = master.get_analog(ANALOG_RIGHT_Y);
+
+//	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
+//	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
 	
-	leftA.move(leftInput * 127);
-	leftB.move(leftInput * 127);
-	leftC.move(leftInput * 127);
-	rightA.move(rightInput * 127);
-	rightB.move(rightInput * 127);
-	rightC.move(rightInput * 127);}
+	leftA.move(leftInput);
+	leftB.move(leftInput);
+	leftC.move(leftInput);
+	rightA.move(rightInput);
+	rightB.move(rightInput);
+	rightC.move(rightInput);}
