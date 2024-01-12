@@ -5,8 +5,8 @@
 
 bool bigOn = false;
 bool miniOn = false;
-ADIDigitalOut bigWings(1);
-ADIDigitalOut miniWing(2);
+ADIDigitalOut bigWings(2);
+ADIDigitalOut miniWing(3);
 
 void wingsControl(void) {
     if (master.get_digital_new_press(DIGITAL_Y)) {
