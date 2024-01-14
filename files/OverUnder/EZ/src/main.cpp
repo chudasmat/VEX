@@ -19,13 +19,20 @@ void autonomous() {
 }
 
 void opcontrol() {
+	int count = 0;
 	chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
 	while (true) {
+
+		if (!(count % 25)) {
+      		master.print(0, 0, "Optical: %d", optical.get_proximity());
+    	}
+    	count++;
+
 		chassisControl();
 		kickerControl();
 		intakeControl();
 		liftControl();
 		wingsControl();
-		pros::delay(10);
+		pros::delay(2);
 	}
 }

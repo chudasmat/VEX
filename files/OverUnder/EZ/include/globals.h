@@ -15,6 +15,7 @@ extern void oneTriball(void);
 extern void kickerControl(void);
 extern void kickMacro(void);
 extern Motor kicker;
+extern Optical optical;
 
 // intake
 extern void intakeControl(void);
