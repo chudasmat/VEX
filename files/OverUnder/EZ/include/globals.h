@@ -8,8 +8,8 @@ extern pros::Controller master;
 extern void chassisControl(void);
 extern Drive chassis;
 
-// auton
-extern void simpleAuton(void);
+// autons
+extern void oneTriball(void);
 
 // kicker
 extern void kickerControl(void);

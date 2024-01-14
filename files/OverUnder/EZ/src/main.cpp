@@ -15,12 +15,13 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	simpleAuton();
+	oneTriball();
 }
 
 void opcontrol() {
+	chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
 	while (true) {
-		chassis.tank();
+		chassisControl();
 		kickerControl();
 		intakeControl();
 		liftControl();

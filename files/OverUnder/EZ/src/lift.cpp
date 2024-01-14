@@ -8,7 +8,7 @@ bool macroOn = false;
 ADIDigitalOut lift(1);
 
 void liftControl(void) {
-    if (master.get_digital(DIGITAL_R2)) {
+    if (master.get_digital_new_press(DIGITAL_R1)) {
         lift.set_value(!liftOn); 
         liftOn = !liftOn;}
     
