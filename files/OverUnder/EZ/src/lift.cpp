@@ -5,6 +5,9 @@
 
 bool liftOn = false;
 bool macroOn = false;
+
+Motor liftA(15, E_MOTOR_GEARSET_06, true);
+Motor liftB(16, E_MOTOR_GEARSET_06, true);
 ADIDigitalOut lift(1);
 
 void liftControl(void) {
