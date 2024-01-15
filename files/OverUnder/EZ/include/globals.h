@@ -10,6 +10,8 @@ extern Drive chassis;
 
 // autons
 extern void oneTriball(void);
+extern void threeTriball(void);
+extern void partialAWP(void);
 
 // kicker
 extern void kickerControl(void);
