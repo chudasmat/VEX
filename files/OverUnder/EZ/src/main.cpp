@@ -15,7 +15,10 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	oneTriball();
+//	oneTriball();
+	nearThreeTriball();
+//	farThreeTriball();
+//	partialAWP();
 }
 
 void opcontrol() {
