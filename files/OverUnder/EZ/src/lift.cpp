@@ -5,7 +5,7 @@
 #include "pros/motors.hpp"
 
 bool liftOn = false; bool macroOn = false;
-int liftHeights;
+int liftHeight = 0;
 
 Motor liftA(15, E_MOTOR_GEARSET_06, true);
 Motor liftB(16, E_MOTOR_GEARSET_06, true);
@@ -27,8 +27,9 @@ void liftControl(void) {
     if (master.get_digital_new_press(DIGITAL_R1)) {lift.move(127);}
     if (master.get_digital_new_press(DIGITAL_L1)) {lift.move(-127);}
     if (master.get_digital_new_press(DIGITAL_A)) {
-        liftHeights++;
-        if (liftHeights == 1 or 2) {lift.move_relative(100, 127);}
-        else if (liftHeights == 3) {liftHeights = 0; lift.move_relative(-200, 127);}
+        liftHeight++;
+        if (liftHeight == 1) {lift.move_absolute(100, 127);}
+        else if (liftHeight == 2) {lift.move_absolute(200, 127);}
+        else if (liftHeight == 3) {liftHeight = 0; lift.move_absolute(0, 127);}
     }
 }

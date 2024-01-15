@@ -1,4 +1,5 @@
 #pragma once
+#include "globals.h"
 #include "main.h"
 
 // controller
@@ -13,6 +14,7 @@ extern void oneTriball(void);
 extern void nearThreeTriball(void);
 extern void farThreeTriball(void);
 extern void partialAWP(void);
+extern void farFiveTriball(void);
 
 // kicker
 extern void kickerControl(void);
