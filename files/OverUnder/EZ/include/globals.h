@@ -34,6 +34,7 @@ extern MotorGroup lift;
 extern void wingsControl(void);
 extern ADIDigitalOut bigWings;
 extern ADIDigitalOut miniWing;
+extern ADIDigitalOut beach;
 
 // climber
 extern void climberControl(void);
