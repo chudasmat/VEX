@@ -2,7 +2,6 @@
 #include "pros/motors.h"
 bool kickerOn = false;
 Motor kicker(9, E_MOTOR_GEAR_200, true);
-ADIDigitalIn kickLimit(5);
 Optical optical(2);
 
 void kickerControl(void) {
