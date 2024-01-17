@@ -11,6 +11,7 @@ Motor liftA(15, E_MOTOR_GEARSET_06, true);
 Motor liftB(16, E_MOTOR_GEARSET_06, true);
 MotorGroup lift({liftA, liftB});
 // ADIDigitalIn lift(1);
+lift.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 
 void liftControl(void) {
 //    if (master.get_digital_new_press(DIGITAL_R1)) {
