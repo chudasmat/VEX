@@ -17,7 +17,7 @@ void wingsControl(void) {
         miniWing.set_value(!miniOn);
         miniOn = !miniOn;
     }
-    if (master.get.digital_new_press(DIGITAL_DOWN)) {
+    if (master.get_digital_new_press(DIGITAL_DOWN)) {
         beach.set_value(!beachOn);
         beachOn = !beachOn;
     }

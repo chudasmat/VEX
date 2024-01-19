@@ -28,7 +28,7 @@ extern MotorGroup intake;
 
 // lift
 extern void liftControl(void);
-extern MotorGroup lift;
+extern Motor lift;
 
 // wings
 extern void wingsControl(void);

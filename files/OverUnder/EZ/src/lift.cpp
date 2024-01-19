@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "main.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
@@ -7,24 +8,10 @@
 bool liftOn = false; bool macroOn = false;
 int liftHeight = 0;
 
-Motor liftA(15, E_MOTOR_GEARSET_06, true);
-Motor liftB(16, E_MOTOR_GEARSET_06, true);
-MotorGroup lift({liftA, liftB});
-// ADIDigitalIn lift(1);
-lift.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+Motor lift(15, E_MOTOR_GEARSET_36, true);
 
 void liftControl(void) {
-//    if (master.get_digital_new_press(DIGITAL_R1)) {
-//        lift.set_value(!liftOn); 
-//        liftOn = !liftOn;}
-//    
-//    if (master.get_digital_new_press(DIGITAL_L2) && master.get_digital_new_press(DIGITAL_R2)) {
-//        macroOn = !macroOn;
-//        miniWing.set_value(macroOn);
-//        lift.set_value(macroOn);
-//        if (macroOn) {kicker.move(127);}
-//        else if (!macroOn) {kicker.brake();}}
-
+    lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     if (master.get_digital_new_press(DIGITAL_R1)) {lift.move(127);}
     if (master.get_digital_new_press(DIGITAL_L1)) {lift.move(-127);}
     if (master.get_digital_new_press(DIGITAL_A)) {
