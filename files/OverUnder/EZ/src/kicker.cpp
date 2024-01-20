@@ -1,8 +1,8 @@
 #include "main.h"
 #include "pros/motors.h"
 bool kickerOn = false;
-Motor kicker(9, E_MOTOR_GEAR_200, true);
-Optical optical(2);
+Motor kicker(13, E_MOTOR_GEAR_200, true);
+Optical optical(1);
 
 void kickerControl(void) {
     if (master.get_digital_new_press(DIGITAL_X)) {

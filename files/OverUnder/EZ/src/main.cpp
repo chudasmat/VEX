@@ -15,14 +15,17 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	farFiveTriball();
-//	oneTriball();
+//	farFiveTriball();
+//	nearOneTriball();
+  	farOneTriball();
 //	nearThreeTriball();
 //	farThreeTriball();
 //	partialAWP();
 }
 
 void opcontrol() {
+	liftLock.set_value(1);
+	kicker.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	int count = 0;
 	chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
 	while (true) {
@@ -37,6 +40,6 @@ void opcontrol() {
 		intakeControl();
 		liftControl();
 		wingsControl();
-		pros::delay(2);
+		pros::delay(10);
 	}
 }

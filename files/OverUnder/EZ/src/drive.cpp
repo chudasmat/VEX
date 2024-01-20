@@ -7,12 +7,12 @@ bool driveHold = false;
 Motor leftA(12, E_MOTOR_GEARSET_06, true);
 Motor leftB(3, E_MOTOR_GEARSET_06, true);
 Motor leftC(4, E_MOTOR_GEARSET_06, true);
-Motor rightA(5, E_MOTOR_GEARSET_06, false);
-Motor rightB(6, E_MOTOR_GEARSET_06, false);
+Motor rightA(18, E_MOTOR_GEARSET_06, false);
+Motor rightB(14, E_MOTOR_GEARSET_06, false);
 Motor rightC(10, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
-Imu imu(11);
+Imu imu(12);
 
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
@@ -21,10 +21,10 @@ Drive chassis (
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{5, 6, 10}
+  ,{18 , 14, 10}
 
   // IMU Port
-  ,11
+  ,12
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   ,2.75
