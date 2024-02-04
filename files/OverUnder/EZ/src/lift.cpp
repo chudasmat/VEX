@@ -16,12 +16,12 @@ void liftControl(void) {
     if (master.get_digital(DIGITAL_R1)) {lift.move(127);} 
     else if (master.get_digital(DIGITAL_L1)) {lift.move(-127);}
     else {lift.brake();}
-    if (master.get_digital_new_press(DIGITAL_A)) {
+    /*if (master.get_digital_new_press(DIGITAL_A)) {
         liftHeight++;
         if (liftHeight == 1) {lift.move_absolute(100, 127);}
         else if (liftHeight == 2) {lift.move_absolute(200, 127);}
         else if (liftHeight == 3) {liftHeight = 0; lift.move_absolute(0, 127);}
-    }
+    }*/
     if (master.get_digital_new_press(DIGITAL_DOWN)) {
         liftLock.set_value(!lockOn);
         lockOn = !lockOn;
