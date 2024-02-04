@@ -5,9 +5,6 @@ Controller master(CONTROLLER_MASTER);
 void initialize() {
 	chassis.initialize();
 	chassis.set_curve_default(3.5, 3.5);
-	sylib::initialize();
-	static Gif gif("/usd/slideshow.gif", lv_scr_act());
-	rgb();
 }
 
 void disabled() {}
@@ -24,6 +21,10 @@ void autonomous() {
 }
 
 void opcontrol() {
+	sylib::initialize();
+	static Gif gif("/usd/slideshow.gif", lv_scr_act());
+	rgb();
+	
 	liftLock.set_value(1);
 	kicker.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	int count = 0;

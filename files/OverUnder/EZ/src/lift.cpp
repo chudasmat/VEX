@@ -8,8 +8,8 @@
 bool liftOn = false; bool macroOn = false; bool lockOn = true;
 int liftHeight = 0;
 
-Motor liftA(9, E_MOTOR_GEARSET_36, false);
-Motor liftB(20, E_MOTOR_GEARSET_36, true);
+Motor liftA(15, E_MOTOR_GEARSET_36, false);
+Motor liftB(20, E_MOTOR_GEARSET_36, false);
 MotorGroup lift({liftA, liftB});
 ADIDigitalOut liftLock(1);
 
