@@ -1,6 +1,7 @@
 #pragma once
 #include "globals.h"
 #include "main.h"
+#include "pros/motors.hpp"
 
 // controller
 extern pros::Controller master;
@@ -25,11 +26,11 @@ extern Optical optical;
 
 // intake
 extern void intakeControl(void);
-extern MotorGroup intake;
+extern Motor intake;
 
 // lift
 extern void liftControl(void);
-extern Motor lift;
+extern MotorGroup lift;
 extern ADIDigitalOut liftLock;
 
 // wings
