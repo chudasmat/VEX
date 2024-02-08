@@ -11,6 +11,7 @@ extern void chassisControl(void);
 extern Drive chassis;
 
 // autons
+extern void default_constants(void);
 extern void nearOneTriball(void);
 extern void farOneTriball();
 extern void nearThreeTriball(void);
