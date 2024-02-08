@@ -4,6 +4,19 @@
 #include "pros/motors.h"
 #include "pros/rtos.hpp"
 
+void default_constants() {
+  // PID Constants
+  chassis.pid_drive_constants_set(10, 0, 100); // Sets forward and backward
+  chassis.pid_heading_constants_set(3, 0, 20);
+  chassis.pid_turn_constants_set(3, 0, 20);
+  chassis.pid_swing_constants_set(5, 0, 30); // Sets forward and backward
+
+  // Swing Constants
+  chassis.slew_drive_constants_set(7_in, 80); // Sets forward and backward
+  chassis.slew_turn_constants_set(5_deg, 50);
+  chassis.slew_swing_constants_set(5_deg, 50); // Sets forward and backward
+}
+
 void nearOneTriball(void) {
     chassis.set_drive_pid(-45, 110, true); delay(1200);
     chassis.set_turn_pid(40, 100); delay(1200);
