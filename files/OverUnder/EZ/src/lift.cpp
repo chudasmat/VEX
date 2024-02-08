@@ -10,10 +10,17 @@ int liftHeight = 0;
 
 Motor liftA(15, E_MOTOR_GEARSET_36, false);
 Motor liftB(20, E_MOTOR_GEARSET_36, false);
+ADIDigitalOut liftPiston(7);
 MotorGroup lift({liftA, liftB});
 ADIDigitalOut liftLock(1);
 
 void liftControl(void) {
+/*    if (master.get_digital(DIGITAL_R1)) {
+        liftPiston.set_value(!liftOn); 
+        liftOn = !liftOn;
+        ledStrip1.pulse(0x43B5F7, 22, 10);
+        ledStrip2.pulse(0x43B5F7, 22, 10);
+    }*/
     lift.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
     if (master.get_digital(DIGITAL_R1)) {lift.move(127);} 
     else if (master.get_digital(DIGITAL_L1)) {lift.move(-127);}
