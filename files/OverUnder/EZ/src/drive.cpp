@@ -17,7 +17,7 @@ Imu imu(12);
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-12, -3, -4}
+  {12, 3, 4}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
@@ -51,18 +51,5 @@ void chassisControl (void) {
 	rightA.move(rightInput);
 	rightB.move(rightInput);
 	rightC.move(rightInput);
-  
-  if (master.get_digital_new_press(DIGITAL_B)) {
-    if (driveHold) {
-      leftDrive.set_brake_modes(MOTOR_BRAKE_COAST);
-      rightDrive.set_brake_modes(MOTOR_BRAKE_COAST);
-      master.clear();
-      master.set_text(0, 0, "COAST");}
-    else {
-      leftDrive.set_brake_modes(MOTOR_BRAKE_HOLD);
-      rightDrive.set_brake_modes(MOTOR_BRAKE_HOLD);
-      master.clear();
-      master.set_text(0, 0, "HOLD");}
-    driveHold = !driveHold;
-  }
+
 }

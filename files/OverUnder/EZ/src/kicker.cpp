@@ -3,7 +3,7 @@
 bool kickerOn = false;
 Motor kickerA(13, E_MOTOR_GEAR_200, true);
 Motor kickerB(14, E_MOTOR_GEAR_200, true);
-Motor_Group kicker({kickerA, kickerB});
+MotorGroup kicker({kickerA, kickerB});
 Optical optical(1);
 
 void kickerControl(void) {

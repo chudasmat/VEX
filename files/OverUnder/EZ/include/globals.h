@@ -22,12 +22,12 @@ extern void farFiveTriball(void);
 // kicker
 extern void kickerControl(void);
 extern void kickMacro(void);
-extern Motor kicker;
+extern MotorGroup kicker;
 extern Optical optical;
 
 // intake
 extern void intakeControl(void);
-extern Motor intake;
+extern MotorGroup intake;
 
 // lift
 extern void liftControl(void);
