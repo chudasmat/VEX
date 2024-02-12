@@ -31,7 +31,7 @@ extern MotorGroup intake;
 
 // lift
 extern void liftControl(void);
-extern MotorGroup lift;
+extern ADIDigitalOut lift;
 extern ADIDigitalOut liftLock;
 
 // wings

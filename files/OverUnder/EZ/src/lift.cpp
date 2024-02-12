@@ -8,12 +8,12 @@
 bool liftOn = false; bool macroOn = false; bool lockOn = false;
 int liftHeight = 0;
 
-ADIDigitalOut liftPiston(7);
+ADIDigitalOut lift(7);
 ADIDigitalOut liftLock(1);
 
 void liftControl(void) {
     if (master.get_digital(DIGITAL_R1)) {
-        liftPiston.set_value(!liftOn); 
+        lift.set_value(!liftOn); 
         liftOn = !liftOn;
         ledStrip1.pulse(0x43B5F7, 22, 10);
         ledStrip2.pulse(0x43B5F7, 22, 10);
