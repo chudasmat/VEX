@@ -4,9 +4,9 @@ float leftInput; float rightInput;
 float leftPower; float rightPower;
 bool driveHold = false;
 
-Motor leftA(12, E_MOTOR_GEARSET_06, true);
-Motor leftB(3, E_MOTOR_GEARSET_06, true);
-Motor leftC(4, E_MOTOR_GEARSET_06, true);
+Motor leftA(12, E_MOTOR_GEARSET_06, false);
+Motor leftB(3, E_MOTOR_GEARSET_06, false);
+Motor leftC(4, E_MOTOR_GEARSET_06, false);
 Motor rightA(18, E_MOTOR_GEARSET_06, false);
 Motor rightB(14, E_MOTOR_GEARSET_06, false);
 Motor rightC(10, E_MOTOR_GEARSET_06, false);

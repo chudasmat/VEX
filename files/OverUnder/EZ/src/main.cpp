@@ -26,7 +26,7 @@ void opcontrol() {
 	sylib::initialize();
 	rgb();
 	
-	liftLock.set_value(1);
+	liftLock.set_value(0);
 	kicker.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	int count = 0;
 	chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
@@ -37,4 +37,4 @@ void opcontrol() {
 	wingsControl();
 	pros::delay(10);
 	}
-}
+

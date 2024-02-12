@@ -1,7 +1,9 @@
 #include "main.h"
 #include "pros/motors.h"
 bool kickerOn = false;
-Motor kicker(13, E_MOTOR_GEAR_200, true);
+Motor kickerA(13, E_MOTOR_GEAR_200, true);
+Motor kickerB(14, E_MOTOR_GEAR_200, true);
+Motor_Group kicker({kickerA, kickerB});
 Optical optical(1);
 
 void kickerControl(void) {
