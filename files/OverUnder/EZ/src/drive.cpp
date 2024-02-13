@@ -4,27 +4,27 @@ float leftInput; float rightInput;
 float leftPower; float rightPower;
 bool driveHold = false;
 
-Motor leftA(12, E_MOTOR_GEARSET_06, false);
-Motor leftB(3, E_MOTOR_GEARSET_06, false);
-Motor leftC(4, E_MOTOR_GEARSET_06, false);
-Motor rightA(18, E_MOTOR_GEARSET_06, false);
-Motor rightB(14, E_MOTOR_GEARSET_06, false);
-Motor rightC(10, E_MOTOR_GEARSET_06, false);
+Motor leftA(20, E_MOTOR_GEARSET_06, false);
+Motor leftB(6, E_MOTOR_GEARSET_06, false);
+Motor leftC(9, E_MOTOR_GEARSET_06, false);
+Motor rightA(12, E_MOTOR_GEARSET_06, false);
+Motor rightB(13, E_MOTOR_GEARSET_06, false);
+Motor rightC(18, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
-Imu imu(12);
+Imu imu(19);
 
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {12, 3, 4}
+  {-20, -6, -9}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{18 , 14, 10}
+  ,{12 , 13, 18}
 
   // IMU Port
-  ,12
+  ,19
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   ,2.75
@@ -51,5 +51,4 @@ void chassisControl (void) {
 	rightA.move(rightInput);
 	rightB.move(rightInput);
 	rightC.move(rightInput);
-
-}
+  }

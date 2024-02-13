@@ -4,6 +4,18 @@
 #include "pros/motors.h"
 #include "pros/rtos.hpp"
 
+/*void default_constants() {
+  // PID Constants
+  chassis.pid_drive_constants_set(10, 0, 100); // Sets forward and backward
+  chassis.pid_heading_constants_set(3, 0, 20);
+  chassis.pid_turn_constants_set(3, 0, 20);
+  chassis.pid_swing_constants_set(5, 0, 30); // Sets forward and backward
+
+  // Swing Constants
+  chassis.slew_drive_constants_set(7_in, 80); // Sets forward and backward
+  chassis.slew_turn_constants_set(5_deg, 50);
+  chassis.slew_swing_constants_set(5_deg, 50); // Sets forward and backward
+}*/
 
 void nearOneTriball(void) {
     chassis.set_drive_pid(-45, 110, true); delay(1200);
@@ -14,16 +26,27 @@ void nearOneTriball(void) {
     chassis.set_drive_pid(20, 110, true); delay(1200);
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
 }
+
 void farOneTriball(void) {
-    chassis.set_drive_pid(55, 110, true); delay(1200);
+    /*chassis.set_drive_pid(55, 110, true); delay(1200);
     chassis.set_turn_pid(-40, 100); delay(1200);
     chassis.set_drive_pid(20, 110, true); delay(1200);
     chassis.set_drive_pid(-30, 100, true); delay(1200);
     chassis.set_drive_pid(30, 127, false); delay(1200);
     chassis.set_drive_pid(-20, 110, true); delay(1200);
+    chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);*/
+
+    chassis.set_drive_pid(55, 127, true); delay(1200);
+    chassis.set_turn_pid(-40, 127); delay(1200);
+    chassis.set_drive_pid(20, 127, true); delay(1200);
+    intake.move(-127); 
+    chassis.set_drive_pid(-30, 127, true); delay(1200);
+    chassis.set_drive_pid(30, 127, false); delay(1200);
+    chassis.set_drive_pid(-20, 127, true); delay(1200);
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
 }
 
+/*
 void nearThreeTriball(void) {
     chassis.set_drive_pid(75, 110, true); chassis.wait_drive();
     chassis.set_turn_pid(-90, 100); chassis.wait_drive();
@@ -46,7 +69,7 @@ void nearThreeTriball(void) {
     chassis.set_drive_pid(50, 110, true); chassis.wait_drive();
     chassis.set_drive_pid(-10, 110, false); chassis.wait_drive();
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
-}
+}*/
 
 void farThreeTriball(void) {
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_HOLD);
@@ -97,4 +120,53 @@ void farFiveTriball(void) {
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_HOLD);
 
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
+}
+
+void basicSkills(void) {
+    liftLock.set_value(0);
+    chassis.set_drive_pid(-40, 110, true); delay(2000);
+    chassis.set_turn_pid(-20, 100); delay(1000);
+    chassis.set_drive_pid(-10, 110, true); delay(1500);
+    miniWing.set_value(1);
+    lift.set_value(1); delay(1250);
+    kicker.move_velocity(120);
+}
+
+void skillsPush(void) {
+    lift.set_value(1); delay(1250);    
+    chassis.set_drive_pid(-40, 110, true); delay(2000);
+    chassis.set_turn_pid(-20, 100); delay(1000);
+    chassis.set_drive_pid(-10, 110, true); delay(1500);
+    miniWing.set_value(1);
+    lift.set_value(1); delay(1250);
+    kicker.move_velocity(120); delay(45000);
+    kicker.brake();
+    lift.set_value(1);
+    chassis.set_drive_pid(70, 110, true); delay(3000);
+    chassis.set_turn_pid(25, 100); delay(1500);
+}
+
+void nearThreeTriball(void) {
+    intake.set_brake_modes(E_MOTOR_BRAKE_HOLD);
+    intake.move_velocity(120);
+    chassis.set_drive_pid(33, 110, true); delay(1000);
+    chassis.set_drive_pid(-68, 110, true); delay(1000);
+    chassis.set_turn_pid(135, 110); delay(500);
+    intake.move(-127);
+    miniWing.set_value(1);
+    chassis.set_drive_pid(28, 110, true); delay(500);
+    chassis.set_turn_pid(65, 110); delay(500);    
+    miniWing.set_value(0); delay(150);
+    chassis.set_turn_pid(150, 110); delay(400);
+    chassis.set_drive_pid(17, 110, true); delay(500);
+    chassis.set_turn_pid(90, 110); delay(500);
+    chassis.set_drive_pid(20, 127, true); delay(600);
+    chassis.set_drive_pid(-30, 127, true); delay(600);
+    chassis.set_turn_pid(105, 127); delay(400);
+    chassis.set_drive_pid(30, 127, false); delay(600);
+    chassis.set_drive_pid(-30, 127, true); delay(600);
+    chassis.set_drive_pid(30, 127, false); delay(600);
+    chassis.set_drive_pid(-30, 127, true); delay(600);
+    chassis.set_drive_pid(30, 127, false); delay(600);
+    chassis.set_drive_pid(-30, 127, true); delay(600);
 }

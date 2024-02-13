@@ -4,15 +4,15 @@
 #include "pros/misc.h"
 
 bool bigOn = false; bool miniOn = false; bool beachOn = false;
-ADIDigitalOut bigWings(2);
-ADIDigitalOut miniWing(3);
+ADIDigitalOut bigWings(8);
+ADIDigitalOut miniWing(6);
 ADIDigitalOut beach(4);
 
 void wingsControl(void) {
     if (master.get_digital_new_press(DIGITAL_Y)) {
         bigWings.set_value(!bigOn);
-        ledStrip1.pulse(0xF71302, 22, 10);
-        ledStrip2.pulse(0xF71302, 22, 10);
+        //ledStrip1.pulse(0xF71302, 22, 10);
+        //ledStrip2.pulse(0xF71302, 22, 10);
         bigOn = !bigOn;
     }
     if (master.get_digital_new_press(DIGITAL_RIGHT)) {

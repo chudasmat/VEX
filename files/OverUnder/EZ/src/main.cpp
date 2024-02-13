@@ -4,7 +4,7 @@ Controller master(CONTROLLER_MASTER);
 
 void initialize() {
 	chassis.initialize();
-	default_constants();
+	//default_constants();
 	static Gif gif("/usd/slideshow.gif", lv_scr_act());
 	chassis.set_curve_default(3.5, 3.5);
 }
@@ -15,9 +15,9 @@ void competition_initialize() {}
 
 void autonomous() {
 //	farFiveTriball();
-	nearOneTriball();
+//	nearOneTriball();
 //	farOneTriball();
-//	nearThreeTriball();
+	nearThreeTriball();
 //	farThreeTriball();
 //	partialAWP();
 }
@@ -26,11 +26,12 @@ void opcontrol() {
 	sylib::initialize(); rgb();
 	liftLock.set_value(0);
 	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
-	chassisControl();
-	kickerControl();
-	intakeControl();
-	liftControl();
-	wingsControl();
-	pros::delay(10);
+	while (1) {
+		chassisControl();
+		kickerControl();
+		intakeControl();
+		liftControl();
+		wingsControl();
+		pros::delay(10);}
 	}
 
