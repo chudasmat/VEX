@@ -13,7 +13,7 @@ extern Drive chassis;
 // autons
 extern void default_constants(void);
 extern void nearOneTriball(void);
-extern void farOneTriball();
+extern void farOneTriball(void);
 extern void nearThreeTriball(void);
 extern void farThreeTriball(void);
 extern void partialAWP(void);
@@ -32,7 +32,7 @@ extern MotorGroup intake;
 // lift
 extern void liftControl(void);
 extern ADIDigitalOut lift;
-extern ADIDigitalOut liftLock;
+extern ADIDigitalOut kaboom;
 
 // wings
 extern void wingsControl(void);

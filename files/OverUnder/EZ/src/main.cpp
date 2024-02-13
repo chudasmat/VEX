@@ -17,14 +17,14 @@ void autonomous() {
 //	farFiveTriball();
 //	nearOneTriball();
 //	farOneTriball();
-	nearThreeTriball();
-//	farThreeTriball();
+//	nearThreeTriball();
+	farThreeTriball();
 //	partialAWP();
 }
 
 void opcontrol() {
 	sylib::initialize(); rgb();
-	liftLock.set_value(0);
+	kaboom.set_value(0);
 	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
 	while (1) {
 		chassisControl();

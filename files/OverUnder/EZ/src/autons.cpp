@@ -71,7 +71,7 @@ void nearThreeTriball(void) {
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
 }*/
 
-void farThreeTriball(void) {
+void farThreeTriball_doesntwork(void) {
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_HOLD);
     chassis.set_drive_pid(75, 110, true); chassis.wait_drive();
     chassis.set_turn_pid(90, 100); chassis.wait_drive();
@@ -123,7 +123,7 @@ void farFiveTriball(void) {
 }
 
 void basicSkills(void) {
-    liftLock.set_value(0);
+    kaboom.set_value(0);
     chassis.set_drive_pid(-40, 110, true); delay(2000);
     chassis.set_turn_pid(-20, 100); delay(1000);
     chassis.set_drive_pid(-10, 110, true); delay(1500);
@@ -146,8 +146,7 @@ void skillsPush(void) {
     chassis.set_turn_pid(25, 100); delay(1500);
 }
 
-void nearThreeTriball(void) {
-    intake.set_brake_modes(E_MOTOR_BRAKE_HOLD);
+void farThreeTriball(void) {
     intake.move_velocity(120);
     chassis.set_drive_pid(33, 110, true); delay(1000);
     chassis.set_drive_pid(-68, 110, true); delay(1000);
