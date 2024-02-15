@@ -71,30 +71,6 @@ void nearThreeTriball(void) {
     chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
 }*/
 
-void farThreeTriball_doesntwork(void) {
-    chassis.set_drive_brake(pros::E_MOTOR_BRAKE_HOLD);
-    chassis.set_drive_pid(75, 110, true); chassis.wait_drive();
-    chassis.set_turn_pid(90, 100); chassis.wait_drive();
-    chassis.set_drive_pid(20, 110, true); chassis.wait_drive();
-    chassis.set_drive_pid(-15, 110, true); chassis.wait_drive();
-    chassis.set_turn_pid(180, 100); chassis.wait_drive();
-    intake.move(127);
-    chassis.set_drive_pid(20, 110, true); chassis.wait_drive();
-    chassis.set_turn_pid(180, 100); chassis.wait_drive();
-    intake.brake();
-    chassis.set_drive_pid(20, 110, false); chassis.wait_drive();
-    chassis.set_drive_pid(-15, 110, true); chassis.wait_drive();
-    chassis.set_turn_pid(180, 100); chassis.wait_drive();
-    intake.move(127);
-    chassis.set_drive_pid(50, 110, true); chassis.wait_drive();
-    chassis.set_drive_pid(-5, 110, false); chassis.wait_drive();
-    chassis.set_turn_pid(180, 100); chassis.wait_drive();
-    intake.brake();
-    chassis.set_drive_pid(50, 110, true); chassis.wait_drive();
-    chassis.set_drive_pid(-10, 110, false); chassis.wait_drive();
-    chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);
-}
-
 void partialAWP(void) {
     chassis.set_drive_pid(-55, 110, true); chassis.wait_drive();
     chassis.set_turn_pid(40, 100); chassis.wait_drive();
@@ -133,7 +109,6 @@ void basicSkills(void) {
 }
 
 void skillsPush(void) {
-    lift.set_value(1); delay(1250);    
     chassis.set_drive_pid(-40, 110, true); delay(2000);
     chassis.set_turn_pid(-20, 100); delay(1000);
     chassis.set_drive_pid(-10, 110, true); delay(1500);
@@ -148,24 +123,25 @@ void skillsPush(void) {
 
 void farThreeTriball(void) {
     intake.move_velocity(120);
-    chassis.set_drive_pid(33, 110, true); delay(1000);
-    chassis.set_drive_pid(-68, 110, true); delay(1000);
-    chassis.set_turn_pid(135, 110); delay(500);
+    chassis.set_drive_pid(33, 110, true); delay(1500);
+    chassis.set_drive_pid(-80, 110, true); delay(1500);
+    chassis.set_turn_pid(135, 110); delay(600);
     intake.move(-127);
     miniWing.set_value(1);
-    chassis.set_drive_pid(28, 110, true); delay(500);
-    chassis.set_turn_pid(65, 110); delay(500);    
+    chassis.set_drive_pid(28, 110, true); delay(700);
+    chassis.set_turn_pid(65, 110); delay(700);    
     miniWing.set_value(0); delay(150);
     chassis.set_turn_pid(150, 110); delay(400);
     chassis.set_drive_pid(17, 110, true); delay(500);
     chassis.set_turn_pid(90, 110); delay(500);
     chassis.set_drive_pid(20, 127, true); delay(600);
-    chassis.set_drive_pid(-30, 127, true); delay(600);
+    chassis.set_drive_pid(-40, 127, true); delay(600);
     chassis.set_turn_pid(105, 127); delay(400);
-    chassis.set_drive_pid(30, 127, false); delay(600);
-    chassis.set_drive_pid(-30, 127, true); delay(600);
-    chassis.set_drive_pid(30, 127, false); delay(600);
-    chassis.set_drive_pid(-30, 127, true); delay(600);
-    chassis.set_drive_pid(30, 127, false); delay(600);
-    chassis.set_drive_pid(-30, 127, true); delay(600);
+    chassis.set_drive_pid(50, 127, false); delay(800);
+    chassis.set_drive_pid(-50, 127, false); delay(800);
+    chassis.set_drive_pid(50, 127, false); delay(800);
+    chassis.set_drive_pid(-50, 127, false); delay(800);
+    chassis.set_drive_pid(50, 127, false); delay(800);
+    chassis.set_drive_pid(-50, 127, false); delay(800);
+    intake.brake();
 }

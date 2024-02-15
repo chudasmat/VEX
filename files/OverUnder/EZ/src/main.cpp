@@ -27,7 +27,8 @@ void opcontrol() {
 	kaboom.set_value(0);
 	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
 	while (1) {
-		chassisControl();
+		//chassisControl();
+		chassis.tank();
 		kickerControl();
 		intakeControl();
 		liftControl();

@@ -1,6 +1,7 @@
 #include "main.h"
 #include "pros/motors.h"
 bool kickerOn = false;
+bool holdOn = false;
 Motor kickerA(1, E_MOTOR_GEAR_200, true);
 Motor kickerB(10, E_MOTOR_GEAR_200, false);
 MotorGroup kicker({kickerA, kickerB});
@@ -22,4 +23,9 @@ void kickerControl(void) {
         else {kicker.move_velocity(-80);}
         kickerOn = !kickerOn;
     }
+    if (master.get_digital_new_press(DIGITAL_UP)) {
+        if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);}
+        else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD);}
+        holdOn = !holdOn;
+    }   
 }

@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "3ball",
+    "project_name": "3ballhold",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -489,7 +489,7 @@
       }
     },
     "upload_options": {
-      "slot": 3
+      "slot": 5
     }
   }
 }
