@@ -22,10 +22,5 @@ void kickerControl(void) {
         if (kickerOn) {kicker.brake();}
         else {kicker.move_velocity(-80);}
         kickerOn = !kickerOn;
-    }
-    if (master.get_digital_new_press(DIGITAL_UP)) {
-        if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);}
-        else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD);}
-        holdOn = !holdOn;
-    }   
+    } 
 }

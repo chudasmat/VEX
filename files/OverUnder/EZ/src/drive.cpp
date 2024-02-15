@@ -2,7 +2,7 @@
 
 float leftInput; float rightInput;
 float leftPower; float rightPower;
-bool driveHold = false;
+bool holdOn = false;
 
 Motor leftA(20, E_MOTOR_GEARSET_06, false);
 Motor leftB(6, E_MOTOR_GEARSET_06, false);
@@ -39,16 +39,24 @@ Drive chassis (
 );
 
 void chassisControl (void) {
-  leftInput = master.get_analog(ANALOG_LEFT_Y);
-  rightInput = master.get_analog(ANALOG_RIGHT_Y);
+  chassis.tank();
+  if (master.get_digital_new_press(DIGITAL_UP)) {
+    if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); master.rumble(". ."); master.print(0, 0, "COAST");}
+    else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); master.rumble("- -"); master.print(0, 0, "HOLD");}
+    holdOn = !holdOn;
+    }  
 
-//	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
-//	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
+/*  leftInput = master.get_analog(ANALOG_LEFT_Y);
+    rightInput = master.get_analog(ANALOG_RIGHT_Y);
+
+    leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
+	  rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
 	
-	leftA.move(leftInput);
-	leftB.move(leftInput);
-	leftC.move(leftInput);
-	rightA.move(rightInput);
-	rightB.move(rightInput);
-	rightC.move(rightInput);
+	  leftA.move(leftInput);
+	  leftB.move(leftInput);
+	  leftC.move(leftInput);
+	  rightA.move(rightInput);
+	  rightB.move(rightInput);
+	  rightC.move(rightInput);
+*/
 }

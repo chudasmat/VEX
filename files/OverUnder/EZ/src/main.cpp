@@ -25,14 +25,14 @@ void autonomous() {
 void opcontrol() {
 	sylib::initialize(); rgb();
 	kaboom.set_value(0);
-	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
+	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); master.print(0, 0, "COAST");
 	while (1) {
-		//chassisControl();
-		chassis.tank();
+		chassisControl();
 		kickerControl();
 		intakeControl();
 		liftControl();
 		wingsControl();
-		pros::delay(10);}
+		pros::delay(10);
+		}
 	}
 
