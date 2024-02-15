@@ -78,7 +78,10 @@ void partialAWP(void) {
     chassis.set_drive_pid(30, 100, true); delay(1200);
     chassis.set_drive_pid(-30, 127, false); delay(1200);
     chassis.set_drive_pid(45, 110, true); delay(1200);
-    chassis.set_turn_pid(-90, 127);
+    miniWing.set_value(1); delay(400);
+    chassis.set_turn_pid(-90, 127); delay(1100);
+    miniWing.set_value(0);
+    chassis.set_drive_pid(70, 110);
 }
 
 void farFiveTriball(void) {
