@@ -72,16 +72,25 @@ void nearThreeTriball(void) {
 }*/
 
 void partialAWP(void) {
-    chassis.set_drive_pid(-60, 110, true); delay(1200);
-    chassis.set_turn_pid(40, 100); delay(1200);
+    intake.move_relative(-500, 200); delay(500);
+    chassis.set_drive_pid(-50, 110, true); delay(1200);
+    chassis.set_turn_pid(45, 100); delay(1200);
     chassis.set_drive_pid(-20, 110, true); delay(1200);
-    chassis.set_drive_pid(30, 100, true); delay(1200);
-    chassis.set_drive_pid(-30, 127, false); delay(1200);
-    chassis.set_drive_pid(45, 110, true); delay(1200);
+    chassis.set_drive_pid(15, 100, true); delay(1200);
+    //chassis.set_drive_pid(-30, 127, false); delay(1200);
+    //chassis.set_drive_pid(20, 110, true); delay(1200);
+    chassis.set_turn_pid(0, 110); delay(500);
+    chassis.set_drive_pid(30, 110, true); delay(1200);
     miniWing.set_value(1); delay(400);
     chassis.set_turn_pid(-90, 127); delay(1100);
     miniWing.set_value(0);
-    chassis.set_drive_pid(70, 110);
+    chassis.set_turn_pid(0, 127); delay(600);
+    chassis.set_drive_pid(20, 110, true); delay(600);
+    chassis.set_turn_pid(-45, 127); delay(600);
+    intake.move(127);
+    chassis.set_drive_pid(57, 100);
+    intake.move(-127); delay(800);
+    intake.brake();
 }
 
 void farFiveTriball(void) {
@@ -114,14 +123,15 @@ void skillsPush(void) {
 }
 
 void farThreeTriball(void) {
-    intake.move_velocity(120);
+    intake.move_relative(-500, 200); delay(500);
+    intake.move(127);
     chassis.set_drive_pid(33, 110, true); delay(1500);
     chassis.set_drive_pid(-80, 110, true); delay(1500);
     chassis.set_turn_pid(135, 110); delay(600);
     intake.move(-127);
     miniWing.set_value(1);
     chassis.set_drive_pid(28, 110, true); delay(700);
-    chassis.set_turn_pid(65, 110); delay(700);    
+    chassis.set_turn_pid(65, 127); delay(700);    
     miniWing.set_value(0); delay(150);
     chassis.set_turn_pid(150, 110); delay(400);
     chassis.set_drive_pid(17, 110, true); delay(500);

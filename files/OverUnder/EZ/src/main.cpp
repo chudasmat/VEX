@@ -18,8 +18,8 @@ void autonomous() {
 //	nearOneTriball();
 //	farOneTriball();
 //	nearThreeTriball();
-	farThreeTriball();
-//	partialAWP();
+//	farThreeTriball();
+	partialAWP();
 }
 
 void opcontrol() {
