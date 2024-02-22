@@ -1,3 +1,4 @@
+#include "lemlib/chassis/chassis.hpp"
 #include "main.h"
 
 float leftInput; float rightInput;
@@ -13,6 +14,26 @@ Motor rightC(18, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
 Imu imu(19);
+
+lemlib::Drivetrain drivetrain{
+    &leftDrive, // left drivetrain motors
+    &rightDrive, // right drivetrain motors
+    10, // track width
+    2.75, // wheel diameter
+    450, // wheel rpm
+	10
+};
+lemlib::OdomSensors sensors {
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	&imu
+};
+lemlib::ControllerSettings lateral {0,0,0,0,0,0,0,0,0};
+lemlib::ControllerSettings angular {0,0,0,0,0,0,0,0,0};
+lemlib::Chassis chassis(drivetrain, lateral, angular, sensors);
+
 
 
 void chassisControl (void) {

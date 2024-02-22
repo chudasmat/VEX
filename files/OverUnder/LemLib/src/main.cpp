@@ -3,7 +3,10 @@
 Controller master(CONTROLLER_MASTER);
 
 void initialize() {
+	chassis.initialize();
+	//default_constants();
 	static Gif gif("/usd/slideshow.gif", lv_scr_act());
+	chassis.set_curve_default(3.5, 3.5);
 }
 
 void disabled() {}
@@ -16,12 +19,13 @@ void autonomous() {
 //	farOneTriball();
 //	nearThreeTriball();
 //	farThreeTriball();
-//	partialAWP();
+	partialAWP();
 }
 
 void opcontrol() {
 	sylib::initialize(); rgb();
 	kaboom.set_value(0);
+	kicker.set_brake_modes(E_MOTOR_BRAKE_HOLD); chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); master.print(0, 0, "COAST");
 	while (1) {
 		chassisControl();
 		kickerControl();

@@ -57,6 +57,7 @@ using namespace pros;
 // using namespace okapi;
 
 #include "globals.h"
+#include "lemlib/api.hpp"
 #include "gif-pros/gifclass.hpp"
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
