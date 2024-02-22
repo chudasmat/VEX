@@ -15,8 +15,8 @@ void liftControl(void) {
     if (master.get_digital_new_press(DIGITAL_R1)) {
         lift.set_value(!liftOn); 
         liftOn = !liftOn;
-        ledStrip1.pulse(0x43B5F7, 22, 10);
-        ledStrip2.pulse(0x43B5F7, 22, 10);
+        ledStrip1.pulse(0x43B5F7, 22, 15);
+        ledStrip2.pulse(0x43B5F7, 22, 15);
     }
 
     if (master.get_digital_new_press(DIGITAL_X)) {

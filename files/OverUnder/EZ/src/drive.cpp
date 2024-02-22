@@ -41,8 +41,8 @@ Drive chassis (
 void chassisControl (void) {
   chassis.tank();
   if (master.get_digital_new_press(DIGITAL_UP)) {
-    if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); master.rumble(". ."); master.print(0, 0, "COAST");}
-    else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); master.rumble("- -"); master.print(0, 0, "HOLD");}
+    if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); delay(50); master.print(0, 0, "COAST");}
+    else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); delay(50); master.print(0, 0, "HOLD ");}
     holdOn = !holdOn;
     }  
 

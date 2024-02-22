@@ -1,7 +1,6 @@
 #include "main.h"
 #include "pros/motors.h"
 bool kickerOn = false;
-bool holdOn = false;
 Motor kickerA(1, E_MOTOR_GEAR_200, true);
 Motor kickerB(10, E_MOTOR_GEAR_200, false);
 MotorGroup kicker({kickerA, kickerB});
