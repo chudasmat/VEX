@@ -7,7 +7,7 @@ MotorGroup kicker({kickerA, kickerB});
 Optical optical(1);
 
 void kickerControl(void) {
-    if (master.get_digital_new_press(DIGITAL_L1)) {
+    if (master.get_digital_new_press(DIGITAL_L1) && !(master.get_digital(DIGITAL_L2))) {
         if (kickerOn) {kicker.brake();}
         else {kicker.move_velocity(170);}
         kickerOn = !kickerOn;
@@ -17,7 +17,7 @@ void kickerControl(void) {
         else {kicker.move_velocity(80);}
         kickerOn = !kickerOn;
     }
-    if (master.get_digital_new_press(DIGITAL_LEFT)) {
+    if ((master.get_digital(DIGITAL_L2)) && (master.get_digital_new_press(DIGITAL_L1))) {
         if (kickerOn) {kicker.brake();}
         else {kicker.move_velocity(-80);}
         kickerOn = !kickerOn;
