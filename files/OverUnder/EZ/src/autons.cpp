@@ -28,17 +28,9 @@ void nearOneTriball(void) {
 }
 
 void farOneTriball(void) {
-    /*chassis.set_drive_pid(55, 110, true); delay(1200);
-    chassis.set_turn_pid(-40, 100); delay(1200);
-    chassis.set_drive_pid(20, 110, true); delay(1200);
-    chassis.set_drive_pid(-30, 100, true); delay(1200);
-    chassis.set_drive_pid(30, 127, false); delay(1200);
-    chassis.set_drive_pid(-20, 110, true); delay(1200);
-    chassis.set_drive_brake(pros::E_MOTOR_BRAKE_COAST);*/
-
-    chassis.set_drive_pid(55, 127, true); delay(1200);
+    chassis.set_drive_pid(-55, 127, true); delay(1200);
     chassis.set_turn_pid(-40, 127); delay(1200);
-    chassis.set_drive_pid(20, 127, true); delay(1200);
+    chassis.set_drive_pid(-20, 127, true); delay(1200);
     intake.move(-127); 
     chassis.set_drive_pid(-30, 127, true); delay(1200);
     chassis.set_drive_pid(30, 127, false); delay(1200);
@@ -81,14 +73,14 @@ void partialAWP(void) {
     //chassis.set_drive_pid(20, 110, true); delay(1200);
     chassis.set_turn_pid(0, 110); delay(500);
     chassis.set_drive_pid(30, 110, true); delay(1200);
-    miniWing.set_value(1); delay(400);
+    miniWing.set_value(0); delay(400);
     chassis.set_turn_pid(-90, 127); delay(1100);
-    miniWing.set_value(0);
+    miniWing.set_value(1);
     chassis.set_turn_pid(0, 127); delay(600);
     chassis.set_drive_pid(20, 110, true); delay(600);
     chassis.set_turn_pid(-45, 127); delay(600);
     intake.move(127);
-    chassis.set_drive_pid(57, 100);
+    chassis.set_drive_pid(59, 100);
     intake.move(-127); delay(800);
     intake.brake();
 }
@@ -129,16 +121,17 @@ void farThreeTriball(void) {
     chassis.set_drive_pid(-80, 110, true); delay(1500);
     chassis.set_turn_pid(135, 110); delay(600);
     intake.move(-127);
-    miniWing.set_value(1);
+    miniWing.set_value(0);
     chassis.set_drive_pid(28, 110, true); delay(700);
-    chassis.set_turn_pid(65, 127); delay(700);    
-    miniWing.set_value(0); delay(150);
+    // turn used to be 65 deg
+    chassis.set_turn_pid(30, 127); delay(700);    
+    miniWing.set_value(1); delay(150);
     chassis.set_turn_pid(150, 110); delay(400);
     chassis.set_drive_pid(17, 110, true); delay(500);
     chassis.set_turn_pid(90, 110); delay(500);
     chassis.set_drive_pid(20, 127, true); delay(600);
     chassis.set_drive_pid(-40, 127, true); delay(600);
-    chassis.set_turn_pid(105, 127); delay(400);
+    chassis.set_turn_pid(112, 127); delay(400);
     chassis.set_drive_pid(50, 127, false); delay(800);
     chassis.set_drive_pid(-50, 127, false); delay(800);
     chassis.set_drive_pid(50, 127, false); delay(800);

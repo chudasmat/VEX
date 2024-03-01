@@ -17,9 +17,9 @@ void liftControl(void) {
         liftOn = !liftOn;
         ledStrip1.pulse(0x43B5F7, 22, 15);
         ledStrip2.pulse(0x43B5F7, 22, 15);
-    }
+    }}
 
-    if ((master.get_digital(DIGITAL_L2)) && (master.get_digital_new_press(DIGITAL_X)) && liftOn) {
+    /*if ((master.get_digital(DIGITAL_L2)) && (master.get_digital_new_press(DIGITAL_X)) && liftOn) {
         kaboom.set_value(1);
         lift.set_value(0);
-        lockOn = liftOn = false;}}
+        lockOn = liftOn = false;}}*/

@@ -3,7 +3,7 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 
-bool bigOn = false; bool miniOn = false; bool beachOn = false;
+bool bigOn = false; bool miniOn = true; bool beachOn = false;
 ADIDigitalOut bigWings(8);
 ADIDigitalOut miniWing(6);
 ADIDigitalOut beach(4);
