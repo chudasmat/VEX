@@ -3,25 +3,36 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 
-bool bigOn = false; bool miniOn = true; bool beachOn = false;
-ADIDigitalOut bigWings(8);
-ADIDigitalOut miniWing(6);
-ADIDigitalOut beach(4);
+bool flOn = false; bool frOn = false; bool frontOn = false; bool rearOn = false; 
+ADIDigitalOut flWing(6);
+ADIDigitalOut frWing(7);
+ADIDigitalOut rearWings(8);
 
 void wingsControl(void) {
-    if (master.get_digital_new_press(DIGITAL_Y)) {
-        bigWings.set_value(!bigOn);
+       // expand / retract front left wing [strobe red light on left side]
+    if (master.get_digital_new_press(DIGITAL_RIGHT)) {
+        flWing.set_value(!flOn);
+        ledStrip1.pulse(0xF71302, 22, 15);
+        flOn = !flOn;
+    }
+    // expand / retract front right wing [strobe red light on right side]
+    if (master.get_digital_new_press(DIGITAL_R1)) {
+        frWing.set_value(!frOn);
+        ledStrip2.pulse(0xF71302, 22, 15);
+        frOn = !frOn;
+    }
+    // expand / retract both front wings simultaneously [strobe red light on both sides]
+    if (master.get_digital_new_press(DIGITAL_L1)) {
+        flWing.set_value(!frontOn); frWing.set_value(!frontOn);
         ledStrip1.pulse(0xF71302, 22, 15);
         ledStrip2.pulse(0xF71302, 22, 15);
-        bigOn = !bigOn;
+        frontOn = !frontOn;
     }
-    if (master.get_digital_new_press(DIGITAL_RIGHT)) {
-        miniWing.set_value(!miniOn);
-        miniOn = !miniOn;
+    // expand / retract both front wings simultaneously [strobe blue light on both sides]
+    if (master.get_digital_new_press(DIGITAL_Y)) {
+        rearWings.set_value(!rearOn);
+        ledStrip1.pulse(0x1B68E3, 22, 15, true);
+        ledStrip2.pulse(0x1B68E3, 22, 15, true);
+        rearOn = !rearOn;
     }
-/*    if (master.get_digital_new_press(DIGITAL_DOWN)) {
-        beach.set_value(!beachOn);
-        beachOn = !beachOn;
-    }
-*/
 }

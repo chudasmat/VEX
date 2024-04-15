@@ -9,6 +9,28 @@ extern pros::Controller master;
 // chassis
 extern void chassisControl(void);
 extern Drive chassis;
+extern void setDrive(int volt);
+extern bool holdOn;
+
+// intake
+extern void intakeControl(void);
+extern MotorGroup intake;
+
+// winch + pto
+extern void winchControl(void);
+extern ADIDigitalOut pto;
+extern ADIDigitalOut winch;
+extern bool ptoOn;
+
+// wings
+extern void wingsControl(void);
+extern ADIDigitalOut frontWings;
+extern ADIDigitalOut rearWings;
+
+// rgb
+extern void rgb(void);
+extern sylib::Addrled ledStrip1;
+extern sylib::Addrled ledStrip2;
 
 // autons
 extern void default_constants(void);
@@ -18,29 +40,3 @@ extern void nearThreeTriball(void);
 extern void farThreeTriball(void);
 extern void partialAWP(void);
 extern void farFiveTriball(void);
-
-// kicker
-extern void kickerControl(void);
-extern void kickMacro(void);
-extern MotorGroup kicker;
-extern Optical optical;
-
-// intake
-extern void intakeControl(void);
-extern MotorGroup intake;
-
-// lift
-extern void liftControl(void);
-extern ADIDigitalOut lift;
-extern ADIDigitalOut kaboom;
-
-// wings
-extern void wingsControl(void);
-extern ADIDigitalOut bigWings;
-extern ADIDigitalOut miniWing;
-extern ADIDigitalOut beach;
-
-// rgb
-extern void rgb(void);
-extern sylib::Addrled ledStrip1;
-extern sylib::Addrled ledStrip2;

@@ -73,9 +73,9 @@ void partialAWP(void) {
     //chassis.set_drive_pid(20, 110, true); delay(1200);
     chassis.set_turn_pid(0, 110); delay(500);
     chassis.set_drive_pid(30, 110, true); delay(1200);
-    miniWing.set_value(0); delay(400);
+    rearWings.set_value(0); delay(400);
     chassis.set_turn_pid(-90, 127); delay(1100);
-    miniWing.set_value(1);
+    rearWings.set_value(1);
     chassis.set_turn_pid(0, 127); delay(600);
     chassis.set_drive_pid(20, 110, true); delay(600);
     chassis.set_turn_pid(-45, 127); delay(600);
@@ -92,24 +92,18 @@ void farFiveTriball(void) {
 }
 
 void basicSkills(void) {
-    kaboom.set_value(0);
     chassis.set_drive_pid(-40, 110, true); delay(2000);
     chassis.set_turn_pid(-20, 100); delay(1000);
     chassis.set_drive_pid(-10, 110, true); delay(1500);
-    miniWing.set_value(1);
-    lift.set_value(1); delay(1250);
-    kicker.move_velocity(120);
+    rearWings.set_value(1);
+    
 }
 
 void skillsPush(void) {
     chassis.set_drive_pid(-40, 110, true); delay(2000);
     chassis.set_turn_pid(-20, 100); delay(1000);
     chassis.set_drive_pid(-10, 110, true); delay(1500);
-    miniWing.set_value(1);
-    lift.set_value(1); delay(1250);
-    kicker.move_velocity(120); delay(45000);
-    kicker.brake();
-    lift.set_value(1);
+    rearWings.set_value(1);
     chassis.set_drive_pid(70, 110, true); delay(3000);
     chassis.set_turn_pid(25, 100); delay(1500);
 }
@@ -121,11 +115,11 @@ void farThreeTriball(void) {
     chassis.set_drive_pid(-80, 110, true); delay(1500);
     chassis.set_turn_pid(135, 110); delay(600);
     intake.move(-127);
-    miniWing.set_value(0);
+    rearWings.set_value(0);
     chassis.set_drive_pid(28, 110, true); delay(700);
     // turn used to be 65 deg
     chassis.set_turn_pid(30, 127); delay(700);    
-    miniWing.set_value(1); delay(150);
+    rearWings.set_value(1); delay(150);
     chassis.set_turn_pid(150, 110); delay(400);
     chassis.set_drive_pid(17, 110, true); delay(500);
     chassis.set_turn_pid(90, 110); delay(500);

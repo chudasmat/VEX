@@ -40,23 +40,17 @@ Drive chassis (
 
 void chassisControl (void) {
   chassis.tank();
+  // weirdly formatted drive hold + controller screen update [midnight antics]
   if (master.get_digital_new_press(DIGITAL_UP)) {
-    if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); delay(50); master.print(0, 0, "COAST");}
-    else {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); delay(50); master.print(0, 0, "HOLD ");}
     holdOn = !holdOn;
-    }  
-
-/*  leftInput = master.get_analog(ANALOG_LEFT_Y);
-    rightInput = master.get_analog(ANALOG_RIGHT_Y);
-
-    leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
-	  rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
-	
-	  leftA.move(leftInput);
-	  leftB.move(leftInput);
-	  leftC.move(leftInput);
-	  rightA.move(rightInput);
-	  rightB.move(rightInput);
-	  rightC.move(rightInput);
-*/
+    if (!holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); delay(50);
+      if (ptoOn) {master.print(0, 0, "COAST - PTO ENGAGED   ");}
+      else {master.print(0, 0, "COAST - PTO DISENGAGED");}}
+    else if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); delay(50); 
+      if (ptoOn) {master.print(0, 0, "HOLD - PTO ENGAGED    ");}
+      else {master.print(0, 0, "HOLD - PTO DISENGAGED ");}}
+    
+    }
 }
+
+void setDrive(int volt) {leftDrive.move(volt); rightDrive.move(volt);}
