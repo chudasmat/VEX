@@ -24,6 +24,11 @@ void winchControl(void) {
     if (ptoOn && master.get_digital(DIGITAL_A)) {
         winch.set_value(1);
     } else {winch.set_value(0);}
+    // just to stop rgb spazzing
+    if (master.get_digital_new_press(DIGITAL_A)) {
+        ledStrip1.pulse(0x24C9A0, 22, 15);
+        ledStrip2.pulse(0x24C9A0, 22, 15);
+    }
     // drives winch [uses pre-existing drive declarations]
     if (ptoOn && master.get_digital(DIGITAL_UP)) {
         setDrive(127);
