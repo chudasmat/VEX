@@ -1,7 +1,7 @@
 #include "main.h"
 bool intakeOn = false;
-Motor intakeA(15, false);
-Motor intakeB(5, true);
+Motor intakeA(14, false);
+Motor intakeB(17, true);
 MotorGroup intake({intakeA, intakeB});
 
 void intakeControl(void) {

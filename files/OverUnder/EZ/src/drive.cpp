@@ -4,11 +4,11 @@ float leftInput; float rightInput;
 float leftPower; float rightPower;
 bool holdOn = false;
 
-Motor leftA(20, E_MOTOR_GEARSET_06, false);
-Motor leftB(6, E_MOTOR_GEARSET_06, false);
-Motor leftC(9, E_MOTOR_GEARSET_06, false);
-Motor rightA(12, E_MOTOR_GEARSET_06, false);
-Motor rightB(13, E_MOTOR_GEARSET_06, false);
+Motor leftA(11, E_MOTOR_GEARSET_06, true);
+Motor leftB(12, E_MOTOR_GEARSET_06, true);
+Motor leftC(13, E_MOTOR_GEARSET_06, true);
+Motor rightA(20, E_MOTOR_GEARSET_06, false);
+Motor rightB(19, E_MOTOR_GEARSET_06, false);
 Motor rightC(18, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
@@ -17,11 +17,11 @@ Imu imu(10);
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-20, -6, -9}
+  {-11, -12, -13}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{12 , 13, 18}
+  ,{20, 19, 18}
 
   // IMU Port
   ,10
