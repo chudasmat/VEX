@@ -12,7 +12,7 @@ Motor rightB(13, E_MOTOR_GEARSET_06, false);
 Motor rightC(18, E_MOTOR_GEARSET_06, false);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
-Imu imu(19);
+Imu imu(10);
 
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
@@ -24,7 +24,7 @@ Drive chassis (
   ,{12 , 13, 18}
 
   // IMU Port
-  ,19
+  ,10
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   ,2.75

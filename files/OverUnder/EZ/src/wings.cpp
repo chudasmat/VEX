@@ -6,7 +6,7 @@
 bool flOn = false; bool frOn = false; bool frontOn = false; bool rearOn = false; 
 ADIDigitalOut flWing(6);
 ADIDigitalOut frWing(7);
-ADIDigitalOut rearWings(8);
+ADIDigitalOut rearWings(2);
 
 void wingsControl(void) {
        // expand / retract front left wing [strobe red light on left side]
@@ -28,7 +28,7 @@ void wingsControl(void) {
         ledStrip2.pulse(0xF71302, 22, 15);
         frontOn = !frontOn;
     }
-    // expand / retract both front wings simultaneously [strobe blue light on both sides]
+    // expand / retract both rear wings simultaneously [strobe blue light on both sides]
     if (master.get_digital_new_press(DIGITAL_Y)) {
         rearWings.set_value(!rearOn);
         ledStrip1.pulse(0x1B68E3, 22, 15, true);

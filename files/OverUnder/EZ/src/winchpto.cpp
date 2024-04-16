@@ -7,7 +7,7 @@
 
 bool ptoOn = false; bool winchOn = false;
 
-ADIDigitalOut pto(3);
+ADIDigitalOut pto(1);
 ADIDigitalOut winch(4);
 
 void winchControl(void) {
