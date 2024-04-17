@@ -4,8 +4,8 @@
 #include "pros/misc.h"
 
 bool flOn = false; bool frOn = false; bool frontOn = false; bool rearOn = false; 
-ADIDigitalOut flWing(6);
-ADIDigitalOut frWing(7);
+ADIDigitalOut flWing(5);
+ADIDigitalOut frWing(4);
 ADIDigitalOut rearWings(2);
 
 void wingsControl(void) {

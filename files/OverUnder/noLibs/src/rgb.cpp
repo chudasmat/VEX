@@ -1,7 +1,7 @@
 #include "main.h"
 
-sylib::Addrled ledStrip1(22, 7, 25);
-sylib::Addrled ledStrip2(22, 8, 25);
+sylib::Addrled ledStrip1(9, 1, 25);
+sylib::Addrled ledStrip2(9, 8, 25);
 
 void rgb (void) {
     ledStrip1.gradient(0xFF0000, 0xFF0005, 0, 0, false, true);

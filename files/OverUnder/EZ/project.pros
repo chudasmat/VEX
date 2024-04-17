@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "AWP",
+    "project_name": "EZ",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -489,7 +489,8 @@
       }
     },
     "upload_options": {
-      "slot": 1
+      "slot": 1,
+      "icon": "pros"
     }
   }
 }

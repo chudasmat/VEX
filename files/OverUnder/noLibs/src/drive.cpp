@@ -3,12 +3,12 @@
 float leftInput; float rightInput;
 float leftPower; float rightPower;
 
-Motor rightA(5, E_MOTOR_GEARSET_06, false);
-Motor rightB(6, E_MOTOR_GEARSET_06, false);
-Motor rightC(10, E_MOTOR_GEARSET_06, false);
-Motor leftA(2, E_MOTOR_GEARSET_06, true);
-Motor leftB(3, E_MOTOR_GEARSET_06, true);
-Motor leftC(4, E_MOTOR_GEARSET_06, true);
+Motor rightA(11, E_MOTOR_GEARSET_06, false);
+Motor rightB(12, E_MOTOR_GEARSET_06, false);
+Motor rightC(13, E_MOTOR_GEARSET_06, false);
+Motor leftA(20, E_MOTOR_GEARSET_06, true);
+Motor leftB(19, E_MOTOR_GEARSET_06, true);
+Motor leftC(18, E_MOTOR_GEARSET_06, true);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
 Imu imu(11);
@@ -26,3 +26,6 @@ void chassisControl (void) {
 	rightA.move(rightInput);
 	rightB.move(rightInput);
 	rightC.move(rightInput);}
+
+void setDrive(int volt) {leftA.move(volt); leftB.move(volt); leftC.move(volt);
+						rightA.move(volt); rightB.move(volt); rightC.move(volt);}

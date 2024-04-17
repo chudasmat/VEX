@@ -8,7 +8,7 @@
 bool ptoOn = false; bool winchOn = false;
 
 ADIDigitalOut pto(1);
-ADIDigitalOut winch(4);
+ADIDigitalOut winch(3);
 
 void winchControl(void) {
 // weirdly formatted pto shift + controller screen update [midnight antics]
@@ -21,7 +21,7 @@ void winchControl(void) {
         if (holdOn) {master.print(0, 0, "HOLD - PTO DISENGAGED ");}
         else {master.print(0, 0, "COAST - PTO DISENGAGED");}}}
     // release winch if pto active and button pressed
-    if (ptoOn && master.get_digital(DIGITAL_A)) {
+    if (master.get_digital(DIGITAL_A)) {
         winch.set_value(1);
     } else {winch.set_value(0);}
     // just to stop rgb spazzing
@@ -30,7 +30,7 @@ void winchControl(void) {
         ledStrip2.pulse(0x24C9A0, 22, 15);
     }
     // drives winch [uses pre-existing drive declarations]
-    if (ptoOn && master.get_digital(DIGITAL_UP)) {
+    if (master.get_digital(DIGITAL_UP)) {
         setDrive(127);
     } else {setDrive(0);}
 }

@@ -6,11 +6,7 @@ extern pros::Controller master;
 
 // chassis
 extern void chassisControl(void);
-
-// kicker
-extern void kickerControl(void);
-extern void kickMacro(void);
-extern Motor kicker;
+extern void setDrive(int volt);
 
 // intake
 extern void intakeControl(void);
@@ -22,8 +18,8 @@ extern ADIDigitalOut lift;
 
 // wings
 extern void wingsControl(void);
-extern ADIDigitalOut bigWings;
-extern ADIDigitalOut miniWing;
+extern void bigWings(void);
+extern ADIDigitalOut rearWings;
 
 // climber
 extern void climberControl(void);
@@ -32,3 +28,5 @@ extern ADIDigitalOut wheelExtend;
 
 // rgb
 extern void rgb(void);
+extern sylib::Addrled ledStrip1;
+extern sylib::Addrled ledStrip2;

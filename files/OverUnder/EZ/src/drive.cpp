@@ -4,12 +4,12 @@ float leftInput; float rightInput;
 float leftPower; float rightPower;
 bool holdOn = false;
 
-Motor leftA(11, E_MOTOR_GEARSET_06, true);
-Motor leftB(12, E_MOTOR_GEARSET_06, true);
-Motor leftC(13, E_MOTOR_GEARSET_06, true);
-Motor rightA(20, E_MOTOR_GEARSET_06, false);
-Motor rightB(19, E_MOTOR_GEARSET_06, false);
-Motor rightC(18, E_MOTOR_GEARSET_06, false);
+Motor leftA(20, E_MOTOR_GEARSET_06, false);
+Motor leftB(19, E_MOTOR_GEARSET_06, false);
+Motor leftC(18, E_MOTOR_GEARSET_06, false);
+Motor rightA(11, E_MOTOR_GEARSET_06, true);
+Motor rightB(12, E_MOTOR_GEARSET_06, true);
+Motor rightC(13, E_MOTOR_GEARSET_06, true);
 MotorGroup leftDrive({leftA, leftB, leftC});
 MotorGroup rightDrive({rightA, rightB, rightC});
 Imu imu(10);
@@ -17,11 +17,11 @@ Imu imu(10);
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-11, -12, -13}
+  {20, 19, 18}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{20, 19, 18}
+  ,{11, 12, 13}
 
   // IMU Port
   ,10
@@ -39,18 +39,15 @@ Drive chassis (
 );
 
 void chassisControl (void) {
-  chassis.tank();
+//  leftA.move(master.get_analog(ANALOG_LEFT_Y));
+//  leftB.move(master.get_analog(ANALOG_LEFT_Y));
+//  leftC.move(master.get_analog(ANALOG_LEFT_Y));
+//  rightA.move(master.get_analog(ANALOG_RIGHT_Y));
+//  rightB.move(master.get_analog(ANALOG_RIGHT_Y));
+//  rightC.move(master.get_analog(ANALOG_RIGHT_Y));
+  
   // weirdly formatted drive hold + controller screen update [midnight antics]
-  if (master.get_digital_new_press(DIGITAL_UP)) {
-    holdOn = !holdOn;
-    if (!holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); delay(50);
-      if (ptoOn) {master.print(0, 0, "COAST - PTO ENGAGED   ");}
-      else {master.print(0, 0, "COAST - PTO DISENGAGED");}}
-    else if (holdOn) {chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD); delay(50); 
-      if (ptoOn) {master.print(0, 0, "HOLD - PTO ENGAGED    ");}
-      else {master.print(0, 0, "HOLD - PTO DISENGAGED ");}}
     
-    }
 }
 
 void setDrive(int volt) {leftDrive.move(volt); rightDrive.move(volt);}

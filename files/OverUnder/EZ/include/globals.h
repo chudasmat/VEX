@@ -24,7 +24,8 @@ extern bool ptoOn;
 
 // wings
 extern void wingsControl(void);
-extern ADIDigitalOut frontWings;
+extern ADIDigitalOut flWing;
+extern ADIDigitalOut frWing;
 extern ADIDigitalOut rearWings;
 
 // rgb

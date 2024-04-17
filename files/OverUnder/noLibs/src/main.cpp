@@ -14,11 +14,10 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
+	master.print(0, 0, "PTO DRIVE");
 	while (true) {
 		chassisControl();
-		kickerControl();
 		intakeControl();
-		liftControl();
 		wingsControl();
 		pros::delay(10);
 	}

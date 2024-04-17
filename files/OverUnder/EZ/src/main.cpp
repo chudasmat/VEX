@@ -26,7 +26,7 @@ void opcontrol() {
 	sylib::initialize(); rgb();
 	chassis.set_drive_brake(E_MOTOR_BRAKE_COAST); master.print(0, 0, "COAST - PTO DISENGAGED");
 	while (1) {
-		chassisControl();
+		chassis.tank();
 		winchControl();
 		intakeControl();
 		wingsControl();
