@@ -47,8 +47,15 @@ void wingsControl(void) {
     if (master.get_digital_new_press(DIGITAL_X)) {
         ptoOn = !ptoOn; pto.set_value(ptoOn);
         if (ptoOn) {
-            master.print(0, 0, "PTO WINCH");
-        } else {master.print(0, 0, "PTO DRIVE");}
+            if (holdOn) {
+                master.print(0, 0, "HOLD - PTO WINCH ");
+            } else {master.print(0, 0, "COAST - PTO WINCH");}
+        }
+        else if (!ptoOn) {
+            if (holdOn) {
+                master.print(0, 0, "HOLD - PTO DRIVE ");
+            } else {master.print(0, 0, "COAST - PTO DRIVE");}
+        }
     }
 
     if (master.get_digital(DIGITAL_A)) {
