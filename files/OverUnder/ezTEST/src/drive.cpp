@@ -40,7 +40,7 @@ Drive chassis (
 
 void chassisControl (void) {
   chassis.tank();
-	
+
   if (master.get_digital_new_press(DIGITAL_LEFT)) {
     holdOn = !holdOn;
     if (holdOn) {

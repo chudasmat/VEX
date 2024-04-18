@@ -33,3 +33,6 @@ extern void rgb(void);
 extern sylib::Addrled ledStrip1;
 extern sylib::Addrled ledStrip2;
 
+// autons
+extern void partialAWP(void);
+extern void farThreeTriball(void);
