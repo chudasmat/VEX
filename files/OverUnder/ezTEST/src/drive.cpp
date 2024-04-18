@@ -2,7 +2,7 @@
 
 float leftInput; float rightInput;
 float leftPower; float rightPower;
-
+bool holdOn = false;
 Motor rightA(11, E_MOTOR_GEARSET_06, false);
 Motor rightB(12, E_MOTOR_GEARSET_06, false);
 Motor rightC(13, E_MOTOR_GEARSET_06, false);
@@ -39,10 +39,26 @@ Drive chassis (
 
 
 void chassisControl (void) {
-    chassis.tank();
+  chassis.tank();
 	
+  if (master.get_digital_new_press(DIGITAL_LEFT)) {
+    holdOn = !holdOn;
+    if (holdOn) {
+      chassis.set_drive_brake(E_MOTOR_BRAKE_HOLD);
+      if (ptoOn) {
+        master.print(0, 0, "HOLD - PTO WINCH ");
+      } else {master.print(0, 0, "HOLD - PTO DRIVE ");}
+    }
+    else if (!holdOn) {
+      chassis.set_drive_brake(E_MOTOR_BRAKE_COAST);
+      if (ptoOn) {
+        master.print(0, 0, "COAST - PTO WINCH");
+      } else {master.print(0, 0, "COAST - PTO DRIVE");}
+    }
+  }
+
 	leftInput = master.get_analog(ANALOG_LEFT_Y);
-    rightInput = master.get_analog(ANALOG_RIGHT_Y);
+  rightInput = master.get_analog(ANALOG_RIGHT_Y);
 
 //	leftPower = (atan((2 * leftInput - (leftInput / std::abs(leftInput))) * 5.5) / (2 * atan(5.5))) + (leftInput / (2 * std::abs(leftInput))) * 127;
 //	rightPower = (atan((2 * rightInput - (rightInput / std::abs(rightInput))) * 5.5) / (2 * atan(5.5))) + (rightInput / (2 * std::abs(rightInput))) * 127;
