@@ -5,8 +5,10 @@
 extern pros::Controller master;
 
 // chassis
+extern Drive chassis;
 extern void chassisControl(void);
 extern void setDrive(int volt);
+extern bool holdOn;
 
 // intake
 extern void intakeControl(void);
@@ -21,9 +23,13 @@ extern void wingsControl(void);
 extern void bigWings(void);
 extern ADIDigitalOut rearWings;
 
+// winch + pto
+extern bool ptoOn;
+extern ADIDigitalOut pto;
+extern ADIDigitalOut winch;
+
 // rgb
 extern void rgb(void);
 extern sylib::Addrled ledStrip1;
 extern sylib::Addrled ledStrip2;
 
-extern Drive chassis;
