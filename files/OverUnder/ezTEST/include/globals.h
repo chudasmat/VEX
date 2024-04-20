@@ -7,7 +7,7 @@ extern pros::Controller master;
 // chassis
 extern Drive chassis;
 extern void chassisControl(void);
-extern void setDrive(int volt);
+extern void setDrive(int rpm);
 extern bool holdOn;
 
 // intake
@@ -36,3 +36,4 @@ extern sylib::Addrled ledStrip2;
 // autons
 extern void partialAWP(void);
 extern void farThreeTriball(void);
+extern void middleRush(void);

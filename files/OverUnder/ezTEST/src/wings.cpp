@@ -15,9 +15,16 @@ ADIDigitalOut winch(3);
 
 void bigWings(bool state) {
     flWing.set_value(state); frWing.set_value(state);
+    flOn = state; frOn = state;
 }
 
 void wingsControl(void) {
+    if (flOn && frOn) {
+        bigOn = true;
+    } else {
+        bigOn = false;
+    }
+
     if (master.get_digital_new_press(DIGITAL_R1)) {
         frOn = !frOn;
         frWing.set_value(frOn);
@@ -42,7 +49,7 @@ void wingsControl(void) {
     }
 
     if (master.get_digital(DIGITAL_UP)) {
-        setDrive(127);}
+        setDrive(360);}
 
     if (master.get_digital_new_press(DIGITAL_X)) {
         ptoOn = !ptoOn; pto.set_value(ptoOn);
@@ -58,7 +65,7 @@ void wingsControl(void) {
         }
     }
 
-    if (master.get_digital(DIGITAL_A)) {
+    if (master.get_digital(DIGITAL_B)) {
         winch.set_value(true);
     } else {winch.set_value(false);}
 }

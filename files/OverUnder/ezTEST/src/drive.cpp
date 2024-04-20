@@ -70,5 +70,5 @@ void chassisControl (void) {
 	rightB.move(rightInput);
 	rightC.move(rightInput);}*/}
 
-void setDrive(int volt) {leftA.move(volt); leftB.move(volt); leftC.move(volt);
-						rightA.move(volt); rightB.move(volt); rightC.move(volt);}
+void setDrive(int rpm) {leftA.move_velocity(rpm); leftB.move_velocity(rpm); leftC.move_velocity(rpm);
+						rightA.move_velocity(rpm); rightB.move_velocity(rpm); rightC.move_velocity(rpm);}
